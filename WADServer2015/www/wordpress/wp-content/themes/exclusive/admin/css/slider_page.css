@@ -1,0 +1,285 @@
+
+#main_slider_div #add-image-line .upload-button{
+	height: 38px !important;
+		display: initial !important;
+		background: url(images/button.png) center !important;
+		background-size: 100% 100% !important;
+		border-radius: 0px !important;
+		border: none !important;
+		font-size: 16px !important;
+		padding: 6px !important;
+		color: white !important;
+		font-size: 13px !important;
+		text-shadow: none !important;
+		font-weight: bold;
+		background-color: none;
+	}
+    #main_slider_div a:active {
+		outline-style: none !important;
+		}
+	#main_slider_div .optiontitle {
+		margin-top: 50px;
+		margin-bottom: 20px;
+		width: 818px;
+		margin: 0px;
+		font-family: Segoe UI;
+		color: rgb(111, 111, 111);
+		font-size: 18pt;
+		padding-bottom: 15px;
+		border-bottom: rgb(206, 206, 206) solid 1.5px;
+	}
+	#main_slider_div tr.new td:last-child{background:rgba(256,256,240,0.5)}
+	#main_slider_div td {
+		width:30%;
+		padding:5px 0px 5px 0px;
+	}
+
+	#main_slider_div td, #main_slider_div textarea {
+		line-height: inherit;
+		font-family: Segoe UI;
+		color: rgb(111, 111, 111);
+		font-size: 14px;
+	}
+	#main_slider_div h3{
+		border:none;
+		cursor:auto !important;
+	}
+	#main_slider_div td h3{
+		font-weight: 200;
+		margin: 0;
+		cursor:auto !important;
+	}
+	#main_slider_div .optiontitle h3{
+		font-weight: 200;
+		margin: 0px;
+	}
+	#main_slider_div select{
+		font-family: Segoe UI;
+		color: rgb(111, 111, 111) !important;
+		font-size: 14px !important;
+	}
+	#main_slider_div input{
+		font-family: Segoe UI;
+		color: rgb(111, 111, 111) !important;
+		font-size: 14px !important;
+	}
+	#main_slider_div textarea{
+		font-family: Segoe UI;
+		color: rgb(111, 111, 111) !important;
+		font-size: 14px !important;
+		width:420px;
+		height:40px;
+		resize: none;
+	}
+	#main_slider_div .button {
+		height: 38px !important;
+		display: initial !important;
+		background-size: 100% 100% !important;
+		border-radius: 0px !important;
+		border: none !important;
+		font-size: 16px !important;
+		padding: 6px !important;
+		color: white !important;
+		font-size: 13px !important;
+		text-shadow: none !important;
+		font-weight: bold;
+		background-color: none;
+	}
+	#main_slider_div tr trd a.remove{
+		position:absolute;
+		top:0px;
+		right:0px;
+		
+	}
+	
+	#main_slider_div tr.slide-from-base td {
+		border-top:1px solid #ddd;
+		padding:10px 0px 0px 0px;
+	}
+
+#main_slider_div  img{
+	width:100% !important;
+}
+#main_slider_div a:active {
+outline-style: none !important;
+}
+#main_slider_div .button.active_button {
+	color: rgb(0, 0, 0) !important;
+	text-shadow: none;
+	font-size: 13px !important;
+}
+#main_slider_div .optiontitle {
+	margin-top: 50px;
+	margin-bottom: 20px;
+	width: 818px;
+	margin: 0px;
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111);
+	font-size: 18pt;
+	padding-bottom: 15px;
+	border-bottom: rgb(206, 206, 206) solid 1.5px;
+}
+#main_slider_div tr.new td:last-child{background:rgba(256,256,240,0.5)}
+#main_slider_div td {
+	width:20%;
+	padding:5px 0px 5px 0px;
+}
+
+#main_slider_div td, #main_slider_div textarea {
+	line-height: inherit;
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111);
+	font-size: 14px;
+}
+
+#main_slider_div td h3{
+	font-weight: 200;
+	margin: 0;
+	cursor:auto !important;
+}
+#main_slider_div .optiontitle h3{
+	font-weight: 200;
+	margin: 0px;
+}
+#main_slider_div select{
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111) !important;
+	font-size: 14px !important;
+}
+#main_slider_div input{
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111) !important;
+	font-size: 14px !important;
+}
+#main_slider_div .submit {
+	margin-top:-5px !important;
+}
+#main_slider_div textarea{
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111) !important;
+	font-size: 14px !important;
+	width:420px;
+	height:40px;
+	resize: none;
+}
+#main_slider_div .button {
+	height: 38px !important;
+	display: initial !important;
+	background: url(../../images/button.png) center !important; 
+	background-size: 100% 100% !important;
+	border-radius: 0px !important;
+	border: none !important;
+	font-size: 16px !important;
+	padding: 6px !important;
+	color: white !important;
+	font-size: 13px !important;
+	text-shadow: none !important;
+	font-weight: bold;
+	background-color: none;
+}
+#main_slider_div tr trd a.remove{
+	position:absolute;
+	top:0px;
+	right:0px;
+	
+}
+
+#main_slider_div tr.slide-from-base td {
+	border-top:1px solid #ddd;
+	padding:10px 0px 0px 0px;
+}
+
+#main_slider_div #add-image-line .upload-button {
+	height: 38px !important;
+	display: initial !important;
+	background-size: 100% 100% !important;
+	border-radius: 0px !important;
+	border: none !important;
+	font-size: 16px !important;
+	padding: 6px !important;
+	color: white !important;
+	font-size: 13px !important;
+	text-shadow: none !important;
+	font-weight: bold;
+	background-color: none;
+}
+#main_slider_div .optiontitle {
+	margin-top: 50px;
+	margin-bottom: 20px;
+	width: 818px;
+	margin: 0px;
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111);
+	font-size: 18pt;
+	padding-bottom: 15px;
+	border-bottom: rgb(206, 206, 206) solid 1.5px;
+}
+#main_slider_div tr.new td:last-child {
+	background: rgba(256,256,240,0.5)
+}
+#main_slider_div td {
+	padding: 5px 0px 5px 0px;
+}
+#main_slider_div td,#main_slider_div  textarea {
+	line-height: inherit;
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111);
+	font-size: 14px;
+}
+#main_slider_div td h3 {
+	width: 145px;
+	font-weight: 200;
+	margin: 0;
+}
+#main_slider_div .optiontitle h3 {
+	font-weight: 200;
+	margin: 0px;
+}
+#main_slider_div h3{
+	width:100%;
+	cursor:default !important;
+	background:none !important;
+	border:none !important;
+	color: rgb(111, 111, 111) !important; 
+}
+#main_slider_div select {
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111) !important;
+	font-size: 14px !important;
+}
+#main_slider_div input {
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111) !important;
+	font-size: 14px !important;
+}
+#main_slider_div textarea {
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111) !important;
+	font-size: 14px !important;
+	width: 420px;
+	height: 40px;
+	resize: none;
+}
+#main_slider_div .button {
+	height: 38px !important;
+	display: initial !important;
+	background-size: 100% 100% !important;
+	border-radius: 0px !important;
+	border: none !important;
+	font-size: 16px !important;
+	padding: 6px !important;
+	color: white !important;
+	font-size: 13px !important;
+	text-shadow: none !important;
+	font-weight: bold;
+	background-color: none;
+}
+#main_slider_div tr trd a.remove {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+#main_slider_div tr.slide-from-base td {
+	border-top: 1px solid #ddd;
+	padding: 10px 0px 0px 0px;
+}

@@ -1,0 +1,2 @@
+content webapprt jar:webapprt.jar!/content/
+locale webapprt en-US jar:en-US.jar!/locale/webapprt/

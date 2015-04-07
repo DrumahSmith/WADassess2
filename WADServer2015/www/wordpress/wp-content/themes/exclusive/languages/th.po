@@ -1,0 +1,274 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: exclusive\n"
+"POT-Creation-Date: 2014-01-19 16:13+0400\n"
+"PO-Revision-Date: 2014-01-20 11:53+0400\n"
+"Last-Translator: dianna <dianna.arakelyan@gmail.com>\n"
+"Language-Team: \n"
+"Language: Afrikaans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\theme_test\\wp-content\\themes"
+"\\exclusive\n"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/404.php:23
+msgid "Type here"
+msgstr "พิมพ์ที่นี่"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/404.php:24
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/search.php:37
+msgid "Search"
+msgstr "ค้นหา"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:16
+msgid "Archive for the"
+msgstr "ที่เก็บสำหรับ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:16
+msgid "Category"
+msgstr "หมวดหมู่"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:18
+msgid "Posts Tagged"
+msgstr "Posts Tagged"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:20
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:22
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:24
+msgid "Archive for"
+msgstr "ที่เก็บสำหรับ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:26
+msgid "Author Archive"
+msgstr "คลังผู้เขียน"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:28
+msgid "Blog Archives"
+msgstr "คลังเก็บบล็อก"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:27
+msgid "&#8249; Older comments"
+msgstr "<ความเห็นที่เก่ากว่า"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:28
+msgid "Newer comments &#8250;"
+msgstr "ใหม่ความเห็น>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:39
+msgid "Pings&#47;Trackbacks"
+msgstr "ปิง / การติดตาม"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:42
+#, php-format
+msgid "%1$d %2$s for \"%3$s\""
+msgstr "%1$d %2$s เพื่อ \"%3$s\""
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:55
+msgid "Name"
+msgstr "ชื่อ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:56
+msgid "E-mail"
+msgstr "E-mail"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:57
+msgid "Website"
+msgstr "เว็บไซต์"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:61
+msgid "Comment"
+msgstr "ความเห็น"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:92
+#, php-format
+msgid ""
+"<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a>"
+msgstr ""
+"<span class=\"sep\"> โพสต์  </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:102
+#, php-format
+msgid ""
+"<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></"
+"a><span class=\"by-author\"> <span class=\"sep\"> by </span> <span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel="
+"\"author\">%7$s</a></span></span>"
+msgstr ""
+"<span class=\"sep\"> โพสต์  </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></"
+"a><span class=\"by-author\"> <span class=\"sep\"> โดย</span> <span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel="
+"\"author\">%7$s</a></span></span>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:108
+#, php-format
+msgid "View all posts by %s"
+msgstr "ดูข้อความทั้งหมดของ %s"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:135
+msgid "Primary Widget Area"
+msgstr "ประถม Widget พื้นที่"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:139
+msgid "The primary widget area"
+msgstr "พื้นที่เครื่องมือหลัก"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:156
+msgid "Secondary Widget Area"
+msgstr "Widget พื้นที่มัธยมศึกษา"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:160
+msgid "The secondary widget area"
+msgstr "พื้นที่เครื่องมือรอง"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:206
+msgid "Primary Menu"
+msgstr "เมนูหลัก"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:421
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:115
+msgid "Full Name"
+msgstr "ชื่อเต็ม"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:123
+msgid "Your Email"
+msgstr "อีเมล์ของคุณ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:131
+msgid "Message title"
+msgstr "ชื่อข้อความ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:141
+msgid "Comments"
+msgstr "ความเห็น"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Name field is required."
+msgstr "ฟิลด์ที่จำเป็น"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Email field is required."
+msgstr "เขตอีเมล์เป็นสิ่งจำเป็น"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "Please provide a valid email address."
+msgstr "โปรดให้ที่อยู่อีเมลที่ถูกต้อง"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Message field is required."
+msgstr "เขตข้อมูลข้อความที่จำเป็น"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "Sorry, the code you entered was invalid."
+msgstr "ขออภัยรหัสที่คุณป้อนไม่ถูกต้อง"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:152
+msgid "Reset"
+msgstr "ตั้งใหม่"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:37
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:45
+msgid "Log in"
+msgstr "เข้าสู่ระบบ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:41
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:60
+msgid "Log Out"
+msgstr "ออกจากระบบ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-product.php:74
+msgid "Read More"
+msgstr "อ่านรายละเอียดเพิ่มเติม"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:45
+msgid "Static Pages:"
+msgstr "คงที่หน้า:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:57
+msgid "All Categories:"
+msgstr "รวมทุกหมวดหมู่:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:70
+msgid "Tags:"
+msgstr "Tags:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:87
+msgid "Archives:"
+msgstr "คลังเก็บ:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:100
+msgid "Authors:"
+msgstr "ผู้เขียน:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:113
+msgid "Blog Posts:"
+msgstr "blog โพสต์:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/search.php:39
+msgid "Count"
+msgstr "นับ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/single.php:34
+msgid "Page"
+msgstr "หน้า"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/color_control.php:320
+msgid "Schemes"
+msgstr "แบบแผน"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/install_sampl_date.php:1314
+msgid "Home"
+msgstr "บ้าน"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:15
+msgid "Insert Button Shortcode"
+msgstr "ใส่ปุ่มย่อ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:25
+msgid "Insert Link Shortcode"
+msgstr "ใส่ลิงค์ย่อ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:39
+msgid "Insert Info Box Shortcode"
+msgstr "แทรกข้อมูลกล่องย่อ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:50
+msgid "Insert Quote Box Shortcode"
+msgstr "ใส่รหัสย่ออ้างกล่อง"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:62
+msgid "Insert Contact Form Shortcode"
+msgstr "ใส่แบบฟอร์มติดต่อย่อ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:73
+msgid "Insert Tabs Creator Shortcode"
+msgstr "ใส่แท็บสร้างย่อ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:83
+msgid "Insert Related Posts Shortcode"
+msgstr "ใส่บทความที่เกี่ยวข้องย่อ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:95
+msgid "Insert Columns Layout Shortcode"
+msgstr "แทรกคอลัมน์เค้าโครงย่อ"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/widgets/widget-category.php:77
+msgid "More"
+msgstr "ขึ้น"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/custom/seo_meta.php:22
+msgid "SEO Exclusive"
+msgstr "SEO พิเศษ"

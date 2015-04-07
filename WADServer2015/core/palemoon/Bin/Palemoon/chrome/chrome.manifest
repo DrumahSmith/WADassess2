@@ -1,0 +1,34 @@
+locale global-platform en-US jar:en-US.jar!/locale/en-US/global-platform/
+locale mozapps en-US jar:en-US.jar!/locale/en-US/mozapps/
+locale passwordmgr en-US jar:en-US.jar!/locale/en-US/passwordmgr/
+locale global-region en-US jar:en-US.jar!/locale/en-US/global-region/
+locale weave en-US jar:en-US.jar!/locale/en-US/
+locale alerts en-US jar:en-US.jar!/locale/en-US/alerts/
+locale necko en-US jar:en-US.jar!/locale/en-US/necko/
+locale pippki en-US jar:en-US.jar!/locale/en-US/pippki/
+locale cookie en-US jar:en-US.jar!/locale/en-US/cookie/
+locale pipnss en-US jar:en-US.jar!/locale/en-US/pipnss/
+locale autoconfig en-US jar:en-US.jar!/locale/en-US/autoconfig/
+locale global en-US jar:en-US.jar!/locale/en-US/global/
+locale places en-US jar:en-US.jar!/locale/en-US/places/
+content marionette jar:marionette.jar!/content/
+content specialpowers jar:marionette.jar!/content/
+content mozapps jar:toolkit.jar!/content/mozapps/
+content global-platform jar:toolkit.jar!/content/global-platform/ platform
+skin global classic/1.0 jar:toolkit.jar!/skin/classic/global/ os=WINNT osversion<6
+content satchel jar:toolkit.jar!/content/satchel/
+content global-region jar:toolkit.jar!/content/global-region/
+content global jar:toolkit.jar!/content/global/ contentaccessible=yes
+skin mozapps classic/1.0 jar:toolkit.jar!/skin/classic/aero/mozapps/ os=WINNT osversion>=6
+skin mozapps classic/1.0 jar:toolkit.jar!/skin/classic/mozapps/ os!=WINNT
+content passwordmgr jar:toolkit.jar!/content/passwordmgr/
+skin mozapps classic/1.0 jar:toolkit.jar!/skin/classic/mozapps/ os=WINNT osversion<6
+skin global classic/1.0 jar:toolkit.jar!/skin/classic/aero/global/ os=WINNT osversion>=6
+content xbl-marquee jar:toolkit.jar!/content/xbl-marquee/
+content cookie jar:toolkit.jar!/content/cookie/
+skin global classic/1.0 jar:toolkit.jar!/skin/classic/global/ os!=WINNT
+content recording jar:recording.jar!/content/
+content pippki jar:pippki.jar!/content/pippki/
+resource specialpowers jar:marionette.jar!/modules/
+override chrome://global/content/nsTransferable.js chrome://global/content/nsDragAndDrop.js
+resource gre-resources jar:toolkit.jar!/res/

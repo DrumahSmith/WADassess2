@@ -1,0 +1,274 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: exclusive\n"
+"POT-Creation-Date: 2014-01-19 16:13+0400\n"
+"PO-Revision-Date: 2014-01-20 11:48+0400\n"
+"Last-Translator: dianna <dianna.arakelyan@gmail.com>\n"
+"Language-Team: \n"
+"Language: Afrikaans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\theme_test\\wp-content\\themes"
+"\\exclusive\n"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/404.php:23
+msgid "Type here"
+msgstr "Lloji këtu"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/404.php:24
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/search.php:37
+msgid "Search"
+msgstr "Kërkim"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:16
+msgid "Archive for the"
+msgstr "Arkivi për"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:16
+msgid "Category"
+msgstr "Kategori"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:18
+msgid "Posts Tagged"
+msgstr "Posts tagged"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:20
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:22
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:24
+msgid "Archive for"
+msgstr "Arkivi për"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:26
+msgid "Author Archive"
+msgstr "Author Arkivi"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:28
+msgid "Blog Archives"
+msgstr "Blog Archives"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:27
+msgid "&#8249; Older comments"
+msgstr "<komente vjetra"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:28
+msgid "Newer comments &#8250;"
+msgstr "Newer Komentet>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:39
+msgid "Pings&#47;Trackbacks"
+msgstr "Kontakteve për / Trackbacks"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:42
+#, php-format
+msgid "%1$d %2$s for \"%3$s\""
+msgstr "%1$d %2$s për \"%3$s\""
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:55
+msgid "Name"
+msgstr "Emër"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:56
+msgid "E-mail"
+msgstr "E-mail"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:57
+msgid "Website"
+msgstr "Website"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:61
+msgid "Comment"
+msgstr "Koment"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:92
+#, php-format
+msgid ""
+"<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a>"
+msgstr ""
+"<span class=\"sep\"> Dërguar të </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:102
+#, php-format
+msgid ""
+"<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></"
+"a><span class=\"by-author\"> <span class=\"sep\"> by </span> <span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel="
+"\"author\">%7$s</a></span></span>"
+msgstr ""
+"<span class=\"sep\"> Dërguar të  </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></"
+"a><span class=\"by-author\"> <span class=\"sep\"> nga  </span> <span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel="
+"\"author\">%7$s</a></span></span>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:108
+#, php-format
+msgid "View all posts by %s"
+msgstr "Shiko të gjitha postimet e bëra nga %s"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:135
+msgid "Primary Widget Area"
+msgstr "Primar Zona Widget"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:139
+msgid "The primary widget area"
+msgstr "Zona widget primar"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:156
+msgid "Secondary Widget Area"
+msgstr "Mesme Widget Area"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:160
+msgid "The secondary widget area"
+msgstr "Zona widget mesme"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:206
+msgid "Primary Menu"
+msgstr "Primar Menu"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:421
+msgid "Edit"
+msgstr "Redaktoj"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:115
+msgid "Full Name"
+msgstr "Emri i plotë"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:123
+msgid "Your Email"
+msgstr "Email juaj"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:131
+msgid "Message title"
+msgstr "Titulli Mesazh"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:141
+msgid "Comments"
+msgstr "Komente"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Name field is required."
+msgstr "Emri fushë është e nevojshme."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Email field is required."
+msgstr "Fusha Email është e nevojshme."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "Please provide a valid email address."
+msgstr "Ju lutemi të sigurojë një adresë e vlefshme email."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Message field is required."
+msgstr "Fusha Mesazhi është e nevojshme."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "Sorry, the code you entered was invalid."
+msgstr "Na vjen keq, kodi keni hyrë ishte e pavlefshme."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:152
+msgid "Reset"
+msgstr "Reset"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:37
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:45
+msgid "Log in"
+msgstr "Identifikohu"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:41
+msgid "Password"
+msgstr "Fjalëkalimi"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:60
+msgid "Log Out"
+msgstr "Log Out"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-product.php:74
+msgid "Read More"
+msgstr "Lexo më shumë"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:45
+msgid "Static Pages:"
+msgstr "Statike Faqe:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:57
+msgid "All Categories:"
+msgstr "Të gjitha Kategoritë:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:70
+msgid "Tags:"
+msgstr "Tags:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:87
+msgid "Archives:"
+msgstr "Archives:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:100
+msgid "Authors:"
+msgstr "Autorët:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:113
+msgid "Blog Posts:"
+msgstr "Blog Postime:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/search.php:39
+msgid "Count"
+msgstr "Akuzë"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/single.php:34
+msgid "Page"
+msgstr "Faqe"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/color_control.php:320
+msgid "Schemes"
+msgstr "Skemat"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/install_sampl_date.php:1314
+msgid "Home"
+msgstr "Shtëpi"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:15
+msgid "Insert Button Shortcode"
+msgstr "Fut Button shortcode"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:25
+msgid "Insert Link Shortcode"
+msgstr "Vendos Link shortcode"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:39
+msgid "Insert Info Box Shortcode"
+msgstr "Fut Info Box shortcode"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:50
+msgid "Insert Quote Box Shortcode"
+msgstr "Fut shortcode Quote Box"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:62
+msgid "Insert Contact Form Shortcode"
+msgstr "Fut Kontakt Form shortcode"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:73
+msgid "Insert Tabs Creator Shortcode"
+msgstr "Fut Tabs Krijuesi shortcode"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:83
+msgid "Insert Related Posts Shortcode"
+msgstr "Fut Posts Related shortcode"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:95
+msgid "Insert Columns Layout Shortcode"
+msgstr "Fut Shtylla Layout shortcode"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/widgets/widget-category.php:77
+msgid "More"
+msgstr "Më shumë"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/custom/seo_meta.php:22
+msgid "SEO Exclusive"
+msgstr "SEO Exclusive"

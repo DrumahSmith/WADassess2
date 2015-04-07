@@ -1,0 +1,95 @@
+#main_licensing_page .data-bordered {
+border-spacing: 0;
+border-collapse: collapse;
+border-bottom: solid 1px #b4b4b4;
+}
+#main_licensing_page a:active {
+outline-style: none !important;
+}
+#main_licensing_page table {
+display: table;
+border-color: gray;
+}
+#main_licensing_page #page {
+text-align: left;
+}
+#main_licensing_page .data-bordered th.first {
+border-left: solid 1px #106EA2;
+border-right: solid 1px #106EA2;
+}
+#main_licensing_page thead {
+display: table-header-group;
+vertical-align: middle;
+border-color: inherit;
+}
+#main_licensing_page .data-bordered td.top,#main_licensing_page  .data-bordered th.top {
+border-left: solid 1px #fff;
+border-right: solid 1px #fff;
+padding: 10px;
+font-size: 30px;
+}
+#main_licensing_page .data-bordered thead th {
+vertical-align: middle;
+text-align: center;
+}
+.data-bordered th {
+background-color: #106EA2;
+color: #ffffff;
+font: bold 0.85em;
+text-transform: none;
+font-size: 30px;
+border-top: none;
+border-left: solid 1px #f28705;
+border-right: solid 1px #f28705;
+}
+
+#main_licensing_page .data-bordered th,#main_licensing_page .data-bordered td {
+padding: 5px 10px;
+vertical-align: top;
+border-top: solid 1px #b4b4b4;
+border-left: solid 1px #b4b4b4;
+border-right: solid 1px #b4b4b4;
+text-align:left;
+
+}
+#main_licensing_page .data-bordered td.yes {
+background-image: url(../../images/Plus.png);
+}
+#main_licensing_page .data-bordered th, #main_licensing_page .data-bordered td {
+padding: 5px 10px;
+vertical-align: top;
+border-top: solid 1px #b4b4b4;
+border-left: solid 1px #b4b4b4;
+border-right: solid 1px #b4b4b4;
+}
+#main_licensing_page .data-bordered{
+	border-collapse: collapse;
+}
+#main_licensing_page .data-bordered .alt td {
+background-color: #E5E5E5;
+}
+#main_licensing_page .data-bordered td {
+font-size: 13px;
+vertical-align: middle;
+line-height: 15px;
+text-align:left;
+}
+#main_licensing_page .data-bordered td.no, #main_licensing_page .data-bordered td.yes {
+background-position: center center;
+background-repeat: no-repeat;
+overflow: hidden;
+text-indent: -9999px;
+}
+#main_licensing_page .data-bordered .alt td {
+background-color: #E5E5E5;
+}
+#main_licensing_page .data-bordered .icon-replace {
+min-width: 74px;
+}
+
+
+#main_licensing_page .buy_theme div {
+width: 161px;
+height: 36px;
+background: url(../../images/Buy-Now.png) no-repeat;
+}

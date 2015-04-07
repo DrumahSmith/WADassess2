@@ -1,0 +1,114 @@
+#seo-1 div:first-child .optiontitle,
+#seo-2 div:first-child .optiontitle,
+#seo-3 div:first-child .optiontitle{
+	border-top:0 !important;
+}
+#main_seo_page a:active {
+outline-style: none !important;
+}
+#main_seo_page .params_main_div{
+	width:90%;
+	margin:0 auto;
+}
+
+#main_seo_page  a:active{
+	outline-style:none !important;
+}
+
+#main_seo_page .button.active_button {
+	color: rgb(0, 0, 0) !important;
+	text-shadow: none;
+	font-size: 13px !important;
+}
+
+#main_seo_page .button {
+	height: 38px !important;
+	display: initial !important;
+	background: url(../../images/button.png) center !important;
+	background-size: 100% 100% !important;
+	border-radius: 0px !important;
+	border: none !important;
+	font-size: 16px !important;
+	padding: 10px !important;
+	color: white !important;
+	font-size: 13px !important;
+	text-shadow: none !important;
+	line-height:0px !important;
+	font-weight: bold;
+}
+
+#main_seo_page .block {
+	position:relative;
+	padding-bottom:0px;
+	height:auto;
+	float:left;
+	margin-bottom:10px;
+	width:100%;
+	min-height:20px;
+}
+
+
+#main_seo_page .optioninput {
+	clear:both;
+	float:left;
+}
+
+#main_seo_page .optioninput.checkbox { 
+	display:block;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width: 23px;
+	height:100%;
+	text-align:center;
+	margin:0px 5px 0px 0px;
+}
+
+#main_seo_page .optioninput select, #main_seo_page .optioninput input,#main_seo_page .optioninput, #main_seo_page .optioninput textarea{	
+	font-family:Segoe UI;
+
+	color: rgb(111, 111, 111); 
+}
+
+#main_seo_page .optioninput textarea{ margin-bottom:10px;resize:none;}
+
+ #main_seo_page .optioninput input, #main_seo_page .optioninput select, #main_seo_page .optioninput textarea{clear:both;	background:#e9e9e9;}
+
+#main_seo_page .optiontitle {		
+	clear:both;
+	font-family:Segoe UI;
+	color: rgb(111, 111, 111); 
+	font-size:18px;
+	border: none;
+	padding:10px 0px 10px 0px;
+	margin:10px 0px 10px 0px;
+	border-top: rgb(206, 206, 206) solid 1.5px;
+}
+
+#main_seo_page .optiontitle.first {border-top: 0px;}		
+#main_seo_page h3{
+	width:100%;
+	cursor:default !important;
+	background:none !important;
+	border:none !important;
+	color: rgb(111, 111, 111) !important;
+	
+}
+#main_seo_page .optiontitle h3{
+	margin:0px;
+	font-weight: bold;
+}
+
+#main_seo_page .optiondescreption {
+	position:relative;
+  	width:97%;
+	float:left;
+	font-family:Segoe UI;
+	color: rgb(111, 111, 111);
+	font-size:16px;
+	margin:-17px 0px -10px 0px;
+}
+
+#main_seo_page .block.margin .optiondescreption {
+	margin-left:25px;
+}

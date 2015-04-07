@@ -1,0 +1,35 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Pale Moon Uniform Server license
+
+Licensed to: Uniform Server (http://www.uniformserver.com/)
+
+Pale Moon has been licensed for incorporation in the Uniform Server package
+as a standalone binary module with required configuration changes.
+This license is restricted to non-commercial availability and use
+of the Uniform Server package.
+
+This incorporation is on an AS-IS basis, and any maintenance and configuration
+required for inclusion in the package, as well as the integrity of included
+binaries is the responsibility of the Uniform Server project owner(s).
+
+NO rights are granted to the Pale Moon name and logo or other items protected
+by intellectual property rights. Incorporation of the browser binaries with
+offical branding, as-built, is permitted use of the Pale Moon name and logo
+under this license.
+
+For any questions about Pale Moon licensing in Uniform Server, please contact
+the Pale Moon lead developer via e-mail at moonchild@palemoon.org
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (MingW32)
+
+iQEcBAEBAgAGBQJSIed/AAoJEKxqDlWrbd26XFcIAOnNaBuULRPAOERQjSpB/ZFx
+WOg2NLt+SugfSBiTXFKqFTX6ZvxuKYDRMMM5xaAe7myFRGaeYy231FfsbsDP4T5s
+O8VEj1Edd6GAqFyvUZ3OaB0RBElhjxqxCh6AsQQMvd6mbmAR/e3WgsdwvYRashUn
+rurSMx9JSSZ0JEFYOJgHmtmqjss8q+KcohL8cMzqOB8UyXvqRbAHuOhG3Su1jCQk
+66Yd8wyC+iykmNyQ1DfT4+7tVKYBM6Yq8ZCXCu9wkfTfRXuD2R45ERngdkOekIT/
+Pn7LR2T2gRcfUgwIqSTsBi2IQGnRk9qZ4+FT/zLdBoxA5xPzLtyahfF5aSI9taQ=
+=v9RN
+-----END PGP SIGNATURE-----

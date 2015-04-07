@@ -1,0 +1,22 @@
+locale browser-region en-US jar:en-US.jar!/locale/browser-region/
+locale branding en-US jar:en-US.jar!/locale/branding/
+locale pdf.js en-US jar:en-US.jar!/locale/pdfviewer/
+locale browser en-US jar:en-US.jar!/locale/browser/
+content branding jar:browser.jar!/content/branding/ contentaccessible=yes
+skin browser classic/1.0 jar:browser.jar!/skin/classic/browser/ os!=WINNT
+skin browser classic/1.0 jar:browser.jar!/skin/classic/aero/browser/ os=WINNT osversion>=6
+content browser jar:browser.jar!/content/browser/ contentaccessible=yes
+skin browser classic/1.0 jar:browser.jar!/skin/classic/browser/ os=WINNT osversion<6
+skin communicator classic/1.0 jar:browser.jar!/skin/classic/communicator/
+override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
+override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
+override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
+overlay chrome://browser/content/browser.xul chrome://browser/content/report-phishing-overlay.xul
+overlay chrome://global/content/viewPartialSource.xul chrome://browser/content/viewSourceOverlay.xul
+overlay chrome://browser/content/browser.xul chrome://browser/content/win6BrowserOverlay.xul os=WINNT osversion>=6
+override chrome://global/content/license.html chrome://browser/content/license.html
+overlay chrome://global/content/viewSource.xul chrome://browser/content/viewSourceOverlay.xul
+style chrome://global/content/customizeToolbar.xul chrome://browser/content/browser.css
+overlay chrome://browser/content/places/places.xul chrome://browser/content/places/downloadsViewOverlay.xul
+style chrome://global/content/customizeToolbar.xul chrome://browser/skin/
+manifest pdfjs/pdfjs.manifest

@@ -1,0 +1,274 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: exclusive\n"
+"POT-Creation-Date: 2014-01-19 16:13+0400\n"
+"PO-Revision-Date: 2014-01-20 11:37+0400\n"
+"Last-Translator: dianna <dianna.arakelyan@gmail.com>\n"
+"Language-Team: \n"
+"Language: Afrikaans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\theme_test\\wp-content\\themes"
+"\\exclusive\n"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/404.php:23
+msgid "Type here"
+msgstr "여기에 입력하십시오"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/404.php:24
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/search.php:37
+msgid "Search"
+msgstr "수색"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:16
+msgid "Archive for the"
+msgstr "아카이브"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:16
+msgid "Category"
+msgstr "범주"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:18
+msgid "Posts Tagged"
+msgstr "게시물 태그"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:20
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:22
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:24
+msgid "Archive for"
+msgstr "아카이브"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:26
+msgid "Author Archive"
+msgstr "저자 아카이브"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:28
+msgid "Blog Archives"
+msgstr "블로그 아카이브"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:27
+msgid "&#8249; Older comments"
+msgstr "<이전 코멘트"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:28
+msgid "Newer comments &#8250;"
+msgstr "최근 코멘트>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:39
+msgid "Pings&#47;Trackbacks"
+msgstr "핑 / 트랙백"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:42
+#, php-format
+msgid "%1$d %2$s for \"%3$s\""
+msgstr "%1$d %2$s 에  \"%3$s\""
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:55
+msgid "Name"
+msgstr "이름"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:56
+msgid "E-mail"
+msgstr "E-메일"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:57
+msgid "Website"
+msgstr "웹 사이트"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:61
+msgid "Comment"
+msgstr "논평"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:92
+#, php-format
+msgid ""
+"<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a>"
+msgstr ""
+"<span class=\"sep\">에 게시 </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:102
+#, php-format
+msgid ""
+"<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></"
+"a><span class=\"by-author\"> <span class=\"sep\"> by </span> <span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel="
+"\"author\">%7$s</a></span></span>"
+msgstr ""
+"<span class=\"sep\">에 게시 </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></"
+"a><span class=\"by-author\"> <span class=\"sep\"> 로 </span> <span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel="
+"\"author\">%7$s</a></span></span>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:108
+#, php-format
+msgid "View all posts by %s"
+msgstr "모든 게시글보기 %s"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:135
+msgid "Primary Widget Area"
+msgstr "기본 위젯 지역"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:139
+msgid "The primary widget area"
+msgstr "일차 위젯 영역"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:156
+msgid "Secondary Widget Area"
+msgstr "보조 위젯 지역"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:160
+msgid "The secondary widget area"
+msgstr "이차 위젯 영역"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:206
+msgid "Primary Menu"
+msgstr "기본 메뉴"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:421
+msgid "Edit"
+msgstr "편집"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:115
+msgid "Full Name"
+msgstr "전체 이름"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:123
+msgid "Your Email"
+msgstr "이메일"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:131
+msgid "Message title"
+msgstr "메시지 제목"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:141
+msgid "Comments"
+msgstr "댓글"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Name field is required."
+msgstr "이름 입력란은 필수입니다."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Email field is required."
+msgstr "이메일 필드가 필요합니다."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "Please provide a valid email address."
+msgstr "유효한 이메일 주소를 제공하십시오."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Message field is required."
+msgstr "메시지 필드가 필요합니다."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "Sorry, the code you entered was invalid."
+msgstr "죄송합니다, 당신이 입력 한 코드는 유효하지 않습니다."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:152
+msgid "Reset"
+msgstr "재설정"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:37
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:45
+msgid "Log in"
+msgstr "로그인"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:41
+msgid "Password"
+msgstr "암호"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:60
+msgid "Log Out"
+msgstr "로그 아웃"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-product.php:74
+msgid "Read More"
+msgstr "자세히보기"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:45
+msgid "Static Pages:"
+msgstr "정적 페이지 :"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:57
+msgid "All Categories:"
+msgstr "모든 카테고리 :"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:70
+msgid "Tags:"
+msgstr "태그 :"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:87
+msgid "Archives:"
+msgstr "아카이브 :"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:100
+msgid "Authors:"
+msgstr "저자 :"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:113
+msgid "Blog Posts:"
+msgstr "블로그 글 :"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/search.php:39
+msgid "Count"
+msgstr "계산"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/single.php:34
+msgid "Page"
+msgstr "페이지"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/color_control.php:320
+msgid "Schemes"
+msgstr "구성표"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/install_sampl_date.php:1314
+msgid "Home"
+msgstr "홈"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:15
+msgid "Insert Button Shortcode"
+msgstr "버튼 단축 코드를 삽입"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:25
+msgid "Insert Link Shortcode"
+msgstr "링크 단축 코드를 삽입"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:39
+msgid "Insert Info Box Shortcode"
+msgstr "정보 상자보기 단축을 삽입"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:50
+msgid "Insert Quote Box Shortcode"
+msgstr "견적 상자 단축 코드를 삽입"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:62
+msgid "Insert Contact Form Shortcode"
+msgstr "문의 양식보기 단축을 삽입"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:73
+msgid "Insert Tabs Creator Shortcode"
+msgstr "탭 창조주보기 단축을 삽입"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:83
+msgid "Insert Related Posts Shortcode"
+msgstr "관련 게시물보기 단축을 삽입"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:95
+msgid "Insert Columns Layout Shortcode"
+msgstr "열보기 레이아웃 단축 코드를 삽입"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/widgets/widget-category.php:77
+msgid "More"
+msgstr "더"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/custom/seo_meta.php:22
+msgid "SEO Exclusive"
+msgstr "SEO 독점"

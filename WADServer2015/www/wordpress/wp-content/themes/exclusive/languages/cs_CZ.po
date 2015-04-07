@@ -1,0 +1,274 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: exclusive\n"
+"POT-Creation-Date: 2014-01-19 16:13+0400\n"
+"PO-Revision-Date: 2014-01-19 17:56+0400\n"
+"Last-Translator: dianna <dianna.arakelyan@gmail.com>\n"
+"Language-Team: \n"
+"Language: Afrikaans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\theme_test\\wp-content\\themes"
+"\\exclusive\n"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/404.php:23
+msgid "Type here"
+msgstr "Sem zde"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/404.php:24
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/search.php:37
+msgid "Search"
+msgstr "Hledání"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:16
+msgid "Archive for the"
+msgstr "Archiv pro"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:16
+msgid "Category"
+msgstr "Kategorie"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:18
+msgid "Posts Tagged"
+msgstr "Příspěvky Tagged"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:20
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:22
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:24
+msgid "Archive for"
+msgstr "Archiv pro"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:26
+msgid "Author Archive"
+msgstr "Archiv autora"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/category.php:28
+msgid "Blog Archives"
+msgstr "Blog Archiv"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:27
+msgid "&#8249; Older comments"
+msgstr "<Starší komentáře"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:28
+msgid "Newer comments &#8250;"
+msgstr "Novější komentáře>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:39
+msgid "Pings&#47;Trackbacks"
+msgstr "Ping / Zpětné odkazy"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:42
+#, php-format
+msgid "%1$d %2$s for \"%3$s\""
+msgstr "%1$d %2$s na \"%3$s\""
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:55
+msgid "Name"
+msgstr "Název"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:56
+msgid "E-mail"
+msgstr "E-mail"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:57
+msgid "Website"
+msgstr "Webové stránky"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/comments.php:61
+msgid "Comment"
+msgstr "Komentář"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:92
+#, php-format
+msgid ""
+"<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a>"
+msgstr ""
+"<span class=\"sep\">Publikováno dne</span><a href=\"%1$s\" title=\"%2$s\" "
+"rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:102
+#, php-format
+msgid ""
+"<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel="
+"\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></"
+"a><span class=\"by-author\"> <span class=\"sep\"> by </span> <span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel="
+"\"author\">%7$s</a></span></span>"
+msgstr ""
+"<span class=\"sep\"> Publikováno dne  </span><a href=\"%1$s\" title=\"%2$s\" "
+"rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></"
+"a><span class=\"by-author\"> <span class=\"sep\">  o</span> <span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel="
+"\"author\">%7$s</a></span></span>"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:108
+#, php-format
+msgid "View all posts by %s"
+msgstr "Zobrazit všechny příspěvky od uživatele %s"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:135
+msgid "Primary Widget Area"
+msgstr "Primární Widget Area"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:139
+msgid "The primary widget area"
+msgstr "Primární Widget oblast"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:156
+msgid "Secondary Widget Area"
+msgstr "Sekundární Widget Area"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:160
+msgid "The secondary widget area"
+msgstr "Sekundární Widget oblast"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:206
+msgid "Primary Menu"
+msgstr "Primární Menu"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/functions.php:421
+msgid "Edit"
+msgstr "Upravit"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:115
+msgid "Full Name"
+msgstr "Jméno a příjmení"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:123
+msgid "Your Email"
+msgstr "Váš e-mail"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:131
+msgid "Message title"
+msgstr "Předmět zprávy"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:141
+msgid "Comments"
+msgstr "Komentáře"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Name field is required."
+msgstr "Je nutné název pole."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Email field is required."
+msgstr "Je nutné Email pole."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "Please provide a valid email address."
+msgstr "Zadejte prosím platnou e-mailovou adresu."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "The Message field is required."
+msgstr "Je nutné pole zprávy."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:151
+msgid "Sorry, the code you entered was invalid."
+msgstr "Omlouváme se, ale kód, který jste zadali neplatný."
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-contact.php:152
+msgid "Reset"
+msgstr "Obnovit"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:37
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:45
+msgid "Log in"
+msgstr "Přihlásit se"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:41
+msgid "Password"
+msgstr "Heslo"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-login.php:60
+msgid "Log Out"
+msgstr "Odhlásit se"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-product.php:74
+msgid "Read More"
+msgstr "Čtěte více"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:45
+msgid "Static Pages:"
+msgstr "Statické stránky:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:57
+msgid "All Categories:"
+msgstr "Všechny kategorie:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:70
+msgid "Tags:"
+msgstr "Tagy:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:87
+msgid "Archives:"
+msgstr "Archiv:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:100
+msgid "Authors:"
+msgstr "Autoři:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/page-sitemap.php:113
+msgid "Blog Posts:"
+msgstr "Příspěvků v blogu:"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/search.php:39
+msgid "Count"
+msgstr "Počítat"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/single.php:34
+msgid "Page"
+msgstr "Strana"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/color_control.php:320
+msgid "Schemes"
+msgstr "Schémata"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/install_sampl_date.php:1314
+msgid "Home"
+msgstr "Domácí"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:15
+msgid "Insert Button Shortcode"
+msgstr "Vložte Tlačítko zkrácený"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:25
+msgid "Insert Link Shortcode"
+msgstr "Vložte odkaz zkrácený"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:39
+msgid "Insert Info Box Shortcode"
+msgstr "Vložte Info Box zkrácený"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:50
+msgid "Insert Quote Box Shortcode"
+msgstr "Vložte Citace Box zkrácený"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:62
+msgid "Insert Contact Form Shortcode"
+msgstr "Vložte Kontaktní formulář zkrácený"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:73
+msgid "Insert Tabs Creator Shortcode"
+msgstr "Vložte Tabs Creator zkrácený"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:83
+msgid "Insert Related Posts Shortcode"
+msgstr "Vložte Související příspěvky zkrácený"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/shortcode/tinymce/config.php:95
+msgid "Insert Columns Layout Shortcode"
+msgstr "Vložit sloupce Rozvržení zkrácený"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/admin/widgets/widget-category.php:77
+msgid "More"
+msgstr "Více"
+
+#: C:\wamp\www\theme_test\wp-content\themes\exclusive/custom/seo_meta.php:22
+msgid "SEO Exclusive"
+msgstr "SEO Exclusive"

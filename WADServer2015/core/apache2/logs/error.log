@@ -1,0 +1,19 @@
+[Thu Apr 02 11:37:26.564785 2015] [mpm_winnt:notice] [pid 5764:tid 608] AH00455: Apache/2.4.10 (Win32) PHP/5.4.36 configured -- resuming normal operations
+[Thu Apr 02 11:37:26.564785 2015] [mpm_winnt:notice] [pid 5764:tid 608] AH00456: Apache Lounge VC10 Server built: Jul 19 2014 11:02:31
+[Thu Apr 02 11:37:26.564785 2015] [core:notice] [pid 5764:tid 608] AH00094: Command line: 'C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2\\bin\\httpd_z.exe -d C:/Users/powelm6/Desktop/WADServer2015/core/apache2 -f C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2\\conf\\httpd.conf -d C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2'
+[Thu Apr 02 11:37:26.564785 2015] [mpm_winnt:notice] [pid 5764:tid 608] AH00418: Parent: Created child process 6112
+[Thu Apr 02 11:37:27.657799 2015] [mpm_winnt:notice] [pid 6112:tid 632] AH00354: Child: Starting 150 worker threads.
+C:/Users/powelm6/Desktop/WADServer2015/core/msmtp/msmtp.exe: cannot connect to smtp.tiscali.co.uk, port 25: timeout
+C:/Users/powelm6/Desktop/WADServer2015/core/msmtp/msmtp.exe: could not send mail (account default from C:/Users/powelm6/Desktop/WADServer2015/core/msmtp/msmtprc.ini)
+[Thu Apr 02 11:42:55.658690 2015] [core:warn] [pid 3468:tid 148] AH00098: pid file C:/Users/powelm6/Desktop/WADServer2015/core/apache2/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Apr 02 11:42:56.251490 2015] [mpm_winnt:notice] [pid 3468:tid 148] AH00455: Apache/2.4.10 (Win32) PHP/5.4.36 configured -- resuming normal operations
+[Thu Apr 02 11:42:56.251490 2015] [mpm_winnt:notice] [pid 3468:tid 148] AH00456: Apache Lounge VC10 Server built: Jul 19 2014 11:02:31
+[Thu Apr 02 11:42:56.251490 2015] [core:notice] [pid 3468:tid 148] AH00094: Command line: 'C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2\\bin\\httpd_z.exe -d C:/Users/powelm6/Desktop/WADServer2015/core/apache2 -f C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2\\conf\\httpd.conf -d C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2'
+[Thu Apr 02 11:42:56.251490 2015] [mpm_winnt:notice] [pid 3468:tid 148] AH00418: Parent: Created child process 2776
+[Thu Apr 02 11:42:57.391290 2015] [mpm_winnt:notice] [pid 2776:tid 632] AH00354: Child: Starting 150 worker threads.
+[Thu Apr 02 11:43:05.129890 2015] [mpm_winnt:notice] [pid 3468:tid 148] AH00428: Parent: child process 2776 exited with status 3221225477 -- Restarting.
+[Thu Apr 02 11:43:05.890890 2015] [mpm_winnt:notice] [pid 3468:tid 148] AH00455: Apache/2.4.10 (Win32) PHP/5.4.36 configured -- resuming normal operations
+[Thu Apr 02 11:43:05.890890 2015] [mpm_winnt:notice] [pid 3468:tid 148] AH00456: Apache Lounge VC10 Server built: Jul 19 2014 11:02:31
+[Thu Apr 02 11:43:05.890890 2015] [core:notice] [pid 3468:tid 148] AH00094: Command line: 'C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2\\bin\\httpd_z.exe -d C:/Users/powelm6/Desktop/WADServer2015/core/apache2 -f C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2\\conf\\httpd.conf -d C:\\Users\\powelm6\\Desktop\\WADServer2015\\core\\apache2'
+[Thu Apr 02 11:43:05.892890 2015] [mpm_winnt:notice] [pid 3468:tid 148] AH00418: Parent: Created child process 3984
+[Thu Apr 02 11:43:06.846890 2015] [mpm_winnt:notice] [pid 3984:tid 628] AH00354: Child: Starting 150 worker threads.

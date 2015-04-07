@@ -1,0 +1,38 @@
+http://localhost/us_opt2/index.php?server=127.0.0.1&username=root&user=root&host=127.0.0.1
+
+
+Auto login
+http://localhost/opt2/index.php?username=root
+
+
+
+Create the following:
+index.php   - New file
+adminer.php - Original down load
+
+Type following in browser address bar
+http://localhost/opt2/?username=
+
+
+index.php
+
+<?php
+   function adminer_object() {
+        class AdminerSoftware extends Adminer {
+            function credentials() {
+                // server, username and password for connecting to database
+                return array('127.0.0.1', 'root', 'root');
+            }
+            function database() {
+                // database name, will be escaped by Adminer
+                return '';
+            }
+        }
+        return new AdminerSoftware;
+    }
+    require_once("adminer.php");
+
+?>
+
+
+

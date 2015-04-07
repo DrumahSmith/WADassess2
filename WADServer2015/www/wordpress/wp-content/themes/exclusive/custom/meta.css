@@ -1,0 +1,44 @@
+.web_business_meta_control .description
+{ display:none; }
+
+.web_business_meta_control label
+{ display:block; font-weight:bold; margin:6px; margin-bottom:0; margin-top:12px; }
+
+.web_business_meta_control label span
+{ display:inline; font-weight:normal; }
+
+.web_business_meta_control span
+{ color:#999; display:block; }
+
+.web_business_meta_control textarea, .web_business_meta_control input[type='text']
+{ margin-bottom:3px; width:99%; }
+
+.web_business_meta_control h4
+{ color:#999; font-size:1em; margin:15px 6px; text-transform:uppercase; }
+
+.t_blog
+{display: none;}
+
+.web_business_meta_control input{
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111);
+}
+
+.web_business_meta_control label{
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111);
+}
+
+.web_business_meta_control p{
+	font-family: Segoe UI;
+	color: rgb(111, 111, 111);
+}
+.seo_meta{
+   width:32%;
+   float:left;
+   text-align:center;
+   margin-right: 1%;
+}
+.seo_meta h4{
+   margin: 0.33em 0;
+}
