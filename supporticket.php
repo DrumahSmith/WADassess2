@@ -9,7 +9,7 @@ Author URI: http://eitonline.eit.ac.nz/course/view.php?id=72/
 Last update: 
 */
 
-$gc_dbversion = "0.1"; //current version of the database
+$GC_dbversion = "0.1"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -19,34 +19,33 @@ if (!function_exists('pr')) {
  
 //========================================================================================
 //all the hooks used by our FAQ demo
-register_activation_hook(__FILE__,'gc_install');
-register_deactivation_hook( __FILE__, 'gc_uninstall' );
-add_action('plugins_loaded', 'gc_update_db_check');
-add_action('plugin_action_links_'.plugin_basename(__FILE__), 'gcsettingslink' );  
-
-add_shortcode('displayfaq', 'WADdisplayfaq');
-add_action('admin_menu', 'WAD_faq_menu');
+register_activation_hook(__FILE__,'GC_install');
+register_deactivation_hook( __FILE__, 'GC_uninstall' );
+add_action('plugins_loaded', 'GC_update_db_check');
+add_action('plugin_action_links_'.plugin_basename(__FILE__), 'GCsettingslink' );  
+add_shortcode('displayfaq', 'GCdisplayfaq');
+add_action('admin_menu', 'GC_faq_menu');
 
 //========================================================================================
 //check to see if there is any update required for the database, 
 //just in case we updated the plugin without reactivating it
 
 function WAD_update_db_check() {
-	global $WAD_dbversion;
-	if (get_site_option('WAD_dbversion') != $WAD_dbversion) WAD_faq_install();   
+	global $GC_dbversion;
+	if (get_site_option('GC_dbversion') != $GC_dbversion) GC_faq_install();   
 }
 
 //========================================================================================
 //hook for the install function - used to create our table for our simple FAQ
-function WAD_faq_install () {
+function GC_faq_install () {
 	global $wpdb;
-	global $WAD_dbversion;
+	global $GC_dbversion;
 
-	$currentversion = get_option( "WAD_dbversion" ); //retrieve the version of FAQ database if it has been installed
-	if ($WAD_dbversion > $currentversion) {
-		if($wpdb->get_var("show tables like 'WAD_faq'") != 'WAD_faq') {
+	$currentversion = get_option( "GC_dbversion" ); //retrieve the version of FAQ database if it has been installed
+	if ($GC_dbversion > $currentversion) {
+		if($wpdb->get_var("show tables like 'GC_faq'") != 'GC_faq') {
 	
-			$sql = 'CREATE TABLE WAD_faq (
+			$sql = 'CREATE TABLE GC_faq (
 			id int(11) NOT NULL auto_increment,
 			author_id int(11) NOT NULL,
 			question_date date NOT NULL,
@@ -60,17 +59,17 @@ function WAD_faq_install () {
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 			dbDelta($sql);
 			//update the version of the database with the new one
-			update_option( "WAD_dbversion", $WAD_dbversion );
-			add_option("WAD_dbversion", $WAD_dbversion);
+			update_option( "GC_dbversion", $GC_dbversion );
+			add_option("GC_dbversion", $GC_dbversion);
 		}  
    }	
 }   
 
 //========================================================================================
 //clean up and remove any settings than may be left in the wp_options table from our plugin
-function WAD_faq_uninstall() {
-	delete_site_option($WAD_dbversion);
-	delete_option($WAD_dbversion);
+function GC_faq_uninstall() {
+	delete_site_option($GC_dbversion);
+	delete_option($GC_dbversion);
 }
 
 //========================================================================================
@@ -78,7 +77,7 @@ function WAD_faq_uninstall() {
 // Add settings link on plugin page
 function FAQsettingslink($links) { 
 //http://codex.wordpress.org/Function_Reference/admin_url
-  array_unshift($links, '<a href="'.admin_url('plugins.php?page=WADsimplefaq').'">Settings</a>'); 
+  array_unshift($links, '<a href="'.admin_url('plugins.php?page=GCsimplefaq').'">Settings</a>'); 
   return $links; 
 }
 
@@ -86,10 +85,10 @@ function FAQsettingslink($links) {
 //shortcode for displaying the FAQ - no parameters
 //usage: [displayfaq]
 //display the faq questions and answers by using a shortcode
-function WADdisplayfaq() {
+function GCdisplayfaq() {
     global $wpdb;
 
-    $query = "SELECT * FROM WAD_faq WHERE status=1 ORDER BY answer_date DESC";
+    $query = "SELECT * FROM GC_faq WHERE status=1 ORDER BY answer_date DESC";
     $allfaqs = $wpdb->get_results($query);
 
     $buffer = '<ol>';
@@ -103,12 +102,12 @@ function WADdisplayfaq() {
 //========================================================================================
 //add in the FAQ menu entry under the plugins menu.
 //notice the menu slug 'WADsimplefaq' - this is used through the FAQ demo in the URL's to identify this page in the WP dashboard
-function WAD_faq_menu() {
-		add_submenu_page( 'plugins.php', 'WAD 9. Simple FAQ', 'WAD Simple FAQ', 'manage_options', 'WADsimplefaq', 'WAD_faq_CRUD');
+function GC_faq_menu() {
+		add_submenu_page( 'plugins.php', 'GC 9. Simple FAQ', 'GC Simple FAQ', 'manage_options', 'GCsimplefaq', 'GC_faq_CRUD');
 }
 
 //basic CRUD selector
-function WAD_faq_CRUD() {
+function GC_faq_CRUD() {
 
  //--- some basic debugging for information purposes only
 	echo '<h3>Contents of the POST data</h3>';
@@ -119,7 +118,7 @@ function WAD_faq_CRUD() {
 
 	echo  '<div id="msg" style="overflow: auto"></div>
 		<div class="wrap">
-		<h2>WAD 8. Simple FAQ <a href="?page=WADsimplefaq&command=new" class="add-new-h2">Add New</a></h2>
+		<h2>GC 8. Simple FAQ <a href="?page=WADsimplefaq&command=new" class="add-new-h2">Add New</a></h2>
 		<div style="clear: both"></div>';
 		
 	$faqdata = $_POST; //our form data from the insert/update
@@ -139,48 +138,48 @@ function WAD_faq_CRUD() {
 //execute the respective function based on the command		
     switch ($command) {
 		case 'view':
-			WAD_faq_view($faqid);
+			GC_faq_view($faqid);
 		break;
 		
 		case 'edit':
-			$msg = WAD_faq_form('update', $faqid); //notice the $faqid passed for the form for an update/edit
+			$msg = GC_faq_form('update', $faqid); //notice the $faqid passed for the form for an update/edit
 		break;
 
 		case 'new':
-			$msg = WAD_faq_form('insert',null);//notice the null passed for the insert/new to the form
+			$msg = GC_faq_form('insert',null);//notice the null passed for the insert/new to the form
 		break;
       
 		case 'delete':
-			$msg = WAD_faq_delete($faqid); //remove a faq entry
+			$msg = GC_faq_delete($faqid); //remove a faq entry
 			$command = '';
 		break;
 
 		case 'update':
-			$msg = WAD_faq_update($faqdata); //update an existing faq
+			$msg = GC_faq_update($faqdata); //update an existing faq
 			$command = '';
 		break;
 
 		case 'insert':	
-			$msg = WAD_faq_insert($faqdata); //prepare a blank form for adding a new faq entry
+			$msg = GC_faq_insert($faqdata); //prepare a blank form for adding a new faq entry
 			$command = '';
 		break;
 	}
 
-	if (empty($command)) WAD_faq_list(); //display a list of the faqs if no command issued
+	if (empty($command)) GC_faq_list(); //display a list of the faqs if no command issued
 
 //show any information messages	
 	if (!empty($msg)) {
-      echo '<p><a href="?page=WADsimplefaq"> back to the FAQ list </a></p> Message: '.$msg;      
+      echo '<p><a href="?page=GCsimplefaq"> back to the FAQ list </a></p> Message: '.$msg;      
 	}
 	echo '</div>';
 }
 
 //========================================================================================
 //view all the detail for a single FAQ
-function WAD_faq_view($id) {
+function GC_faq_view($id) {
    global $wpdb;
    
-   $row = $wpdb->get_row("SELECT * FROM WAD_faq WHERE id = '$id'");
+   $row = $wpdb->get_row("SELECT * FROM GC_faq WHERE id = '$id'");
    echo '<p>';
    echo "Question:";
    echo '<br/>';
@@ -189,15 +188,15 @@ function WAD_faq_view($id) {
    echo "Answer:";
    echo '<br/>';
    echo $row->answer;
-   echo '<p><a href="?page=WADsimplefaq">&laquo; back to the FAQ list</p>';
+   echo '<p><a href="?page=GCsimplefaq">&laquo; back to the FAQ list</p>';
 }
 
 //========================================================================================
 //remove an existing FAQ from the database
-function WAD_faq_delete($id) {
+function GC_faq_delete($id) {
    global $wpdb;
 
-   $results = $wpdb->delete('WAD_faq',array( 'id' => $id ) );
+   $results = $wpdb->delete('GC_faq',array( 'id' => $id ) );
    if ($results) {
       $msg = "FAQ entry $id was successfully deleted.";
    }
@@ -206,11 +205,11 @@ function WAD_faq_delete($id) {
 
 //========================================================================================
 //update an existing FAQ in the database
-function WAD_faq_update($data) {
+function GC_faq_update($data) {
     global $wpdb, $current_user;
 	
 //add in data validation and error checking here before updating the database!!
-    $wpdb->update('WAD_faq',
+    $wpdb->update('GC_faq',
 		  array( 'question' => stripslashes_deep($data['question']),
 				 'answer' => stripslashes_deep($data['answer']),
 				 'answer_date' => date("Y-m-d"),
@@ -223,11 +222,11 @@ function WAD_faq_update($data) {
 
 //========================================================================================
 //add a new FAQ to the database
-function WAD_faq_insert($data) {
+function GC_faq_insert($data) {
     global $wpdb, $current_user;
 
 //add in data validation and error checking here before updating the database!!
-    $wpdb->insert( 'WAD_faq',
+    $wpdb->insert( 'GC_faq',
 		  array(
 			'question' => stripslashes_deep($data['question']),
 			'answer' => stripslashes_deep($data['answer']),
@@ -240,11 +239,11 @@ function WAD_faq_insert($data) {
 }
 
 //========================================================================================
-function WAD_faq_list() {
+function GC_faq_list() {
    global $wpdb, $current_user;
 
    //prepare the query for retrieving the FAQ's from the database
-   $query = "SELECT id, question, answer, author_id, answer_date, status FROM WAD_faq ORDER BY answer_date DESC";
+   $query = "SELECT id, question, answer, author_id, answer_date, status FROM GC_faq ORDER BY answer_date DESC";
    $allfaqs = $wpdb->get_results($query);
 
    //prepare the table and use a default WP style - wp-list-table widefat
@@ -267,9 +266,9 @@ function WAD_faq_list() {
 	   $user_info = get_userdata($faq->author_id);
 	   
 //prepare the URL's for some of the CRUD	   
-	   $edit_link = '?page=WADsimplefaq&id=' . $faq->id . '&command=edit';
-	   $view_link ='?page=WADsimplefaq&id=' . $faq->id . '&command=view';
-	   $delete_link = '?page=WADsimplefaq&id=' . $faq->id . '&command=delete';
+	   $edit_link = '?page=GCsimplefaq&id=' . $faq->id . '&command=edit';
+	   $view_link ='?page=GCsimplefaq&id=' . $faq->id . '&command=view';
+	   $delete_link = '?page=GCsimplefaq&id=' . $faq->id . '&command=delete';
 
 //use some inbuilt WP CSS to perform the rollover effect for the edit/view/delete links	   
 	   echo '<tr>';
@@ -297,7 +296,7 @@ function WAD_faq_list() {
 
 //========================================================================================
 //this is the form used for the insert as well as the edit/update of the FAQ data
-function WAD_faq_form($command, $id = null) {
+function GC_faq_form($command, $id = null) {
     global $wpdb;
 
 //if the current command is insert then clear the form variables to ensure we have a blank
@@ -310,7 +309,7 @@ function WAD_faq_form($command, $id = null) {
 	
 //if the current command is 'edit' then retrieve the FAQ record based on the id pased to this function
 	if ($command == 'update') {
-        $faq = $wpdb->get_row("SELECT * FROM WAD_faq WHERE id = '$id'");
+        $faq = $wpdb->get_row("SELECT * FROM GC_faq WHERE id = '$id'");
 	}
 
 //prepare the draft/published status for the HTML check boxes	
@@ -320,7 +319,7 @@ function WAD_faq_form($command, $id = null) {
 	}
 	
 //prepare the HTML form	
-    echo '<form name="WADform" method="post" action="?page=WADsimplefaq">
+    echo '<form name="GCform" method="post" action="?page=GCsimplefaq">
 		<input type="hidden" name="hid" value="'.$id.'"/>
 		<input type="hidden" name="command" value="'.$command.'"/>
 
@@ -335,6 +334,6 @@ function WAD_faq_form($command, $id = null) {
 		</p>
 		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /></p>
 		</form>';
-   echo '<p><a href="?page=WADsimplefaq">&laquo; back to the FAQ list</p>';		
+   echo '<p><a href="?page=GCsimplefaq">&laquo; back to the FAQ list</p>';		
 }
 ?>
