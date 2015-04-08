@@ -66,7 +66,7 @@ function GC_faq_install () {
 			special_requests text NOT NULL,
 			job_manager tinytext NOT NULL,
 			date_completed date NOT NULL,
-			compliance_certificate_required enum('true','false') NOT NULL, /*Must enter true/false otherwise blank entry added*/
+			compliance_certificate_required tinytext NOT NULL,
 			compliance_certificate_number int(11) NOT NULL,
 			known_site_hazards text NOT NULL,
 			glenn_cook_job_number int(11) NOT NULL,
