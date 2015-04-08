@@ -43,18 +43,44 @@ function GC_faq_install () {
 
 	$currentversion = get_option( "GC_dbversion" ); //retrieve the version of FAQ database if it has been installed
 	if ($GC_dbversion > $currentversion) {
-		if($wpdb->get_var("show tables like 'GC_faq'") != 'GC_faq') {
+		if($wpdb->get_var("show tables like 'GC_ticket'") != 'GC_ticket') {
 	
-			$sql = 'CREATE TABLE GC_faq (
+			$sql = 'CREATE TABLE GC_ticket (
 			id int(11) NOT NULL auto_increment,
-			author_id int(11) NOT NULL,
-			question_date date NOT NULL,
-			question text NOT NULL,
-			answer_date date NOT NULL,
-			answer text NOT NULL,
-			status tinyint(4) NOT NULL,
+			job_id int(11) NOT NULL,
+			customer_name tinytext NOT NULL,
+			technician_name tinytext NOT NULL,
+			job_status int(11) NOT NULL,
+			site_name tinytext NOT NULL,
+			street tinytext NOT NULL,
+			suburb tinytext NOT NULL,
+			city tinytext NOT NULL,
+			description text NOT NULL,
+			contact_name tinytext NOT NULL,
+			purchase_order_number int(11) NOT NULL,
+			planned_start_date date NOT NULL,
+			planned_finish_date date NOT NULL,
+			site_contact_name tinytext NOT NULL,
+			site_contact_phone int(11) NOT NULL,
+			address tinytext NOT NULL,
+			special_requests text NOT NULL,
+			customer_notes text NOT NULL,
+			job_manager tinytext NOT NULL,
+			technician_notes text NOT NULL,
+			date_completed date NOT NULL,
+			compliance_certificate_required enum('true','false') NOT NULL, /*Must enter true/false otherwise blank entry added*/
+			compliance_certificate_number int(11) NOT NULL,
+			known_site_hazards text NOT NULL,
+			glenn_cook_job_number int(11) NOT NULL,
+			description_of_repair text NOT NULL,
+			last_updated date NOT NULL,
+			category tinytext NOT NULL,
+			priority int(11) NOT NULL,
+			attached_files /* Add data type */
 			PRIMARY KEY (id)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
+			
+			
 
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 			dbDelta($sql);
