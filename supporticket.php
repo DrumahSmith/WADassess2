@@ -64,9 +64,7 @@ function GC_faq_install () {
 			site_contact_phone int(11) NOT NULL,
 			address tinytext NOT NULL,
 			special_requests text NOT NULL,
-			customer_notes text NOT NULL,
 			job_manager tinytext NOT NULL,
-			technician_notes text NOT NULL,
 			date_completed date NOT NULL,
 			compliance_certificate_required enum('true','false') NOT NULL, /*Must enter true/false otherwise blank entry added*/
 			compliance_certificate_number int(11) NOT NULL,
@@ -77,18 +75,53 @@ function GC_faq_install () {
 			category tinytext NOT NULL,
 			priority int(11) NOT NULL,
 			attached_files /* Add data type */
-			PRIMARY KEY (id)
+			PRIMARY KEY (job_id)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
 			
-			
-
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 			dbDelta($sql);
 			//update the version of the database with the new one
 			update_option( "GC_dbversion", $GC_dbversion );
 			add_option("GC_dbversion", $GC_dbversion);
-		}  
-   }	
+		} 
+	
+		if($wpdb->get_var("show tables like 'GC_notes'") != 'GC_notes') {
+	
+			$sql = 'CREATE TABLE GC_notes (
+			id int(11) NOT NULL auto_increment,
+			customer_notes text NOT NULL,
+			technician_notes text NOT NULL,
+			fgn_job_id int(11) NOT NULL,
+			PRIMARY KEY (id)
+			FOREIGN KEY (fgn_job_id) REFERENCES GC_ticket(job_id)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
+			
+			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+			dbDelta($sql);
+			//update the version of the database with the new one
+			update_option( "GC_dbversion", $GC_dbversion );
+			add_option("GC_dbversion", $GC_dbversion);
+		}
+		
+		if($wpdb->get_var("show tables like 'GC_accounts'") != 'GC_accounts') {
+	
+			$sql = 'CREATE TABLE GC_accounts (
+			id int(11) NOT NULL auto_increment,
+			
+			/* Add fields for extra user info */
+			
+			fgn_user_id int(11) NOT NULL,
+			PRIMARY KEY (id)
+			FOREIGN KEY (fgn_user_id) REFERENCES wp_users(ID)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
+			
+			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+			dbDelta($sql);
+			//update the version of the database with the new one
+			update_option( "GC_dbversion", $GC_dbversion );
+			add_option("GC_dbversion", $GC_dbversion);
+		}
+	}	
 }   
 
 //========================================================================================
