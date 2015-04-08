@@ -9,7 +9,7 @@ Author URI: http://eitonline.eit.ac.nz/course/view.php?id=72/
 Last update: 
 */
 
-$WAD_dbversion = "0.1"; //current version of our database for our simple FAQ demo
+$gc_dbversion = "0.1"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -19,10 +19,11 @@ if (!function_exists('pr')) {
  
 //========================================================================================
 //all the hooks used by our FAQ demo
-register_activation_hook(__FILE__,'WAD_faq_install');
-register_deactivation_hook( __FILE__, 'WAD_faq_uninstall' );
-add_action('plugins_loaded', 'WAD_update_db_check');
-add_action('plugin_action_links_'.plugin_basename(__FILE__), 'FAQsettingslink' );  
+register_activation_hook(__FILE__,'gc_install');
+register_deactivation_hook( __FILE__, 'gc_uninstall' );
+add_action('plugins_loaded', 'gc_update_db_check');
+add_action('plugin_action_links_'.plugin_basename(__FILE__), 'gcsettingslink' );  
+
 add_shortcode('displayfaq', 'WADdisplayfaq');
 add_action('admin_menu', 'WAD_faq_menu');
 
