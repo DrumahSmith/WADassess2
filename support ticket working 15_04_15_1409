@@ -9,7 +9,7 @@
  * License: GPL2
  */
 
-$GC_dbversion = "0.1"; //current version of the database
+$ST_dbversion = "0.1"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -19,51 +19,67 @@ if (!function_exists('pr')) {
  
 //========================================================================================
 //all the hooks used by our FAQ demo
-register_activation_hook(__FILE__,'GC_install');
-register_deactivation_hook(__FILE__, 'GC_uninstall' );
-add_action('plugins_loaded', 'GC_update_db_check');
-//add_action('plugin_action_links_'.plugin_basename(__FILE__), 'GCsettingslink' );  
-//add_shortcode('displayfaq', 'GCdisplayfaq');
-//add_action('admin_menu', 'GC_faq_menu');
+register_activation_hook(__FILE__,'ST_install');
+register_deactivation_hook(__FILE__, 'ST_uninstall' );
+add_action('plugins_loaded', 'ST_update_db_check');
+//add_action('plugin_action_links_'.plugin_basename(__FILE__), 'STsettingslink' );  
+//add_shortcode('displayfaq', 'STdisplayfaq');
+//add_action('admin_menu', 'ST_faq_menu');
 
 //========================================================================================
 //check to see if there is any update required for the database, 
 //just in case we updated the plugin without reactivating it
 
-function GC_update_db_check() {
-	global $GC_dbversion;
-	if (get_site_option('GC_dbversion') != $GC_dbversion) GC_install();   
+function ST_update_db_check() {
+	global $ST_dbversion;
+	if (get_site_option('ST_dbversion') != $ST_dbversion) ST_install();   
 }
  
  //========================================================================================
 //hook for the install function - used to create our table for our simple FAQ
-function GC_install () {
+function ST_install () {
 	global $wpdb;
-	global $GC_dbversion;
+	global $ST_dbversion;
 
-	$currentversion = get_option( "GC_dbversion" ); //retrieve the version of FAQ database if it has been installed
-	if ($GC_dbversion > $currentversion) {
-		if($wpdb->get_var("show tables like 'GC_ticket'") != 'GC_ticket') {
+	$currentversion = get_option( "ST_dbversion" ); //retrieve the version of FAQ database if it has been installed
+	if ($ST_dbversion > $currentversion) {
+		if($wpdb->get_var("show tables like 'ST_ticket'") != 'ST_ticket') {
 	
-			$sql = 'CREATE TABLE GC_ticket (
+			$sql = 'CREATE TABLE ST_ticket (
+			id int(11) NOT NULL auto_increment,
+			PRIMARY KEY (id)
+			);';
+		} 
+		
+		if($wpdb->get_var("show tables like 'ST_users'") != 'ST_users') {
+	
+			$sql .= 'CREATE TABLE ST_users (
+			id int(11) NOT NULL auto_increment,
+			PRIMARY KEY (id)
+			);';
+		}
+		
+		if($wpdb->get_var("show tables like 'ST_notes'") != 'ST_notes') {
+	
+			$sql .= 'CREATE TABLE ST_notes (
 			id int(11) NOT NULL auto_increment,
 			PRIMARY KEY (id)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
-		} 
+		}
 		
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 			dbDelta($sql);
 			//update the version of the database with the new one
-			update_option( "GC_dbversion", $GC_dbversion );
-			add_option("GC_dbversion", $GC_dbversion);
+			update_option( "ST_dbversion", $ST_dbversion );
+			add_option("ST_dbversion", $ST_dbversion);
 	}
 }
 
 //========================================================================================
 //clean up and remove any settings than may be left in the wp_options table from our plugin
-function GC_uninstall() {
-	delete_site_option($GC_dbversion);
-	delete_option($GC_dbversion);
+function ST_uninstall() {
+	delete_site_option($ST_dbversion);
+	delete_option($ST_dbversion);
 }
 //========================================================================================
 
