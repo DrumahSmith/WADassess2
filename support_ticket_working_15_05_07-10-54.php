@@ -382,8 +382,10 @@ function ST_ticket_form($command, $id = null) {
 		<textarea name="answer" rows="10" cols="30" class="large-text">'.$ticket->answer.'</textarea>
 		<p>Customer Name:<br/>
 		<input type="text" name="customer_name" value="'.$ticket->customer_name.'" size="20" class="large-text"/>
-		</p><hr />
-		<p>
+		<p>Site Name:<br/>
+		<input type="text" name="site_name" value="'.$ticket->site_name.'" size="20" class="large-text"/>
+		
+		
 		<label><input type="radio" name="status" value="0" '.$draftstatus.'> Draft</label> 
 		<label><input type="radio" name="status" value="1" '.$pubstatus.'> Published</label> 
 		</p>
