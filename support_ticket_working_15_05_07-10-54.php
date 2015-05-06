@@ -390,7 +390,46 @@ function ST_ticket_form($command, $id = null) {
 		<input type="text" name="customer_name" value="'.$ticket->customer_name.'" size="20" class="large-text"/>
 		<p>Site Name:<br/>
 		<input type="text" name="site_name" value="'.$ticket->site_name.'" size="20" class="large-text"/>
-		
+		<p>Site Address Street:<br/>
+		<input type="text" name="site_address_street" value="'.$ticket->site_address_street.'" size="20" class="large-text"/>
+		<p>Site Address Suburb:<br/>
+		<input type="text" name="site_address_suburb" value="'.$ticket->site_address_suburb.'" size="20" class="large-text"/>
+		<p>Site Address City:<br/>
+		<input type="text" name="site_address_city" value="'.$ticket->site_address_city.'" size="20" class="large-text"/>
+		<p>Site Contact Name:<br/>
+		<input type="text" name="site_contact_name" value="'.$ticket->site_contact_name.'" size="20" class="large-text"/>
+		<p>Site Contact Phone:<br/>
+		<input type="text" name="site_contact_phone" value="'.$ticket->site_contact_phone.'" size="20" class="large-text"/>
+		<p>Technician Name:<br/>
+		<input type="text" name="technician_name" value="'.$ticket->technician_name.'" size="20" class="large-text"/>
+		<p>Job Manager:<br/>
+		<input type="text" name="job_manager" value="'.$ticket->job_manager.'" size="20" class="large-text"/>
+		<p>Job Description:<br/>
+		<textarea name="job_description" rows="5" cols="20" class="large-text">'.$ticket->job_description.'</textarea>
+		<p>Special Requests:<br/>
+		<textarea name="special_requests" rows="5" cols="20" class="large-text">'.$ticket->special_requests.'</textarea>
+		<p>Planned Start Date:<br/>
+		<input type="text" name="planned_start_date" value="'.$ticket->planned_start_date.'" size="20" class="large-text"/>
+		<p>Planned Finish Date:<br/>
+		<input type="text" name="planned_finish_date" value="'.$ticket->planned_finish_date.'" size="20" class="large-text"/>
+		<p>Completion Date:<br/>
+		<input type="text" name="completion_date" value="'.$ticket->completion_date.'" size="20" class="large-text"/>
+		<p>Compliance Certificate Required?:<br/>
+		<input type="text" name="compliance_certificate_required" value="'.$ticket->compliance_certificate_required.'" size="20" class="large-text"/>
+		<p>Compliance Certificate Number:<br/>
+		<input type="text" name="compliance_certificate_number" value="'.$ticket->compliance_certificate_number.'" size="20" class="large-text"/>
+		<p>Known Site Hazards:<br/>
+		<textarea name="known_site_hazards" rows="5" cols="20" class="large-text">'.$ticket->known_site_hazards.'</textarea>
+		<p>Affiliate Job Number:<br/>
+		<input type="text" name="affiliate_job_number" value="'.$ticket->job_manager.'" size="20" class="large-text"/>
+		<p>Description of Repair:<br/>
+		<textarea name="description_of_repair" rows="5" cols="20" class="large-text">'.$ticket->description_of_repair.'</textarea>
+		<p>Last Updated:<br/>
+		<input type="text" name="last_updated" value="'.$ticket->last_updated.'" size="20" class="large-text"/>
+		<p>Category:<br/>
+		<input type="text" name="category" value="'.$ticket->category.'" size="20" class="large-text"/>
+		<p>Priority:<br/>
+		<input type="text" name="priority" value="'.$ticket->priority.'" size="20" class="large-text"/>
 		
 		<label><input type="radio" name="status" value="0" '.$draftstatus.'> Draft</label> 
 		<label><input type="radio" name="status" value="1" '.$pubstatus.'> Published</label> 
