@@ -9,7 +9,7 @@
  * License: GPL2
  */
 
-$ST_dbversion = "0.1"; //current version of the database
+$ST_dbversion = "0.7"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -237,6 +237,10 @@ function ST_ticket_view($id) {
    echo "Customer Name:";
    echo '<br/>';
    echo $row->customer_name;
+   echo '<p>';
+   echo "Site Name:";
+   echo '<br/>';
+   echo $row->site_name;
    echo '<p><a href="?page=STsimpleticket">&laquo; back to list</p>';
 }
 
@@ -265,7 +269,8 @@ function ST_ticket_update($data) {
 				 'answer_date' => date("Y-m-d"),
 				 'author_id' => $current_user->ID,
 				 'status' => $data['status'],
-				 'customer_name' => stripslashes_deep($data['customer_name'])),
+				 'customer_name' => stripslashes_deep($data['customer_name']),
+				 'site_name' => stripslashes_deep($data['site_name'])),
 		  array( 'id' => $data['hid']));
     $msg = "Question and answer ".$data['hid']." has been updated";
     return $msg;
@@ -285,8 +290,9 @@ function ST_ticket_insert($data) {
 			'answer_date' => date("Y-m-d"),
 			'author_id' => $current_user->ID,
 			'status' => $data['status'],
-			'customer_name' => stripslashes_deep($data['customer_name'])),
-		  array( '%s', '%s', '%s', '%s', '%d', '%d', '%s' ) );
+			'customer_name' => stripslashes_deep($data['customer_name']),
+			'site_name' => stripslashes_deep($data['site_name'])),
+		  array( '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s' ) );
     $msg = "A ticket entry has been added";
     return $msg;
 }
@@ -370,7 +376,7 @@ function ST_ticket_form($command, $id = null) {
 		$draftstatus = ($ticket->status == 0)?"checked":"";
 		$pubstatus   = ($ticket->status == 1)?"checked":"";
 	}
-	
+
 //prepare the HTML form	
     echo '<form name="STform" method="post" action="?page=STsimpleticket">
 		<input type="hidden" name="hid" value="'.$id.'"/>
