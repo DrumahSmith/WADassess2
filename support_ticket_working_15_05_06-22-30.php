@@ -123,15 +123,21 @@ function STsettingslink($links) {
 function STdisplayticket() {
     global $wpdb;
 
-    $query = "SELECT * FROM ST_ticket WHERE status=1 ORDER BY answer_date DESC";
-    $alltickets = $wpdb->get_results($query);
+	if (is_user_logged_in()) { //is the user authenticated - any user	
+		echo "You are an authenticated user so you may access this information...";	
+		
+		$query = "SELECT * FROM ST_ticket WHERE status=1 ORDER BY answer_date DESC";
+		$alltickets = $wpdb->get_results($query);
 
-    $buffer = '<ol>';
-    foreach ($alltickets as $ticket) {
-		$buffer .= '<li>'.format_to_post( $ticket->question ).'<br/>'.format_to_post( $ticket->answer ).'</li>';	
-    }
-    $buffer .= '</ol>';
-    return $buffer;
+		$buffer = '<ol>';
+		foreach ($alltickets as $ticket) {
+			$buffer .= '<li>'.format_to_post( $ticket->question ).'<br/>'.format_to_post( $ticket->answer ).'</li>';	
+		}
+		$buffer .= '</ol>';
+		return $buffer;
+	}
+	else
+		echo "You need to be logged in to access this information";
 }
 
 //========================================================================================
