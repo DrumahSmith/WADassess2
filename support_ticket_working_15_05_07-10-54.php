@@ -9,7 +9,7 @@
  * License: GPL2
  */
 
-$ST_dbversion = "0.7"; //current version of the database
+$ST_dbversion = "0.1"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -241,6 +241,86 @@ function ST_ticket_view($id) {
    echo "Site Name:";
    echo '<br/>';
    echo $row->site_name;
+   echo '<p>';
+   echo "Site Address:";
+   echo '<br/>';
+   echo $row->site_address;
+   echo '<p>';
+   echo "Site Address Suburb:";
+   echo '<br/>';
+   echo $row->site_address_suburb;
+   echo '<p>';
+   echo "Site Address City:";
+   echo '<br/>';
+   echo $row->site_address_city;
+   echo '<p>';
+   echo "Site Contact Name:";
+   echo '<br/>';
+   echo $row->site_contact_name;
+   echo '<p>';
+   echo "Site Contact Phone:";
+   echo '<br/>';
+   echo $row->site_contact_phone;
+   echo '<p>';
+   echo "Technician Name:";
+   echo '<br/>';
+   echo $row->technician_name;
+   echo '<p>';
+   echo "Job Manager:";
+   echo '<br/>';
+   echo $row->job_manager;
+   echo '<p>';
+   echo "Job Description:";
+   echo '<br/>';
+   echo $row->job_description;
+   echo '<p>';
+   echo "Special Requests:";
+   echo '<br/>';
+   echo $row->special_requests;
+   echo '<p>';
+   echo "Planned Start Date:";
+   echo '<br/>';
+   echo $row->planned_start_date;
+   echo '<p>';
+   echo "Planned Finish Date:";
+   echo '<br/>';
+   echo $row->planned_finish_date;
+   echo '<p>';
+   echo "Completion Date:";
+   echo '<br/>';
+   echo $row->completion_date;
+   echo '<p>';
+   echo "Compliance Certificate Required:";
+   echo '<br/>';
+   echo $row->compliance_certificate_required;
+   echo '<p>';
+   echo "Compliance Certificate Number:";
+   echo '<br/>';
+   echo $row->compliance_certificate_number;
+   echo '<p>';
+   echo "Known Site Hazards:";
+   echo '<br/>';
+   echo $row->known_site_hazards;
+   echo '<p>';
+   echo "Affiliate Job Number:";
+   echo '<br/>';
+   echo $row->affiliate_job_number;
+   echo '<p>';
+   echo "Description Of Repair:";
+   echo '<br/>';
+   echo $row->description_of_repair;
+   echo '<p>';
+   echo "Last Updated:";
+   echo '<br/>';
+   echo $row->last_updated;
+   echo '<p>';
+   echo "Category:";
+   echo '<br/>';
+   echo $row->category;
+   echo '<p>';
+   echo "Priority:";
+   echo '<br/>';
+   echo $row->priority;
    echo '<p><a href="?page=STsimpleticket">&laquo; back to list</p>';
 }
 
@@ -270,7 +350,27 @@ function ST_ticket_update($data) {
 				 'author_id' => $current_user->ID,
 				 'status' => $data['status'],
 				 'customer_name' => stripslashes_deep($data['customer_name']),
-				 'site_name' => stripslashes_deep($data['site_name'])),
+				 'site_name' => stripslashes_deep($data['site_name']),
+				 'site_address' => stripslashes_deep($data['site_address']),
+				 'site_address_suburb' => stripslashes_deep($data['site_address_suburb']),
+				 'site_address_city' => stripslashes_deep($data['site_address_city']),
+				 'site_contact_name' => stripslashes_deep($data['site_contact_name']),
+				 'site_contact_phone' => stripslashes_deep($data['site_contact_phone']),
+				 'technician_name' => stripslashes_deep($data['technician_name']),
+				 'job_manager' => stripslashes_deep($data['job_manager']),
+				 'job_description' => stripslashes_deep($data['job_description']),
+				 'special_requests' => stripslashes_deep($data['special_requests']),
+				 'planned_start_date' => stripslashes_deep($data['planned_start_date']),
+				 'planned_finish_date' => stripslashes_deep($data['planned_finish_date']),
+				 'completion_date' => stripslashes_deep($data['completion_date']),
+				 'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
+				 'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
+				 'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
+				 'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
+				 'description_of_repair' => stripslashes_deep($data['description_of_repair']),
+				 'last_updated' => stripslashes_deep($data['last_updated']),
+				 'category' => stripslashes_deep($data['category']),
+				 'priority' => stripslashes_deep($data['priority'])),
 		  array( 'id' => $data['hid']));
     $msg = "Question and answer ".$data['hid']." has been updated";
     return $msg;
@@ -291,8 +391,28 @@ function ST_ticket_insert($data) {
 			'author_id' => $current_user->ID,
 			'status' => $data['status'],
 			'customer_name' => stripslashes_deep($data['customer_name']),
-			'site_name' => stripslashes_deep($data['site_name'])),
-		  array( '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s' ) );
+			'site_name' => stripslashes_deep($data['site_name']),
+			'site_address' => stripslashes_deep($data['site_address']),
+			'site_address_suburb' => stripslashes_deep($data['site_address_suburb']),
+			'site_address_city' => stripslashes_deep($data['site_address_city']),
+			'site_contact_name' => stripslashes_deep($data['site_contact_name']),
+			'site_contact_phone' => stripslashes_deep($data['site_contact_phone']),
+			'technician_name' => stripslashes_deep($data['technician_name']),
+			'job_manager' => stripslashes_deep($data['job_manager']),
+			'job_description' => stripslashes_deep($data['job_description']),
+			'special_requests' => stripslashes_deep($data['special_requests']),
+			'planned_start_date' => stripslashes_deep($data['planned_start_date']),
+			'planned_finish_date' => stripslashes_deep($data['planned_finish_date']),
+			'completion_date' => stripslashes_deep($data['completion_date']),
+			'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
+			'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
+			'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
+			'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
+			'description_of_repair' => stripslashes_deep($data['description_of_repair']),
+			'last_updated' => stripslashes_deep($data['last_updated']),
+			'category' => stripslashes_deep($data['category']),
+			'priority' => stripslashes_deep($data['priority'])),
+		  array( '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
     $msg = "A ticket entry has been added";
     return $msg;
 }
