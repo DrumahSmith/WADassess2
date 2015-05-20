@@ -422,7 +422,36 @@ function ST_ticket_list() {
    global $wpdb, $current_user;
 
    //prepare the query for retrieving the ticket's from the database
-   $query = "SELECT id, question, answer, author_id, answer_date, status FROM ST_ticket ORDER BY answer_date DESC";
+   $query = "SELECT
+   id,
+   question,
+   answer,
+   author_id,
+   answer_date,
+   status,
+   customer_name,
+   site_name,
+   site_address_street,
+   site_address_suburb,
+   site_address_city,
+   site_contact_name,
+   site_contact_phone,
+   technician_name,
+   job_manager,
+   job_description,
+   special_requests,
+   planned_start_date,
+   planned_finish_date,
+   completion_date,
+   compliance_certificate_required,
+   compliance_certificate_number,
+   known_site_hazards,
+   affiliate_job_number,
+   description_of_repair,
+   last_updated,
+   category,
+   priority 
+   FROM ST_ticket ORDER BY answer_date DESC";
    $alltickets = $wpdb->get_results($query);
 
    //prepare the table and use a default WP style - wp-list-table widefat
@@ -433,6 +462,28 @@ function ST_ticket_list() {
 			<th scope="col" class="manage-column">Created</th>
 			<th scope="col" class="manage-column">Author</th>
 			<th scope="col" class="manage-column">Status</th>
+			<th scope="col" class="manage-column">customer_name</th>
+			<th scope="col" class="manage-column">site_name</th>
+			<th scope="col" class="manage-column">site_address_street</th>
+			<th scope="col" class="manage-column">site_address_suburb</th>
+			<th scope="col" class="manage-column">site_address_city</th>
+			<th scope="col" class="manage-column">site_contact_name</th>
+			<th scope="col" class="manage-column">site_contact_phone</th>
+			<th scope="col" class="manage-column">technician_name</th>
+			<th scope="col" class="manage-column">job_manager</th>
+			<th scope="col" class="manage-column">job_description</th>
+			<th scope="col" class="manage-column">special_requests</th>
+			<th scope="col" class="manage-column">planned_start_date</th>
+			<th scope="col" class="manage-column">planned_finish_date</th>
+			<th scope="col" class="manage-column">completion_date</th>
+			<th scope="col" class="manage-column">compliance_certificate_required</th>
+			<th scope="col" class="manage-column">compliance_certificate_number</th>
+			<th scope="col" class="manage-column">known_site_hazards</th>
+			<th scope="col" class="manage-column">affiliate_job_number</th>
+			<th scope="col" class="manage-column">description_of_repair</th>
+			<th scope="col" class="manage-column">last_updated</th>
+			<th scope="col" class="manage-column">category</th>
+			<th scope="col" class="manage-column">priority</th>
 		</tr>
 		</thead>
 		<tbody>';
@@ -462,8 +513,30 @@ function ST_ticket_list() {
 	   echo '<td>' . $user_info->user_login . '</td>';
 	   
 //display the status in words depending on the current status value in the database - 0 or 1	   
-	   $status = array('Draft', 'Published');
- 	   echo '<td>' . $status[$ticket->status] . '</td></tr>';  
+	   $status = array('Private', 'Public');
+ 	   echo '<td>' . $status[$ticket->status] . '</td>';
+	   echo '<td>' . $ticket->customer_name . '</td>';
+	   echo '<td>' . $ticket->site_name . '</td>';
+	   echo '<td>' . $ticket->site_address_street . '</td>';
+	   echo '<td>' . $ticket->site_address_suburb . '</td>';
+	   echo '<td>' . $ticket->site_address_city . '</td>';
+	   echo '<td>' . $ticket->site_contact_name . '</td>';
+	   echo '<td>' . $ticket->site_contact_phone . '</td>';
+	   echo '<td>' . $ticket->technician_name . '</td>';
+	   echo '<td>' . $ticket->job_manager . '</td>';
+	   echo '<td>' . $ticket->job_description . '</td>';
+	   echo '<td>' . $ticket->special_requests . '</td>';
+	   echo '<td>' . $ticket->planned_start_date . '</td>';
+	   echo '<td>' . $ticket->planned_finish_date . '</td>';
+	   echo '<td>' . $ticket->completion_date . '</td>';
+	   echo '<td>' . $ticket->compliance_certificate_required . '</td>';
+	   echo '<td>' . $ticket->compliance_certificate_number . '</td>';
+	   echo '<td>' . $ticket->known_site_hazards . '</td>';
+	   echo '<td>' . $ticket->affiliate_job_number . '</td>';
+	   echo '<td>' . $ticket->description_of_repair . '</td>';
+	   echo '<td>' . $ticket->last_updated . '</td>';
+	   echo '<td>' . $ticket->category . '</td>';
+	   echo '<td>' . $ticket->priority . '</td></tr>';  
     }
    echo '</tbody></table>';
 	
@@ -551,8 +624,8 @@ function ST_ticket_form($command, $id = null) {
 		<p>Priority:<br/>
 		<input type="text" name="priority" value="'.$ticket->priority.'" size="20" class="large-text"/>
 		
-		<label><input type="radio" name="status" value="0" '.$draftstatus.'> Draft</label> 
-		<label><input type="radio" name="status" value="1" '.$pubstatus.'> Published</label> 
+		<label><input type="radio" name="status" value="0" '.$draftstatus.'> Private</label> 
+		<label><input type="radio" name="status" value="1" '.$pubstatus.'> Public</label> 
 		</p>
 		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /></p>
 		</form>';
