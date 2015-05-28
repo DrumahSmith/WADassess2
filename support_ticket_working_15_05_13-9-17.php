@@ -355,15 +355,15 @@ function ST_ticket_update($data) {
 			'job_manager' => stripslashes_deep($data['job_manager']),
 			'job_description' => stripslashes_deep($data['job_description']),
 			'special_requests' => stripslashes_deep($data['special_requests']),
-			'planned_start_date' => stripslashes_deep($data['planned_start_date']),
-			'planned_finish_date' => stripslashes_deep($data['planned_finish_date']),
-			'completion_date' => stripslashes_deep($data['completion_date']),
+			'planned_start_date' => date("Y-m-d", strtotime($data['planned_start_date'])),
+			'planned_finish_date' => date("Y-m-d", strtotime($data['planned_finish_date'])),
+			'completion_date' => date("Y-m-d", strtotime($data['completion_date'])),
 			'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
 			'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
 			'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
 			'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
 			'description_of_repair' => stripslashes_deep($data['description_of_repair']),
-			'last_updated' => stripslashes_deep($data['last_updated']),
+			'last_updated' => date("Y-m-d"),
 			'category' => stripslashes_deep($data['category']),
 			'priority' => stripslashes_deep($data['priority'])),
 		  array( 'id' => $data['hid']));
@@ -395,15 +395,15 @@ function ST_ticket_insert($data) {
 			'job_manager' => stripslashes_deep($data['job_manager']),
 			'job_description' => stripslashes_deep($data['job_description']),
 			'special_requests' => stripslashes_deep($data['special_requests']),
-			'planned_start_date' => stripslashes_deep($data['planned_start_date']),
-			'planned_finish_date' => stripslashes_deep($data['planned_finish_date']),
-			'completion_date' => stripslashes_deep($data['completion_date']),
+			'planned_start_date' => date("Y-m-d", strtotime($data['planned_start_date'])),
+			'planned_finish_date' => date("Y-m-d", strtotime($data['planned_finish_date'])),
+			'completion_date' => date("Y-m-d", strtotime($data['completion_date'])),
 			'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
 			'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
 			'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
 			'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
 			'description_of_repair' => stripslashes_deep($data['description_of_repair']),
-			'last_updated' => stripslashes_deep($data['last_updated']),
+			'last_updated' => date("Y-m-d"),
 			'category' => stripslashes_deep($data['category']),
 			'priority' => stripslashes_deep($data['priority'])),
 		  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%d', '%s', '%s', '%s' ) );
@@ -565,7 +565,25 @@ function ST_ticket_form($command, $id = null) {
 	}
 
 //prepare the HTML form	
-    echo '<form name="STform" method="post" action="?page=STsimpleticket">
+    echo '
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <!-- Load jQuery JS -->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- Load jQuery UI Main JS  -->
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript">
+	/*  jQuery ready function. Specify a function to execute when the DOM is fully loaded.  */
+	$(document).ready(
+		/* This is the function that will get executed after the DOM is fully loaded */
+		function () {
+			$( ".datepicker" ).datepicker({
+			changeMonth: true,//this option for allowing user to select month
+			changeYear: true //this option for allowing user to select from year range
+			});
+		}
+	);
+	</script>
+	<form name="STform" method="post" action="?page=STsimpleticket">
 		<input type="hidden" name="hid" value="'.$id.'"/>
 		<input type="hidden" name="command" value="'.$command.'"/>
 
@@ -594,11 +612,11 @@ function ST_ticket_form($command, $id = null) {
 		<p>Special Requests:<br/>
 		<textarea name="special_requests" rows="5" cols="20" class="large-text">'.$ticket->special_requests.'</textarea>
 		<p>Planned Start Date:<br/>
-		<input type="text" name="planned_start_date" value="'.$ticket->planned_start_date.'" size="20" class="large-text"/>
+		<input type="text" name="planned_start_date" class="datepicker" value="'.$ticket->planned_start_date.'" size="20" class="large-text" readonly/>
 		<p>Planned Finish Date:<br/>
-		<input type="text" name="planned_finish_date" value="'.$ticket->planned_finish_date.'" size="20" class="large-text"/>
+		<input type="text" name="planned_finish_date" class="datepicker" value="'.$ticket->planned_finish_date.'" size="20" class="large-text" readonly/>
 		<p>Completion Date:<br/>
-		<input type="text" name="completion_date" value="'.$ticket->completion_date.'" size="20" class="large-text"/>
+		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" size="20" class="large-text" readonly/>
 		<p>Compliance Certificate Required?:<br/>
 		<input type="text" name="compliance_certificate_required" value="'.$ticket->compliance_certificate_required.'" size="20" class="large-text"/>
 		<p>Compliance Certificate Number:<br/>
@@ -610,7 +628,7 @@ function ST_ticket_form($command, $id = null) {
 		<p>Description of Repair:<br/>
 		<textarea name="description_of_repair" rows="5" cols="20" class="large-text">'.$ticket->description_of_repair.'</textarea>
 		<p>Last Updated:<br/>
-		<input type="text" name="last_updated" value="'.$ticket->last_updated.'" size="20" class="large-text"/>
+		<input type="text" name="last_updated" value="'.$ticket->last_updated.'" size="20" class="large-text" readonly/>
 		<p>Category:<br/>
 		<input type="text" name="category" value="'.$ticket->category.'" size="20" class="large-text"/>
 		<p>Priority:<br/>
