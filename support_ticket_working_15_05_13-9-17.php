@@ -534,6 +534,31 @@ function ST_ticket_list() {
 }
 
 //========================================================================================
+//Create a dynamic dropdown menu for the form
+function dropdown( $name, array $options, $selected=null )
+{
+    /*** begin the select ***/
+    $dropdown = '<select name="'.$name.'" id="'.$name.'">'."\n";
+
+    $selected = $selected;
+    /*** loop over the options ***/
+    foreach( $options as $key=>$option )
+    {
+        /*** assign a selected value ***/
+        $select = $selected==$option ? ' selected' : null;
+
+        /*** add each option to the dropdown ***/
+        $dropdown .= '<option value="'.$option.'"'.$select.'>'.$option.'</option>'."\n";
+    }
+
+    /*** close the select ***/
+    $dropdown .= '</select>'."\n";
+
+    /*** and return the completed dropdown ***/
+    return $dropdown;
+}
+
+//========================================================================================
 //this is the form used for the insert as well as the edit/update of the ticket data
 function ST_ticket_form($command, $id = null) {
     global $wpdb;
@@ -545,7 +570,7 @@ function ST_ticket_form($command, $id = null) {
 	  $ticket->status = 0;
     }
 	
-//if the current command is 'edit' then retrieve the ticket record based on the id pased to this function
+//if the current command is 'edit' then retrieve the ticket record based on the id passed to this function
 	if ($command == 'update') {
         $ticket = $wpdb->get_row("SELECT * FROM ST_ticket WHERE id = '$id'");
 	}
@@ -555,6 +580,11 @@ function ST_ticket_form($command, $id = null) {
 		$draftstatus = ($ticket->status == 0)?"checked":"";
 		$pubstatus   = ($ticket->status == 1)?"checked":"";
 	}
+
+//prepare the variables for the dropdown menu
+	$name = 'compliance_certificate_required';
+	$options = array(' ', 'yes', 'no');
+	$selected = 1;
 	
 //prepare the priorities for the HTML check boxes
 	if (isset($ticket)) {
@@ -615,8 +645,10 @@ function ST_ticket_form($command, $id = null) {
 		<input type="text" name="planned_finish_date" class="datepicker" value="'.$ticket->planned_finish_date.'" size="20" class="large-text" readonly/>
 		<p>Completion Date:<br/>
 		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" size="20" class="large-text" readonly/>
-		<p>Compliance Certificate Required?:<br/>
-		<input type="text" name="compliance_certificate_required" value="'.$ticket->compliance_certificate_required.'" size="20" class="large-text"/>
+		<p>Compliance Certificate Required?:<br/>';
+
+		echo dropdown($name, $options);
+		echo '
 		<p>Compliance Certificate Number:<br/>
 		<input type="text" name="compliance_certificate_number" value="'.$ticket->compliance_certificate_number.'" size="20" class="large-text"/>
 		<p>Known Site Hazards:<br/>
@@ -631,9 +663,9 @@ function ST_ticket_form($command, $id = null) {
 		<input type="text" name="category" value="'.$ticket->category.'" size="20" class="large-text"/>
 		<p>Priority:<br/>
 		<label><input type="radio" name="priority" value="0" '.$lowPriority.'> Low</label>
-		<label><input type="radio" name="priority" value="1" '.$highPriority.'> Low</label>
-		<label><input type="radio" name="priority" value="2" '.$urgentPriority.'> Low</label>
-		<label><input type="radio" name="priority" value="3" '.$criticalPriority.'> Low</label>
+		<label><input type="radio" name="priority" value="1" '.$highPriority.'> High</label>
+		<label><input type="radio" name="priority" value="2" '.$urgentPriority.'> Urgent</label>
+		<label><input type="radio" name="priority" value="3" '.$criticalPriority.'> Critical</label>
 		
 		<p>Status:<br/>
 		<label><input type="radio" name="status" value="0" '.$draftstatus.'> Private</label> 
