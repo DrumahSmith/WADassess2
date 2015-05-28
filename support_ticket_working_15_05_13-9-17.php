@@ -9,7 +9,7 @@
  * License: GPL2
  */
 
-$ST_dbversion = "0.1"; //current version of the database
+$ST_dbversion = "0.2"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -48,8 +48,7 @@ function ST_install () {
 			$sql = 'CREATE TABLE ST_ticket (
 			id int(11) NOT NULL auto_increment,
 			author_id int(11) NOT NULL,
-			question_date date NOT NULL,
-			question text NOT NULL,
+			entry_date date NOT NULL,
 			answer_date date NOT NULL,
 			answer text NOT NULL,
 			status tinyint(4) NOT NULL,
@@ -131,7 +130,7 @@ function STdisplayticket() {
 
 		$buffer = '<ol>';
 		foreach ($alltickets as $ticket) {
-			$buffer .= '<li>'.format_to_post( $ticket->question ).'<br/>'.format_to_post( $ticket->answer ).'</li>';	
+			$buffer .= '<li>'.format_to_post( $ticket->id ).'<br/>'.format_to_post( $ticket->answer ).'</li>';	
 		}
 		$buffer .= '</ol>';
 		return $buffer;
@@ -222,17 +221,13 @@ function ST_ticket_view($id) {
    
    $row = $wpdb->get_row("SELECT * FROM ST_ticket WHERE id = '$id'");
    echo '<p>';
-   echo "Question:";
-   echo '<br/>';
-   echo $row->question;
-   echo '<p>';
    echo "Answer:";
    echo '<br/>';
    echo $row->answer;
    echo '<p>';
-   echo "Question Date:";
+   echo "Entry Date:";
    echo '<br/>';
-   echo $row->question_date;
+   echo $row->entry_date;
    echo '<p>';
    echo "Customer Name:";
    echo '<br/>';
@@ -343,52 +338,11 @@ function ST_ticket_update($data) {
 	
 //add in data validation and error checking here before updating the database!!
     $wpdb->update('ST_ticket',
-		  array( 'question' => stripslashes_deep($data['question']),
-				 'question_date' => date("Y-m-d"),
-				 'answer' => stripslashes_deep($data['answer']),
-				 'answer_date' => date("Y-m-d"),
-				 'author_id' => $current_user->ID,
-				 'status' => $data['status'],
-				 'customer_name' => stripslashes_deep($data['customer_name']),
-				 'site_name' => stripslashes_deep($data['site_name']),
-				 'site_address_street' => stripslashes_deep($data['site_address_street']),
-				 'site_address_suburb' => stripslashes_deep($data['site_address_suburb']),
-				 'site_address_city' => stripslashes_deep($data['site_address_city']),
-				 'site_contact_name' => stripslashes_deep($data['site_contact_name']),
-				 'site_contact_phone' => stripslashes_deep($data['site_contact_phone']),
-				 'technician_name' => stripslashes_deep($data['technician_name']),
-				 'job_manager' => stripslashes_deep($data['job_manager']),
-				 'job_description' => stripslashes_deep($data['job_description']),
-				 'special_requests' => stripslashes_deep($data['special_requests']),
-				 'planned_start_date' => stripslashes_deep($data['planned_start_date']),
-				 'planned_finish_date' => stripslashes_deep($data['planned_finish_date']),
-				 'completion_date' => stripslashes_deep($data['completion_date']),
-				 'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
-				 'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
-				 'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
-				 'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
-				 'description_of_repair' => stripslashes_deep($data['description_of_repair']),
-				 'last_updated' => stripslashes_deep($data['last_updated']),
-				 'category' => stripslashes_deep($data['category']),
-				 'priority' => stripslashes_deep($data['priority'])),
-		  array( 'id' => $data['hid']));
-    $msg = "Question and answer ".$data['hid']." has been updated";
-    return $msg;
-}
-
-//========================================================================================
-//add a new ticket to the database
-function ST_ticket_insert($data) {
-    global $wpdb, $current_user;
-
-//add in data validation and error checking here before updating the database!!
-    $wpdb->insert( 'ST_ticket',
-		  array(
-			'question' => stripslashes_deep($data['question']),
-			'question_date' => date("Y-m-d"),
-			'answer' => stripslashes_deep($data['answer']),
+		  array( 
+		  	'author_id' => $current_user->ID,
+			'entry_date' => date("Y-m-d"),
 			'answer_date' => date("Y-m-d"),
-			'author_id' => $current_user->ID,
+			'answer' => stripslashes_deep($data['answer']),
 			'status' => $data['status'],
 			'customer_name' => stripslashes_deep($data['customer_name']),
 			'site_name' => stripslashes_deep($data['site_name']),
@@ -412,7 +366,47 @@ function ST_ticket_insert($data) {
 			'last_updated' => stripslashes_deep($data['last_updated']),
 			'category' => stripslashes_deep($data['category']),
 			'priority' => stripslashes_deep($data['priority'])),
-		  array( '%s', '%s', '%s', '%s', '%d', '%d' ) );
+		  array( 'id' => $data['hid']));
+    $msg = "Job# and answer ".$data['hid']." has been updated";
+    return $msg;
+}
+
+//========================================================================================
+//add a new ticket to the database
+function ST_ticket_insert($data) {
+    global $wpdb, $current_user;
+
+//add in data validation and error checking here before updating the database!!
+    $wpdb->insert( 'ST_ticket',
+		  array(
+			'author_id' => $current_user->ID,
+			'entry_date' => date("Y-m-d"),
+			'answer_date' => date("Y-m-d"),
+			'answer' => stripslashes_deep($data['answer']),
+			'status' => $data['status'],
+			'customer_name' => stripslashes_deep($data['customer_name']),
+			'site_name' => stripslashes_deep($data['site_name']),
+			'site_address_street' => stripslashes_deep($data['site_address_street']),
+			'site_address_suburb' => stripslashes_deep($data['site_address_suburb']),
+			'site_address_city' => stripslashes_deep($data['site_address_city']),
+			'site_contact_name' => stripslashes_deep($data['site_contact_name']),
+			'site_contact_phone' => stripslashes_deep($data['site_contact_phone']),
+			'technician_name' => stripslashes_deep($data['technician_name']),
+			'job_manager' => stripslashes_deep($data['job_manager']),
+			'job_description' => stripslashes_deep($data['job_description']),
+			'special_requests' => stripslashes_deep($data['special_requests']),
+			'planned_start_date' => stripslashes_deep($data['planned_start_date']),
+			'planned_finish_date' => stripslashes_deep($data['planned_finish_date']),
+			'completion_date' => stripslashes_deep($data['completion_date']),
+			'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
+			'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
+			'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
+			'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
+			'description_of_repair' => stripslashes_deep($data['description_of_repair']),
+			'last_updated' => stripslashes_deep($data['last_updated']),
+			'category' => stripslashes_deep($data['category']),
+			'priority' => stripslashes_deep($data['priority'])),
+		  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%d', '%s', '%s', '%s' ) );
     $msg = "A ticket entry has been added";
     return $msg;
 }
@@ -424,10 +418,10 @@ function ST_ticket_list() {
    //prepare the query for retrieving the ticket's from the database
    $query = "SELECT
    id,
-   question,
-   answer,
    author_id,
+   entry_date,
    answer_date,
+   answer,
    status,
    customer_name,
    site_name,
@@ -458,7 +452,7 @@ function ST_ticket_list() {
    echo '<table class="wp-list-table widefat">
 		<thead>
 		<tr>
-			<th scope="col" class="manage-column">Question</th>
+			<th scope="col" class="manage-column">Job Number</th>
 			<th scope="col" class="manage-column">Created</th>
 			<th scope="col" class="manage-column">Author</th>
 			<th scope="col" class="manage-column">Status</th>
@@ -502,14 +496,14 @@ function ST_ticket_list() {
 
 //use some inbuilt WP CSS to perform the rollover effect for the edit/view/delete links	   
 	   echo '<tr>';
-	   echo '<td><strong><a href="'.$edit_link.'" title="Edit question">' . $ticket->question . '</a></strong>';
+	   echo '<td><strong><a href="'.$edit_link.'" title="Edit Job#">' . $ticket->id . '</a></strong>';
 	   echo '<div class="row-actions">';
 	   echo '<span class="edit"><a href="'.$edit_link.'" title="Edit this item">Edit</a></span> | ';
 	   echo '<span class="view"><a href="'.$view_link.'" title="View this item">View</a></span> | ';
 	   echo '<span class="trash"><a href="'.$delete_link.'" title="Move this item to Trash" onclick="return doDelete();">Trash</a></span>';
 	   echo '</div>';
 	   echo '</td>';
-	   echo '<td>' . $ticket->answer_date . '</td>';
+	   echo '<td>' . $ticket->entry_date . '</td>';
 	   echo '<td>' . $user_info->user_login . '</td>';
 	   
 //display the status in words depending on the current status value in the database - 0 or 1	   
@@ -554,7 +548,7 @@ function ST_ticket_form($command, $id = null) {
 //if the current command is insert then clear the form variables to ensure we have a blank
 //form before starting	
     if ($command == 'insert') {
-      $ticket->question = '';
+      $ticket->id = '';
       $ticket->answer = '';
 	  $ticket->status = 0;
     }
@@ -575,8 +569,6 @@ function ST_ticket_form($command, $id = null) {
 		<input type="hidden" name="hid" value="'.$id.'"/>
 		<input type="hidden" name="command" value="'.$command.'"/>
 
-		<p>Question:<br/>
-		<input type="text" name="question" value="'.$ticket->question.'" size="20" class="large-text"/>
 		<p>Answer:<br/>
 		<textarea name="answer" rows="10" cols="30" class="large-text">'.$ticket->answer.'</textarea>
 		<p>Customer Name:<br/>
