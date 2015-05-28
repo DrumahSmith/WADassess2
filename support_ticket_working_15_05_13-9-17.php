@@ -9,7 +9,7 @@
  * License: GPL2
  */
 
-$ST_dbversion = "0.2"; //current version of the database
+$ST_dbversion = "0.3"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -50,7 +50,6 @@ function ST_install () {
 			author_id int(11) NOT NULL,
 			entry_date date NOT NULL,
 			answer_date date NOT NULL,
-			answer text NOT NULL,
 			status tinyint(4) NOT NULL,
 			customer_name tinytext,
 			site_name tinytext,
@@ -130,7 +129,7 @@ function STdisplayticket() {
 
 		$buffer = '<ol>';
 		foreach ($alltickets as $ticket) {
-			$buffer .= '<li>'.format_to_post( $ticket->id ).'<br/>'.format_to_post( $ticket->answer ).'</li>';	
+			$buffer .= '<li>'.format_to_post( $ticket->id ).'<br/>'.format_to_post( $ticket->customer_name ).'</li>';	
 		}
 		$buffer .= '</ol>';
 		return $buffer;
@@ -220,10 +219,6 @@ function ST_ticket_view($id) {
    global $wpdb;
    
    $row = $wpdb->get_row("SELECT * FROM ST_ticket WHERE id = '$id'");
-   echo '<p>';
-   echo "Answer:";
-   echo '<br/>';
-   echo $row->answer;
    echo '<p>';
    echo "Entry Date:";
    echo '<br/>';
@@ -342,7 +337,6 @@ function ST_ticket_update($data) {
 		  	'author_id' => $current_user->ID,
 			'entry_date' => date("Y-m-d"),
 			'answer_date' => date("Y-m-d"),
-			'answer' => stripslashes_deep($data['answer']),
 			'status' => $data['status'],
 			'customer_name' => stripslashes_deep($data['customer_name']),
 			'site_name' => stripslashes_deep($data['site_name']),
@@ -367,7 +361,7 @@ function ST_ticket_update($data) {
 			'category' => stripslashes_deep($data['category']),
 			'priority' => stripslashes_deep($data['priority'])),
 		  array( 'id' => $data['hid']));
-    $msg = "Job# and answer ".$data['hid']." has been updated";
+    $msg = "Ticket ".$data['hid']." has been updated";
     return $msg;
 }
 
@@ -382,7 +376,6 @@ function ST_ticket_insert($data) {
 			'author_id' => $current_user->ID,
 			'entry_date' => date("Y-m-d"),
 			'answer_date' => date("Y-m-d"),
-			'answer' => stripslashes_deep($data['answer']),
 			'status' => $data['status'],
 			'customer_name' => stripslashes_deep($data['customer_name']),
 			'site_name' => stripslashes_deep($data['site_name']),
@@ -421,7 +414,6 @@ function ST_ticket_list() {
    author_id,
    entry_date,
    answer_date,
-   answer,
    status,
    customer_name,
    site_name,
@@ -530,7 +522,8 @@ function ST_ticket_list() {
 	   echo '<td>' . $ticket->description_of_repair . '</td>';
 	   echo '<td>' . $ticket->last_updated . '</td>';
 	   echo '<td>' . $ticket->category . '</td>';
-	   echo '<td>' . $ticket->priority . '</td></tr>';  
+	   $priority = array('Low','High','Urgent','Critical');
+	   echo '<td>' . $priority[$ticket->priority] . '</td></tr>';  
     }
    echo '</tbody></table>';
 	
@@ -549,7 +542,6 @@ function ST_ticket_form($command, $id = null) {
 //form before starting	
     if ($command == 'insert') {
       $ticket->id = '';
-      $ticket->answer = '';
 	  $ticket->status = 0;
     }
 	
@@ -562,6 +554,14 @@ function ST_ticket_form($command, $id = null) {
 	if (isset($ticket)) {
 		$draftstatus = ($ticket->status == 0)?"checked":"";
 		$pubstatus   = ($ticket->status == 1)?"checked":"";
+	}
+	
+//prepare the priorities for the HTML check boxes
+	if (isset($ticket)) {
+		$lowPriority = ($ticket->priority == 0)?"checked":"";
+		$highPriority = ($ticket->priority == 1)?"checked":"";
+		$urgentPriority = ($ticket->priority == 2)?"checked":"";
+		$criticalPriority = ($ticket->priority == 3)?"checked":"";
 	}
 
 //prepare the HTML form	
@@ -587,8 +587,6 @@ function ST_ticket_form($command, $id = null) {
 		<input type="hidden" name="hid" value="'.$id.'"/>
 		<input type="hidden" name="command" value="'.$command.'"/>
 
-		<p>Answer:<br/>
-		<textarea name="answer" rows="10" cols="30" class="large-text">'.$ticket->answer.'</textarea>
 		<p>Customer Name:<br/>
 		<input type="text" name="customer_name" value="'.$ticket->customer_name.'" size="20" class="large-text"/>
 		<p>Site Name:<br/>
@@ -632,8 +630,12 @@ function ST_ticket_form($command, $id = null) {
 		<p>Category:<br/>
 		<input type="text" name="category" value="'.$ticket->category.'" size="20" class="large-text"/>
 		<p>Priority:<br/>
-		<input type="text" name="priority" value="'.$ticket->priority.'" size="20" class="large-text"/>
+		<label><input type="radio" name="priority" value="0" '.$lowPriority.'> Low</label>
+		<label><input type="radio" name="priority" value="1" '.$highPriority.'> Low</label>
+		<label><input type="radio" name="priority" value="2" '.$urgentPriority.'> Low</label>
+		<label><input type="radio" name="priority" value="3" '.$criticalPriority.'> Low</label>
 		
+		<p>Status:<br/>
 		<label><input type="radio" name="status" value="0" '.$draftstatus.'> Private</label> 
 		<label><input type="radio" name="status" value="1" '.$pubstatus.'> Public</label> 
 		</p>
