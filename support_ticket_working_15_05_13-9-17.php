@@ -9,7 +9,7 @@
  * License: GPL2
  */
 
-$ST_dbversion = "0.3"; //current version of the database
+$ST_dbversion = "0.6"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -50,7 +50,7 @@ function ST_install () {
 			author_id int(11) NOT NULL,
 			entry_date date NOT NULL,
 			answer_date date NOT NULL,
-			status tinyint(4) NOT NULL,
+			visibility tinyint(4) NOT NULL,
 			customer_name tinytext,
 			site_name tinytext,
 			site_address_street tinytext,
@@ -71,8 +71,9 @@ function ST_install () {
 			affiliate_job_number int(11),
 			description_of_repair text,
 			last_updated date,
-			category tinytext,
+			department int(11),
 			priority int(11),
+			status int(11),
 			PRIMARY KEY (id)
 			);';
 		} 
@@ -124,7 +125,7 @@ function STdisplayticket() {
 	if (is_user_logged_in()) { //is the user authenticated - any user	
 		echo "You are an authenticated user so you may access this information...";	
 		
-		$query = "SELECT * FROM ST_ticket WHERE status=1 ORDER BY answer_date DESC";
+		$query = "SELECT * FROM ST_ticket WHERE visibility=1 ORDER BY answer_date DESC";
 		$alltickets = $wpdb->get_results($query);
 
 		$buffer = '<ol>';
@@ -304,13 +305,17 @@ function ST_ticket_view($id) {
    echo '<br/>';
    echo $row->last_updated;
    echo '<p>';
-   echo "Category:";
+   echo "Department:";
    echo '<br/>';
-   echo $row->category;
+   echo $row->department;
    echo '<p>';
    echo "Priority:";
    echo '<br/>';
    echo $row->priority;
+   echo '<p>';
+   echo "Status:";
+   echo '<br/>';
+   echo $row->status;
    echo '<p><a href="?page=STsimpleticket">&laquo; back to list</p>';
 }
 
@@ -337,7 +342,7 @@ function ST_ticket_update($data) {
 		  	'author_id' => $current_user->ID,
 			'entry_date' => date("Y-m-d"),
 			'answer_date' => date("Y-m-d"),
-			'status' => $data['status'],
+			'visibility' => $data['visibility'],
 			'customer_name' => stripslashes_deep($data['customer_name']),
 			'site_name' => stripslashes_deep($data['site_name']),
 			'site_address_street' => stripslashes_deep($data['site_address_street']),
@@ -358,8 +363,9 @@ function ST_ticket_update($data) {
 			'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
 			'description_of_repair' => stripslashes_deep($data['description_of_repair']),
 			'last_updated' => date("Y-m-d"),
-			'category' => stripslashes_deep($data['category']),
-			'priority' => stripslashes_deep($data['priority'])),
+			'department' => stripslashes_deep($data['department']),
+			'priority' => stripslashes_deep($data['priority']),
+			'status' => stripslashes_deep($data['status'])),
 		  array( 'id' => $data['hid']));
     $msg = "Ticket ".$data['hid']." has been updated";
     return $msg;
@@ -376,7 +382,7 @@ function ST_ticket_insert($data) {
 			'author_id' => $current_user->ID,
 			'entry_date' => date("Y-m-d"),
 			'answer_date' => date("Y-m-d"),
-			'status' => $data['status'],
+			'visibility' => $data['visibility'],
 			'customer_name' => stripslashes_deep($data['customer_name']),
 			'site_name' => stripslashes_deep($data['site_name']),
 			'site_address_street' => stripslashes_deep($data['site_address_street']),
@@ -397,9 +403,10 @@ function ST_ticket_insert($data) {
 			'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
 			'description_of_repair' => stripslashes_deep($data['description_of_repair']),
 			'last_updated' => date("Y-m-d"),
-			'category' => stripslashes_deep($data['category']),
-			'priority' => stripslashes_deep($data['priority'])),
-		  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%d', '%s', '%s', '%s' ) );
+			'department' => stripslashes_deep($data['department']),
+			'priority' => stripslashes_deep($data['priority']),
+			'status' => stripslashes_deep($data['status'])),
+		  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%d', '%s', '%s', '%s', '%s' ) );
     $msg = "A ticket entry has been added";
     return $msg;
 }
@@ -414,7 +421,7 @@ function ST_ticket_list() {
    author_id,
    entry_date,
    answer_date,
-   status,
+   visibility,
    customer_name,
    site_name,
    site_address_street,
@@ -435,8 +442,9 @@ function ST_ticket_list() {
    affiliate_job_number,
    description_of_repair,
    last_updated,
-   category,
-   priority 
+   department,
+   priority,
+   status
    FROM ST_ticket ORDER BY answer_date DESC";
    $alltickets = $wpdb->get_results($query);
 
@@ -447,7 +455,7 @@ function ST_ticket_list() {
 			<th scope="col" class="manage-column">Job Number</th>
 			<th scope="col" class="manage-column">Created</th>
 			<th scope="col" class="manage-column">Author</th>
-			<th scope="col" class="manage-column">Status</th>
+			<th scope="col" class="manage-column">Visibility</th>
 			<th scope="col" class="manage-column">customer_name</th>
 			<th scope="col" class="manage-column">site_name</th>
 			<th scope="col" class="manage-column">site_address_street</th>
@@ -468,8 +476,9 @@ function ST_ticket_list() {
 			<th scope="col" class="manage-column">affiliate_job_number</th>
 			<th scope="col" class="manage-column">description_of_repair</th>
 			<th scope="col" class="manage-column">last_updated</th>
-			<th scope="col" class="manage-column">category</th>
+			<th scope="col" class="manage-column">Department</th>
 			<th scope="col" class="manage-column">priority</th>
+			<th scope="col" class="manage-column">Status</th>
 		</tr>
 		</thead>
 		<tbody>';
@@ -498,9 +507,9 @@ function ST_ticket_list() {
 	   echo '<td>' . $ticket->entry_date . '</td>';
 	   echo '<td>' . $user_info->user_login . '</td>';
 	   
-//display the status in words depending on the current status value in the database - 0 or 1	   
-	   $status = array('Private', 'Public');
- 	   echo '<td>' . $status[$ticket->status] . '</td>';
+//display the visibility in words depending on the current visibility value in the database - 0 or 1	   
+	   $visibility = array('Private', 'Public');
+ 	   echo '<td>' . $visibility[$ticket->visibility] . '</td>';
 	   echo '<td>' . $ticket->customer_name . '</td>';
 	   echo '<td>' . $ticket->site_name . '</td>';
 	   echo '<td>' . $ticket->site_address_street . '</td>';
@@ -515,15 +524,19 @@ function ST_ticket_list() {
 	   echo '<td>' . $ticket->planned_start_date . '</td>';
 	   echo '<td>' . $ticket->planned_finish_date . '</td>';
 	   echo '<td>' . $ticket->completion_date . '</td>';
-	   echo '<td>' . $ticket->compliance_certificate_required . '</td>';
+	   $compliance = array(' ', 'Yes', 'No');
+	   echo '<td>' . $compliance[$ticket->compliance_certificate_required] . '</td>';
 	   echo '<td>' . $ticket->compliance_certificate_number . '</td>';
 	   echo '<td>' . $ticket->known_site_hazards . '</td>';
 	   echo '<td>' . $ticket->affiliate_job_number . '</td>';
 	   echo '<td>' . $ticket->description_of_repair . '</td>';
 	   echo '<td>' . $ticket->last_updated . '</td>';
-	   echo '<td>' . $ticket->category . '</td>';
-	   $priority = array('Low','High','Urgent','Critical');
-	   echo '<td>' . $priority[$ticket->priority] . '</td></tr>';  
+	   $department = array(' ', 'Server Support', 'Network Support', 'Hardware Support', 'Data Support');
+	   echo '<td>' . $department[$ticket->department] . '</td>';
+	   $priority = array(' ', 'Low','High','Urgent','Critical');
+	   echo '<td>' . $priority[$ticket->priority] . '</td>';
+	   $status = array(' ', 'Pending','Open','Closed');
+	   echo '<td>' . $status[$ticket->status] . '</td></tr>';
     }
    echo '</tbody></table>';
 	
@@ -545,10 +558,10 @@ function dropdown( $name, array $options, $selected=null )
     foreach( $options as $key=>$option )
     {
         /*** assign a selected value ***/
-        $select = $selected==$option ? ' selected' : null;
+        $select = $selected==$key ? ' selected' : null;
 
         /*** add each option to the dropdown ***/
-        $dropdown .= '<option value="'.$option.'"'.$select.'>'.$option.'</option>'."\n";
+        $dropdown .= '<option value="'.$key.'"'.$select.'>'.$option.'</option>'."\n";
     }
 
     /*** close the select ***/
@@ -567,7 +580,7 @@ function ST_ticket_form($command, $id = null) {
 //form before starting	
     if ($command == 'insert') {
       $ticket->id = '';
-	  $ticket->status = 0;
+	  $ticket->visibility = 0;
     }
 	
 //if the current command is 'edit' then retrieve the ticket record based on the id passed to this function
@@ -575,25 +588,32 @@ function ST_ticket_form($command, $id = null) {
         $ticket = $wpdb->get_row("SELECT * FROM ST_ticket WHERE id = '$id'");
 	}
 
-//prepare the draft/published status for the HTML check boxes	
+//prepare the draft/published visibility for the HTML check boxes	
 	if (isset($ticket)) {
-		$draftstatus = ($ticket->status == 0)?"checked":"";
-		$pubstatus   = ($ticket->status == 1)?"checked":"";
+		$privateVisibility = ($ticket->visibility == 0)?"checked":"";
+		$pubVisibility   = ($ticket->visibility == 1)?"checked":"";
 	}
 
-//prepare the variables for the dropdown menu
-	$name = 'compliance_certificate_required';
-	$options = array(' ', 'yes', 'no');
-	$selected = 1;
+//prepare the compliance variables for the dropdown menu
+	$complianceName = 'compliance_certificate_required';
+	$complianceOptions = array(' ', 'Yes', 'No');
+	$complianceSelected = 1;
 	
-//prepare the priorities for the HTML check boxes
-	if (isset($ticket)) {
-		$lowPriority = ($ticket->priority == 0)?"checked":"";
-		$highPriority = ($ticket->priority == 1)?"checked":"";
-		$urgentPriority = ($ticket->priority == 2)?"checked":"";
-		$criticalPriority = ($ticket->priority == 3)?"checked":"";
-	}
+//prepare the priorities variables for the dropdown menu
+	$priorityName = 'priority';
+	$priorityOptions = array(' ', 'Low', 'High', 'Urgent', 'Critical');
+	$prioritySelected = 1;
+	
+//prepare the department variables for the dropdown menu
+	$departmentName = 'department';
+	$departmentOptions = array(' ', 'Server Support', 'Network Support', 'Hardware Support', 'Data Support');
+	$departmentSelected = 1;
 
+//prepare the department variables for the dropdown menu
+	$statusName = 'status';	
+	$statusOptions = array(' ', 'Pending','Open','Closed');
+	$statusSelected = 1;
+	
 //prepare the HTML form	
     echo '
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -647,7 +667,7 @@ function ST_ticket_form($command, $id = null) {
 		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" size="20" class="large-text" readonly/>
 		<p>Compliance Certificate Required?:<br/>';
 
-		echo dropdown($name, $options);
+		echo dropdown($complianceName, $complianceOptions, $ticket->compliance_certificate_required);
 		echo '
 		<p>Compliance Certificate Number:<br/>
 		<input type="text" name="compliance_certificate_number" value="'.$ticket->compliance_certificate_number.'" size="20" class="large-text"/>
@@ -659,17 +679,21 @@ function ST_ticket_form($command, $id = null) {
 		<textarea name="description_of_repair" rows="5" cols="20" class="large-text">'.$ticket->description_of_repair.'</textarea>
 		<p>Last Updated:<br/>
 		<input type="text" name="last_updated" value="'.$ticket->last_updated.'" size="20" class="large-text" readonly/>
-		<p>Category:<br/>
-		<input type="text" name="category" value="'.$ticket->category.'" size="20" class="large-text"/>
-		<p>Priority:<br/>
-		<label><input type="radio" name="priority" value="0" '.$lowPriority.'> Low</label>
-		<label><input type="radio" name="priority" value="1" '.$highPriority.'> High</label>
-		<label><input type="radio" name="priority" value="2" '.$urgentPriority.'> Urgent</label>
-		<label><input type="radio" name="priority" value="3" '.$criticalPriority.'> Critical</label>
+		<p>Department:<br/>';
 		
-		<p>Status:<br/>
-		<label><input type="radio" name="status" value="0" '.$draftstatus.'> Private</label> 
-		<label><input type="radio" name="status" value="1" '.$pubstatus.'> Public</label> 
+		echo dropdown($departmentName, $departmentOptions, $ticket->department);
+		echo '
+		<p>Priority:<br/>';
+		
+		echo dropdown($priorityName, $priorityOptions, $ticket->priority);
+		echo '
+		<p>Status:<br/>';
+		
+		echo dropdown($statusName, $statusOptions, $ticket->status);
+		echo '
+		<p>Visibility:<br/>
+		<label><input type="radio" name="visibility" value="0" '.$privateVisibility.'> Private</label> 
+		<label><input type="radio" name="visibility" value="1" '.$pubVisibility.'> Public</label> 
 		</p>
 		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /></p>
 		</form>';
