@@ -9,7 +9,7 @@
  * License: GPL2
  */
 require "gump.class.php";
-$ST_dbversion = "0.7"; //current version of the database
+$ST_dbversion = "0.8"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -70,7 +70,7 @@ function ST_install () {
 			affiliate_job_number tinytext,
 			description_of_repair text,
 			last_updated date,
-			department int(11),
+			department int(11) NOT NULL,
 			priority int(11),
 			status int(11),
 			PRIMARY KEY (id)
@@ -334,32 +334,65 @@ function ST_ticket_delete($id) {
 //Validate the form data before adding in to the database
 
 function validate_form_data($data) {
+
+	//covert the entered dates dates
+
+
+	// Add custom validators
+	GUMP::add_validator("equal_to_zero", function($field, $input, $param = NULL) {
+		$result = $input[$field];
+		if ($result != 0) {
+		return true;
+		}
+	});
+	
 	
 	//create new validation object
 	$myValidator = new GUMP();
 	
 	//Define rules for the data
 	$rules = array (
-		'customer_name'					=> 'required|valid_name',
-		'site_address_street'			=> 'required|alpha_space',
-		'site_address_suburb'			=> 'valid_name',
-		'site_address_city'				=> 'required|valid_name',
-		'site_contact_name'				=> 'required|valid_name',
-		'technician_name'				=> 'valid_name',
-		'job_manager'					=> 'valid_name',
-		'compliance_certificate_number'	=> 'numeric'
+		'customer_name'						=> 'required|valid_name',
+		'site_address_street'				=> 'required|alpha_space',
+		'site_address_suburb'				=> 'valid_name',
+		'site_address_city'					=> 'required|valid_name',
+		'site_contact_name'					=> 'required|valid_name',
+		'site_contact_phone'				=> 'numeric',
+		'technician_name'					=> 'valid_name',
+		'job_manager'						=> 'valid_name',
+		'planned_start_date'				=> 'required|date',
+		'planned_finish_date'				=> 'required|date',
+		'completion_date'					=> 'required|date',
+		'department'						=> 'equal_to_zero|max_numeric,4',
+		'priority'							=> 'equal_to_zero|max_numeric,3',
+		'status'							=> 'equal_to_zero|max_numeric,3',
+		'compliance_certificate_required'	=> 'equal_to_zero|max_numeric,2',
+		'compliance_certificate_number'		=> 'numeric',
+		'affiliate_job_number'				=> 'numeric',
+		'last_updated'						=> 'date'
 	);
+	
+	if($data[compliance_certificate_required] == 1) {
+		$rules["compliance_certificate_number"] = "required";
+	}
+
 	
 	//Define filters to remove bad data
 	$filters = array (
-		'customer_name'					=> 'sanitize_string',
-		'site_address_street'			=> 'sanitize_string',
-		'site_address_suburb'			=> 'sanitize_string',
-		'site_address_city'				=> 'sanitize_string',
-		'site_contact_name'				=> 'sanitize_string',
-		'technician_name'				=> 'sanitize_string',
-		'job_manager'					=> 'sanitize_string',
-		'compliance_certificate_number'	=> 'sanitize_string'
+		'customer_name'						=> 'sanitize_string',
+		'site_address_street'				=> 'sanitize_string',
+		'site_address_suburb'				=> 'sanitize_string',
+		'site_address_city'					=> 'sanitize_string',
+		'site_contact_name'					=> 'sanitize_string',
+		'site_contact_phone'				=> 'sanitize_string',
+		'technician_name'					=> 'sanitize_string',
+		'job_manager'						=> 'sanitize_string',
+		'job_description'					=> 'sanitize_string',
+		'special_requests'					=> 'sanitize_string',
+		'compliance_certificate_number'		=> 'sanitize_string',
+		'known_site_hazards'				=> 'sanitize_string',
+		'affiliate_job_number'				=> 'sanitize_string',
+		'description_of_repair'				=> 'sanitize_string'
 	
 	);
 	
@@ -377,7 +410,7 @@ function validate_form_data($data) {
 	}
 	else
 	{		
-		print_r($validated); // Shows all the rules that failed along with the data
+		//print_r($validated); // Shows all the rules that failed along with the data
 		echo $myValidator->get_readable_errors(true);
 		return "err";
 	}
@@ -437,37 +470,45 @@ function ST_ticket_insert($data) {
     global $wpdb, $current_user;
 
 //add in data validation and error checking here before updating the database!!
-    $wpdb->insert( 'ST_ticket',
-		  array(
-			'author_id' => $current_user->ID,
-			'entry_date' => date("Y-m-d"),
-			'visibility' => $data['visibility'],
-			'customer_name' => stripslashes_deep($data['customer_name']),
-			'site_name' => stripslashes_deep($data['site_name']),
-			'site_address_street' => stripslashes_deep($data['site_address_street']),
-			'site_address_suburb' => stripslashes_deep($data['site_address_suburb']),
-			'site_address_city' => stripslashes_deep($data['site_address_city']),
-			'site_contact_name' => stripslashes_deep($data['site_contact_name']),
-			'site_contact_phone' => stripslashes_deep($data['site_contact_phone']),
-			'technician_name' => stripslashes_deep($data['technician_name']),
-			'job_manager' => stripslashes_deep($data['job_manager']),
-			'job_description' => stripslashes_deep($data['job_description']),
-			'special_requests' => stripslashes_deep($data['special_requests']),
-			'planned_start_date' => date("Y-m-d", strtotime($data['planned_start_date'])),
-			'planned_finish_date' => date("Y-m-d", strtotime($data['planned_finish_date'])),
-			'completion_date' => date("Y-m-d", strtotime($data['completion_date'])),
-			'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
-			'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
-			'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
-			'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
-			'description_of_repair' => stripslashes_deep($data['description_of_repair']),
-			'last_updated' => date("Y-m-d"),
-			'department' => stripslashes_deep($data['department']),
-			'priority' => stripslashes_deep($data['priority']),
-			'status' => stripslashes_deep($data['status'])),
-		  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
-    $msg = "A ticket entry has been added";
-    return $msg;
+
+	if (validate_form_data($data) == "success")
+	{
+		$wpdb->insert( 'ST_ticket',
+			  array(
+				'author_id' => $current_user->ID,
+				'entry_date' => date("Y-m-d"),
+				'visibility' => $data['visibility'],
+				'customer_name' => stripslashes_deep($data['customer_name']),
+				'site_name' => stripslashes_deep($data['site_name']),
+				'site_address_street' => stripslashes_deep($data['site_address_street']),
+				'site_address_suburb' => stripslashes_deep($data['site_address_suburb']),
+				'site_address_city' => stripslashes_deep($data['site_address_city']),
+				'site_contact_name' => stripslashes_deep($data['site_contact_name']),
+				'site_contact_phone' => stripslashes_deep($data['site_contact_phone']),
+				'technician_name' => stripslashes_deep($data['technician_name']),
+				'job_manager' => stripslashes_deep($data['job_manager']),
+				'job_description' => stripslashes_deep($data['job_description']),
+				'special_requests' => stripslashes_deep($data['special_requests']),
+				'planned_start_date' => date("Y-m-d", strtotime($data['planned_start_date'])),
+				'planned_finish_date' => date("Y-m-d", strtotime($data['planned_finish_date'])),
+				'completion_date' => date("Y-m-d", strtotime($data['completion_date'])),
+				'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
+				'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
+				'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
+				'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
+				'description_of_repair' => stripslashes_deep($data['description_of_repair']),
+				'last_updated' => date("Y-m-d"),
+				'department' => stripslashes_deep($data['department']),
+				'priority' => stripslashes_deep($data['priority']),
+				'status' => stripslashes_deep($data['status'])),
+			  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
+		$msg = "A ticket entry has been added";
+		return $msg;
+	}
+	else {
+		$msg = "invalid data entered";
+		return $msg;
+	}
 }
 
 //========================================================================================
@@ -582,7 +623,7 @@ function ST_ticket_list() {
 	   echo '<td>' . $ticket->planned_start_date . '</td>';
 	   echo '<td>' . $ticket->planned_finish_date . '</td>';
 	   echo '<td>' . $ticket->completion_date . '</td>';
-	   $compliance = array(' ', 'Yes', 'No');
+	   $compliance = array('', 'Yes', 'No');
 	   echo '<td>' . $compliance[$ticket->compliance_certificate_required] . '</td>';
 	   echo '<td>' . $ticket->compliance_certificate_number . '</td>';
 	   echo '<td>' . $ticket->known_site_hazards . '</td>';
@@ -654,7 +695,7 @@ function ST_ticket_form($command, $id = null) {
 
 //prepare the compliance variables for the dropdown menu
 	$complianceName = 'compliance_certificate_required';
-	$complianceOptions = array(' ', 'Yes', 'No');
+	$complianceOptions = array('', 'Yes', 'No');
 	$complianceSelected = 1;
 	
 //prepare the priorities variables for the dropdown menu
@@ -664,7 +705,7 @@ function ST_ticket_form($command, $id = null) {
 	
 //prepare the department variables for the dropdown menu
 	$departmentName = 'department';
-	$departmentOptions = array(' ', 'Server Support', 'Network Support', 'Hardware Support', 'Data Support');
+	$departmentOptions = array('', 'Server Support', 'Network Support', 'Hardware Support', 'Data Support');
 	$departmentSelected = 1;
 
 //prepare the department variables for the dropdown menu
@@ -686,7 +727,9 @@ function ST_ticket_form($command, $id = null) {
 		function () {
 			$( ".datepicker" ).datepicker({
 			changeMonth: true,//this option for allowing user to select month
-			changeYear: true //this option for allowing user to select from year range
+			changeYear: true, //this option for allowing user to select from year range
+			dateFormat: "yy-mm-dd",
+			minDate: "today"
 			});
 		}
 	);
