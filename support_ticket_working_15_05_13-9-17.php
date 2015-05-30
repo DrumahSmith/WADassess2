@@ -8,8 +8,8 @@
  * Author URI: http://eitonline.eit.ac.nz/course/view.php?id=72/
  * License: GPL2
  */
-
-$ST_dbversion = "0.6"; //current version of the database
+require "gump.class.php";
+$ST_dbversion = "0.7"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -49,7 +49,6 @@ function ST_install () {
 			id int(11) NOT NULL auto_increment,
 			author_id int(11) NOT NULL,
 			entry_date date NOT NULL,
-			answer_date date NOT NULL,
 			visibility tinyint(4) NOT NULL,
 			customer_name tinytext,
 			site_name tinytext,
@@ -57,7 +56,7 @@ function ST_install () {
 			site_address_suburb tinytext,
 			site_address_city tinytext,
 			site_contact_name tinytext,
-			site_contact_phone int(11),
+			site_contact_phone tinytext,
 			technician_name tinytext,
 			job_manager tinytext,
 			job_description text,
@@ -66,9 +65,9 @@ function ST_install () {
 			planned_finish_date date,
 			completion_date date,
 			compliance_certificate_required tinytext, 
-			compliance_certificate_number int(11),
+			compliance_certificate_number tinytext,
 			known_site_hazards text,
-			affiliate_job_number int(11),
+			affiliate_job_number tinytext,
 			description_of_repair text,
 			last_updated date,
 			department int(11),
@@ -125,7 +124,7 @@ function STdisplayticket() {
 	if (is_user_logged_in()) { //is the user authenticated - any user	
 		echo "You are an authenticated user so you may access this information...";	
 		
-		$query = "SELECT * FROM ST_ticket WHERE visibility=1 ORDER BY answer_date DESC";
+		$query = "SELECT * FROM ST_ticket WHERE visibility=1 ORDER BY entry_date DESC";
 		$alltickets = $wpdb->get_results($query);
 
 		$buffer = '<ol>';
@@ -168,7 +167,7 @@ function ST_ticket_CRUD() {
 		$ticketid = $_REQUEST['id']; 
 	else 
 		$ticketid = '';
-
+	
 //current CRUD command		
 	if (isset($_REQUEST["command"])) 
 		$command = $_REQUEST["command"]; 
@@ -332,43 +331,104 @@ function ST_ticket_delete($id) {
 }
 
 //========================================================================================
+//Validate the form data before adding in to the database
+
+function validate_form_data($data) {
+	
+	//create new validation object
+	$myValidator = new GUMP();
+	
+	//Define rules for the data
+	$rules = array (
+		'customer_name'					=> 'required|valid_name',
+		'site_address_street'			=> 'required|alpha_space',
+		'site_address_suburb'			=> 'valid_name',
+		'site_address_city'				=> 'required|valid_name',
+		'site_contact_name'				=> 'required|valid_name',
+		'technician_name'				=> 'valid_name',
+		'job_manager'					=> 'valid_name',
+		'compliance_certificate_number'	=> 'numeric'
+	);
+	
+	//Define filters to remove bad data
+	$filters = array (
+		'customer_name'					=> 'sanitize_string',
+		'site_address_street'			=> 'sanitize_string',
+		'site_address_suburb'			=> 'sanitize_string',
+		'site_address_city'				=> 'sanitize_string',
+		'site_contact_name'				=> 'sanitize_string',
+		'technician_name'				=> 'sanitize_string',
+		'job_manager'					=> 'sanitize_string',
+		'compliance_certificate_number'	=> 'sanitize_string'
+	
+	);
+	
+	//filter the data first before validating, data changed after filtering could become invalid of malicious
+	$data = $myValidator->filter($data, $filters);
+	
+	//run validation
+	$validated = $myValidator->validate($data, $rules);
+	
+	//Check that the validation was successful
+	if($validated === TRUE)
+	{
+		echo "Successful Validation\n\n";
+		return "success";
+	}
+	else
+	{		
+		print_r($validated); // Shows all the rules that failed along with the data
+		echo $myValidator->get_readable_errors(true);
+		return "err";
+	}
+}
+
+
+//========================================================================================
 //update an existing ticket in the database
 function ST_ticket_update($data) {
     global $wpdb, $current_user;
 	
 //add in data validation and error checking here before updating the database!!
-    $wpdb->update('ST_ticket',
-		  array( 
-		  	'author_id' => $current_user->ID,
-			'entry_date' => date("Y-m-d"),
-			'answer_date' => date("Y-m-d"),
-			'visibility' => $data['visibility'],
-			'customer_name' => stripslashes_deep($data['customer_name']),
-			'site_name' => stripslashes_deep($data['site_name']),
-			'site_address_street' => stripslashes_deep($data['site_address_street']),
-			'site_address_suburb' => stripslashes_deep($data['site_address_suburb']),
-			'site_address_city' => stripslashes_deep($data['site_address_city']),
-			'site_contact_name' => stripslashes_deep($data['site_contact_name']),
-			'site_contact_phone' => stripslashes_deep($data['site_contact_phone']),
-			'technician_name' => stripslashes_deep($data['technician_name']),
-			'job_manager' => stripslashes_deep($data['job_manager']),
-			'job_description' => stripslashes_deep($data['job_description']),
-			'special_requests' => stripslashes_deep($data['special_requests']),
-			'planned_start_date' => date("Y-m-d", strtotime($data['planned_start_date'])),
-			'planned_finish_date' => date("Y-m-d", strtotime($data['planned_finish_date'])),
-			'completion_date' => date("Y-m-d", strtotime($data['completion_date'])),
-			'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
-			'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
-			'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
-			'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
-			'description_of_repair' => stripslashes_deep($data['description_of_repair']),
-			'last_updated' => date("Y-m-d"),
-			'department' => stripslashes_deep($data['department']),
-			'priority' => stripslashes_deep($data['priority']),
-			'status' => stripslashes_deep($data['status'])),
-		  array( 'id' => $data['hid']));
-    $msg = "Ticket ".$data['hid']." has been updated";
-    return $msg;
+
+	if (validate_form_data($data) == "success")
+	{
+		$wpdb->update('ST_ticket',
+			  array( 
+				'author_id' => $current_user->ID,
+				'visibility' => $data['visibility'],
+				'customer_name' => stripslashes_deep($data['customer_name']),
+				'site_name' => stripslashes_deep($data['site_name']),
+				'site_address_street' => stripslashes_deep($data['site_address_street']),
+				'site_address_suburb' => stripslashes_deep($data['site_address_suburb']),
+				'site_address_city' => stripslashes_deep($data['site_address_city']),
+				'site_contact_name' => stripslashes_deep($data['site_contact_name']),
+				'site_contact_phone' => stripslashes_deep($data['site_contact_phone']),
+				'technician_name' => stripslashes_deep($data['technician_name']),
+				'job_manager' => stripslashes_deep($data['job_manager']),
+				'job_description' => stripslashes_deep($data['job_description']),
+				'special_requests' => stripslashes_deep($data['special_requests']),
+				'planned_start_date' => date("Y-m-d", strtotime($data['planned_start_date'])),
+				'planned_finish_date' => date("Y-m-d", strtotime($data['planned_finish_date'])),
+				'completion_date' => date("Y-m-d", strtotime($data['completion_date'])),
+				'compliance_certificate_required' => stripslashes_deep($data['compliance_certificate_required']),
+				'compliance_certificate_number' => stripslashes_deep($data['compliance_certificate_number']),
+				'known_site_hazards' => stripslashes_deep($data['known_site_hazards']),
+				'affiliate_job_number' => stripslashes_deep($data['affiliate_job_number']),
+				'description_of_repair' => stripslashes_deep($data['description_of_repair']),
+				'last_updated' => date("Y-m-d"),
+				'department' => stripslashes_deep($data['department']),
+				'priority' => stripslashes_deep($data['priority']),
+				'status' => stripslashes_deep($data['status'])),
+			  array( 'id' => $data['hid']));
+		$msg = "Ticket ".$data['hid']." has been updated";
+		return $msg;
+	}
+	else
+	{
+		$msg = "invalid data entered";
+		return $msg;
+	}		
 }
 
 //========================================================================================
@@ -381,7 +441,6 @@ function ST_ticket_insert($data) {
 		  array(
 			'author_id' => $current_user->ID,
 			'entry_date' => date("Y-m-d"),
-			'answer_date' => date("Y-m-d"),
 			'visibility' => $data['visibility'],
 			'customer_name' => stripslashes_deep($data['customer_name']),
 			'site_name' => stripslashes_deep($data['site_name']),
@@ -406,7 +465,7 @@ function ST_ticket_insert($data) {
 			'department' => stripslashes_deep($data['department']),
 			'priority' => stripslashes_deep($data['priority']),
 			'status' => stripslashes_deep($data['status'])),
-		  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%d', '%s', '%s', '%s', '%s' ) );
+		  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
     $msg = "A ticket entry has been added";
     return $msg;
 }
@@ -420,7 +479,6 @@ function ST_ticket_list() {
    id,
    author_id,
    entry_date,
-   answer_date,
    visibility,
    customer_name,
    site_name,
@@ -445,7 +503,7 @@ function ST_ticket_list() {
    department,
    priority,
    status
-   FROM ST_ticket ORDER BY answer_date DESC";
+   FROM ST_ticket ORDER BY entry_date DESC";
    $alltickets = $wpdb->get_results($query);
 
    //prepare the table and use a default WP style - wp-list-table widefat
@@ -550,24 +608,24 @@ function ST_ticket_list() {
 //Create a dynamic dropdown menu for the form
 function dropdown( $name, array $options, $selected=null )
 {
-    /*** begin the select ***/
+    // begin the select
     $dropdown = '<select name="'.$name.'" id="'.$name.'">'."\n";
 
     $selected = $selected;
-    /*** loop over the options ***/
+    // loop over the options
     foreach( $options as $key=>$option )
     {
-        /*** assign a selected value ***/
+        // assign a selected value
         $select = $selected==$key ? ' selected' : null;
 
-        /*** add each option to the dropdown ***/
+        // add each option to the dropdown
         $dropdown .= '<option value="'.$key.'"'.$select.'>'.$option.'</option>'."\n";
     }
 
-    /*** close the select ***/
+    // close the select
     $dropdown .= '</select>'."\n";
 
-    /*** and return the completed dropdown ***/
+    // and return the completed dropdown
     return $dropdown;
 }
 
@@ -660,15 +718,14 @@ function ST_ticket_form($command, $id = null) {
 		<p>Special Requests:<br/>
 		<textarea name="special_requests" rows="5" cols="20" class="large-text">'.$ticket->special_requests.'</textarea>
 		<p>Planned Start Date:<br/>
-		<input type="text" name="planned_start_date" class="datepicker" value="'.$ticket->planned_start_date.'" size="20" class="large-text" readonly/>
+		<input type="text" name="planned_start_date" class="datepicker" value="'.$ticket->planned_start_date.'" placeholder="Pick a Date" size="20" class="large-text" readonly/>
 		<p>Planned Finish Date:<br/>
-		<input type="text" name="planned_finish_date" class="datepicker" value="'.$ticket->planned_finish_date.'" size="20" class="large-text" readonly/>
+		<input type="text" name="planned_finish_date" class="datepicker" value="'.$ticket->planned_finish_date.'" placeholder="Pick a Date" size="20" class="large-text" readonly/>
 		<p>Completion Date:<br/>
-		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" size="20" class="large-text" readonly/>
-		<p>Compliance Certificate Required?:<br/>';
-
-		echo dropdown($complianceName, $complianceOptions, $ticket->compliance_certificate_required);
-		echo '
+		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" placeholder="Pick a Date" size="20" class="large-text" readonly/>
+		<p>Compliance Certificate Required?:<br/>
+		
+		'.dropdown($complianceName, $complianceOptions, $ticket->compliance_certificate_required).'
 		<p>Compliance Certificate Number:<br/>
 		<input type="text" name="compliance_certificate_number" value="'.$ticket->compliance_certificate_number.'" size="20" class="large-text"/>
 		<p>Known Site Hazards:<br/>
@@ -677,20 +734,15 @@ function ST_ticket_form($command, $id = null) {
 		<input type="text" name="affiliate_job_number" value="'.$ticket->affiliate_job_number.'" size="20" class="large-text"/>
 		<p>Description of Repair:<br/>
 		<textarea name="description_of_repair" rows="5" cols="20" class="large-text">'.$ticket->description_of_repair.'</textarea>
-		<p>Last Updated:<br/>
-		<input type="text" name="last_updated" value="'.$ticket->last_updated.'" size="20" class="large-text" readonly/>
-		<p>Department:<br/>';
+		<p>Department:<br/>
 		
-		echo dropdown($departmentName, $departmentOptions, $ticket->department);
-		echo '
-		<p>Priority:<br/>';
+		'.dropdown($departmentName, $departmentOptions, $ticket->department).'
+		<p>Priority:<br/>
 		
-		echo dropdown($priorityName, $priorityOptions, $ticket->priority);
-		echo '
-		<p>Status:<br/>';
+		'.dropdown($priorityName, $priorityOptions, $ticket->priority).'
+		<p>Status:<br/>
 		
-		echo dropdown($statusName, $statusOptions, $ticket->status);
-		echo '
+		'.dropdown($statusName, $statusOptions, $ticket->status).'
 		<p>Visibility:<br/>
 		<label><input type="radio" name="visibility" value="0" '.$privateVisibility.'> Private</label> 
 		<label><input type="radio" name="visibility" value="1" '.$pubVisibility.'> Public</label> 
