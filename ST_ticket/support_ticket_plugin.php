@@ -771,7 +771,7 @@ function ST_ticket_form($command, $id = null) {
 					},
 					site_contact_phone: {
 						digits: true,
-						range: [7,14]
+						rangelength: [7,14]
 					},
 					technician_name: {
 						minlength: 2
