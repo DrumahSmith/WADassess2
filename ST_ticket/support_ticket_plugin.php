@@ -18,13 +18,14 @@ if (!function_exists('pr')) {
 }
  
 //========================================================================================
-//all the hooks used by our ticket demo
+//all the hooks used by our ticket
 register_activation_hook(__FILE__,'ST_install');
 register_deactivation_hook(__FILE__, 'ST_uninstall' );
 add_action('plugins_loaded', 'ST_update_db_check');
 add_action('plugin_action_links_'.plugin_basename(__FILE__), 'STsettingslink' );  
 add_shortcode('displayticket', 'STdisplayticket');
 add_action('admin_menu', 'ST_ticket_menu');
+
 
 //========================================================================================
 //check to see if there is any update required for the database, 
@@ -353,6 +354,7 @@ function validate_form_data($data) {
 	//Define rules for the data
 	$rules = array (
 		'customer_name'						=> 'required|valid_name',
+		'site_name'							=> 'required|alpha_space',
 		'site_address_street'				=> 'required|alpha_space',
 		'site_address_suburb'				=> 'valid_name',
 		'site_address_city'					=> 'required|valid_name',
@@ -362,7 +364,7 @@ function validate_form_data($data) {
 		'job_manager'						=> 'valid_name',
 		'planned_start_date'				=> 'required|date',
 		'planned_finish_date'				=> 'required|date',
-		'completion_date'					=> 'required|date',
+		'completion_date'					=> 'date',
 		'department'						=> 'equal_to_zero|max_numeric,4',
 		'priority'							=> 'equal_to_zero|max_numeric,3',
 		'status'							=> 'equal_to_zero|max_numeric,3',
@@ -380,6 +382,7 @@ function validate_form_data($data) {
 	//Define filters to remove bad data
 	$filters = array (
 		'customer_name'						=> 'sanitize_string',
+		'site_name'							=> 'sanitize_string',
 		'site_address_street'				=> 'sanitize_string',
 		'site_address_suburb'				=> 'sanitize_string',
 		'site_address_city'					=> 'sanitize_string',
@@ -717,9 +720,13 @@ function ST_ticket_form($command, $id = null) {
     echo '
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <!-- Load jQuery JS -->
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <!-- Load jQuery UI Main JS  -->
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<!-- load the data validation script -->
+	<script src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"></script>
+	<script src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.min.js"></script>
 	<script type="text/javascript">
 	/*  jQuery ready function. Specify a function to execute when the DOM is fully loaded.  */
 	$(document).ready(
@@ -733,8 +740,128 @@ function ST_ticket_form($command, $id = null) {
 			});
 		}
 	);
+	$(document).ready(
+		function () {
+			$("#STform").validate({
+
+				
+				rules: {
+					customer_name: {
+						required: true,
+						minlength: 3
+					},
+					site_name: {
+						required: true,
+						minlength: 3
+					},
+					site_address_street: {
+						required: true,
+						minlength: 6
+					},
+					site_address_suburb: {
+						minlength: 2
+					},
+					site_address_city: {
+						required: true,
+						minlength: 2
+					},
+					site_contact_name: {
+						required: true,
+						minlength: 3
+					},
+					site_contact_phone: {
+						digits: true,
+						range: [7,14]
+					},
+					technician_name: {
+						minlength: 2
+					},
+					job_manager: {
+						minlength: 2
+					},
+					planned_start_date: {
+						required: true,
+						dateISO: true
+					},
+					planned_finish_date: {
+						required: true,
+						dateISO: true
+					},
+					completion_date: {
+						dateISO: true
+					},					
+					department: {
+						range: [1,4]
+					},
+					priority: {
+						range: [1,4]
+					},
+					status: {
+						range: [1,3]
+					},
+					compliance_certificate_required: {
+						range: [1,2]
+					},
+					compliance_certificate_number: {
+						digits: true
+					},
+					affiliate_job_number: {
+						digits: true
+					}					
+				},
+				messages: {
+					customer_name: {
+						required: "Please Specify Your Name",
+						minlength: "Name must be more than 2 characters in length"
+					},
+					site_name: {
+						required: "Please Specify Your Site Name"
+					},
+					site_address_street: {
+						required: "Please Specify Your Address"
+					},
+					site_contact_name: {
+						required: "Please Specify Your Name",
+						minlength: "Name must be more than 2 characters in length"
+					},
+					site_contact_phone: {
+						digits: "Only Numbers Please"
+					},
+					planned_start_date: {
+						required: "Please Pick a Date",
+						dateISO: "yyyy-mm-dd Format Please"
+					},
+					planned_finish_date: {
+						required: "Please Pick a Date",
+						dateISO: "yyyy-mm-dd Format Please"
+					},
+					completion_date: {
+						dateISO: "yyyy-mm-dd Format Please"
+					},
+					department: {
+						range: "please select an option"
+					},
+					priority: {
+						range: "please select an option"
+					},
+					status: {
+						range: "please select an option"
+					},
+					compliance_certificate_required: {
+						range: "please select an option"
+					},
+					compliance_certificate_number: {
+						digits: "Only Numbers Please"
+					},
+					affiliate_job_number: {
+						digits: "Only Numbers Please"
+					}		
+				}
+			});
+		}
+	);
 	</script>
-	<form name="STform" method="post" action="?page=STsimpleticket">
+	<form name="STform" id="STform" method="post" action="?page=STsimpleticket">
 		<input type="hidden" name="hid" value="'.$id.'"/>
 		<input type="hidden" name="command" value="'.$command.'"/>
 
@@ -761,12 +888,10 @@ function ST_ticket_form($command, $id = null) {
 		<p>Special Requests:<br/>
 		<textarea name="special_requests" rows="5" cols="20" class="large-text">'.$ticket->special_requests.'</textarea>
 		<p>Planned Start Date:<br/>
-		<input type="text" name="planned_start_date" class="datepicker" value="'.$ticket->planned_start_date.'" placeholder="Pick a Date" size="20" class="large-text" readonly/>
+		<input type="text" name="planned_start_date" class="datepicker" value="'.$ticket->planned_start_date.'" placeholder="Pick a Date" size="20" class="large-text" />
 		<p>Planned Finish Date:<br/>
-		<input type="text" name="planned_finish_date" class="datepicker" value="'.$ticket->planned_finish_date.'" placeholder="Pick a Date" size="20" class="large-text" readonly/>
-		<p>Completion Date:<br/>
-		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" placeholder="Pick a Date" size="20" class="large-text" readonly/>
-		<p>Compliance Certificate Required?:<br/>
+		<input type="text" name="planned_finish_date" class="datepicker" value="'.$ticket->planned_finish_date.'" placeholder="Pick a Date" size="20" class="large-text" />
+		<p>Compliance Certificate Required:<br/>
 		
 		'.dropdown($complianceName, $complianceOptions, $ticket->compliance_certificate_required).'
 		<p>Compliance Certificate Number:<br/>
@@ -786,6 +911,8 @@ function ST_ticket_form($command, $id = null) {
 		<p>Status:<br/>
 		
 		'.dropdown($statusName, $statusOptions, $ticket->status).'
+		<p>Completion Date:<br/>
+		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" placeholder="Pick a Date" size="20" class="large-text" />
 		<p>Visibility:<br/>
 		<label><input type="radio" name="visibility" value="0" '.$privateVisibility.'> Private</label> 
 		<label><input type="radio" name="visibility" value="1" '.$pubVisibility.'> Public</label> 
