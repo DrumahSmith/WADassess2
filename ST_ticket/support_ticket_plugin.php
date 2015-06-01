@@ -26,7 +26,6 @@ add_action('plugin_action_links_'.plugin_basename(__FILE__), 'STsettingslink' );
 add_shortcode('displayticket', 'STdisplayticket');
 add_action('admin_menu', 'ST_ticket_menu');
 
-
 //========================================================================================
 //check to see if there is any update required for the database, 
 //just in case we updated the plugin without reactivating it
@@ -525,24 +524,12 @@ function ST_ticket_list() {
    entry_date,
    visibility,
    customer_name,
-   site_name,
-   site_address_street,
-   site_address_suburb,
-   site_address_city,
-   site_contact_name,
-   site_contact_phone,
    technician_name,
-   job_manager,
    job_description,
-   special_requests,
    planned_start_date,
    planned_finish_date,
    completion_date,
-   compliance_certificate_required,
-   compliance_certificate_number,
-   known_site_hazards,
    affiliate_job_number,
-   description_of_repair,
    last_updated,
    department,
    priority,
@@ -559,24 +546,12 @@ function ST_ticket_list() {
 			<th scope="col" class="manage-column">Author</th>
 			<th scope="col" class="manage-column">Visibility</th>
 			<th scope="col" class="manage-column">customer_name</th>
-			<th scope="col" class="manage-column">site_name</th>
-			<th scope="col" class="manage-column">site_address_street</th>
-			<th scope="col" class="manage-column">site_address_suburb</th>
-			<th scope="col" class="manage-column">site_address_city</th>
-			<th scope="col" class="manage-column">site_contact_name</th>
-			<th scope="col" class="manage-column">site_contact_phone</th>
 			<th scope="col" class="manage-column">technician_name</th>
-			<th scope="col" class="manage-column">job_manager</th>
 			<th scope="col" class="manage-column">job_description</th>
-			<th scope="col" class="manage-column">special_requests</th>
 			<th scope="col" class="manage-column">planned_start_date</th>
 			<th scope="col" class="manage-column">planned_finish_date</th>
 			<th scope="col" class="manage-column">completion_date</th>
-			<th scope="col" class="manage-column">compliance_certificate_required</th>
-			<th scope="col" class="manage-column">compliance_certificate_number</th>
-			<th scope="col" class="manage-column">known_site_hazards</th>
 			<th scope="col" class="manage-column">affiliate_job_number</th>
-			<th scope="col" class="manage-column">description_of_repair</th>
 			<th scope="col" class="manage-column">last_updated</th>
 			<th scope="col" class="manage-column">Department</th>
 			<th scope="col" class="manage-column">priority</th>
@@ -613,25 +588,12 @@ function ST_ticket_list() {
 	   $visibility = array('Private', 'Public');
  	   echo '<td>' . $visibility[$ticket->visibility] . '</td>';
 	   echo '<td>' . $ticket->customer_name . '</td>';
-	   echo '<td>' . $ticket->site_name . '</td>';
-	   echo '<td>' . $ticket->site_address_street . '</td>';
-	   echo '<td>' . $ticket->site_address_suburb . '</td>';
-	   echo '<td>' . $ticket->site_address_city . '</td>';
-	   echo '<td>' . $ticket->site_contact_name . '</td>';
-	   echo '<td>' . $ticket->site_contact_phone . '</td>';
 	   echo '<td>' . $ticket->technician_name . '</td>';
-	   echo '<td>' . $ticket->job_manager . '</td>';
 	   echo '<td>' . $ticket->job_description . '</td>';
-	   echo '<td>' . $ticket->special_requests . '</td>';
 	   echo '<td>' . $ticket->planned_start_date . '</td>';
 	   echo '<td>' . $ticket->planned_finish_date . '</td>';
 	   echo '<td>' . $ticket->completion_date . '</td>';
-	   $compliance = array('', 'Yes', 'No');
-	   echo '<td>' . $compliance[$ticket->compliance_certificate_required] . '</td>';
-	   echo '<td>' . $ticket->compliance_certificate_number . '</td>';
-	   echo '<td>' . $ticket->known_site_hazards . '</td>';
 	   echo '<td>' . $ticket->affiliate_job_number . '</td>';
-	   echo '<td>' . $ticket->description_of_repair . '</td>';
 	   echo '<td>' . $ticket->last_updated . '</td>';
 	   $department = array(' ', 'Server Support', 'Network Support', 'Hardware Support', 'Data Support');
 	   echo '<td>' . $department[$ticket->department] . '</td>';
@@ -680,11 +642,7 @@ function ST_ticket_form($command, $id = null) {
 
 //if the current command is insert then clear the form variables to ensure we have a blank
 //form before starting	
-    if ($command == 'insert') {
-      $ticket->id = '';
-	  $ticket->visibility = 0;
-    }
-	
+
 //if the current command is 'edit' then retrieve the ticket record based on the id passed to this function
 	if ($command == 'update') {
         $ticket = $wpdb->get_row("SELECT * FROM ST_ticket WHERE id = '$id'");
@@ -727,140 +685,8 @@ function ST_ticket_form($command, $id = null) {
 	<!-- load the data validation script -->
 	<script src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"></script>
 	<script src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.min.js"></script>
-	<script type="text/javascript">
-	/*  jQuery ready function. Specify a function to execute when the DOM is fully loaded.  */
-	$(document).ready(
-		/* This is the function that will get executed after the DOM is fully loaded */
-		function () {
-			$( ".datepicker" ).datepicker({
-			changeMonth: true,//this option for allowing user to select month
-			changeYear: true, //this option for allowing user to select from year range
-			dateFormat: "yy-mm-dd",
-			minDate: "today"
-			});
-		}
-	);
-	$(document).ready(
-		function () {
-			$("#STform").validate({
+	<script type="text/javascript" src="../wp-content/plugins/ST_ticket/plugin.js"></script>
 
-				
-				rules: {
-					customer_name: {
-						required: true,
-						minlength: 3
-					},
-					site_name: {
-						required: true,
-						minlength: 3
-					},
-					site_address_street: {
-						required: true,
-						minlength: 6
-					},
-					site_address_suburb: {
-						minlength: 2
-					},
-					site_address_city: {
-						required: true,
-						minlength: 2
-					},
-					site_contact_name: {
-						required: true,
-						minlength: 3
-					},
-					site_contact_phone: {
-						digits: true,
-						rangelength: [7,14]
-					},
-					technician_name: {
-						minlength: 2
-					},
-					job_manager: {
-						minlength: 2
-					},
-					planned_start_date: {
-						required: true,
-						dateISO: true
-					},
-					planned_finish_date: {
-						required: true,
-						dateISO: true
-					},
-					completion_date: {
-						dateISO: true
-					},					
-					department: {
-						range: [1,4]
-					},
-					priority: {
-						range: [1,4]
-					},
-					status: {
-						range: [1,3]
-					},
-					compliance_certificate_required: {
-						range: [1,2]
-					},
-					compliance_certificate_number: {
-						digits: true
-					},
-					affiliate_job_number: {
-						digits: true
-					}					
-				},
-				messages: {
-					customer_name: {
-						required: "Please Specify Your Name",
-						minlength: "Name must be more than 2 characters in length"
-					},
-					site_name: {
-						required: "Please Specify Your Site Name"
-					},
-					site_address_street: {
-						required: "Please Specify Your Address"
-					},
-					site_contact_name: {
-						required: "Please Specify Your Name",
-						minlength: "Name must be more than 2 characters in length"
-					},
-					site_contact_phone: {
-						digits: "Only Numbers Please"
-					},
-					planned_start_date: {
-						required: "Please Pick a Date",
-						dateISO: "yyyy-mm-dd Format Please"
-					},
-					planned_finish_date: {
-						required: "Please Pick a Date",
-						dateISO: "yyyy-mm-dd Format Please"
-					},
-					completion_date: {
-						dateISO: "yyyy-mm-dd Format Please"
-					},
-					department: {
-						range: "please select an option"
-					},
-					priority: {
-						range: "please select an option"
-					},
-					status: {
-						range: "please select an option"
-					},
-					compliance_certificate_required: {
-						range: "please select an option"
-					},
-					compliance_certificate_number: {
-						digits: "Only Numbers Please"
-					},
-					affiliate_job_number: {
-						digits: "Only Numbers Please"
-					}		
-				}
-			});
-		}
-	);
-	</script>
 	<form name="STform" id="STform" method="post" action="?page=STsimpleticket">
 		<input type="hidden" name="hid" value="'.$id.'"/>
 		<input type="hidden" name="command" value="'.$command.'"/>
