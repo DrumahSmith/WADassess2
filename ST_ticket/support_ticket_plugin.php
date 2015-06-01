@@ -219,103 +219,123 @@ function ST_ticket_view($id) {
    global $wpdb;
    
    $row = $wpdb->get_row("SELECT * FROM ST_ticket WHERE id = '$id'");
-   echo '<p>';
-   echo "Entry Date:";
-   echo '<br/>';
-   echo $row->entry_date;
-   echo '<p>';
-   echo "Customer Name:";
-   echo '<br/>';
-   echo $row->customer_name;
-   echo '<p>';
-   echo "Site Name:";
-   echo '<br/>';
-   echo $row->site_name;
-   echo '<p>';
-   echo "Site Address:";
-   echo '<br/>';
-   echo $row->site_address_street;
-   echo '<p>';
-   echo "Site Address Suburb:";
-   echo '<br/>';
-   echo $row->site_address_suburb;
-   echo '<p>';
-   echo "Site Address City:";
-   echo '<br/>';
-   echo $row->site_address_city;
-   echo '<p>';
-   echo "Site Contact Name:";
-   echo '<br/>';
-   echo $row->site_contact_name;
-   echo '<p>';
-   echo "Site Contact Phone:";
-   echo '<br/>';
-   echo $row->site_contact_phone;
-   echo '<p>';
-   echo "Technician Name:";
-   echo '<br/>';
-   echo $row->technician_name;
-   echo '<p>';
-   echo "Job Manager:";
-   echo '<br/>';
-   echo $row->job_manager;
-   echo '<p>';
-   echo "Job Description:";
-   echo '<br/>';
-   echo $row->job_description;
-   echo '<p>';
-   echo "Special Requests:";
-   echo '<br/>';
-   echo $row->special_requests;
-   echo '<p>';
-   echo "Planned Start Date:";
-   echo '<br/>';
-   echo $row->planned_start_date;
-   echo '<p>';
-   echo "Planned Finish Date:";
-   echo '<br/>';
-   echo $row->planned_finish_date;
-   echo '<p>';
-   echo "Completion Date:";
-   echo '<br/>';
-   echo $row->completion_date;
-   echo '<p>';
-   echo "Compliance Certificate Required:";
-   echo '<br/>';
-   echo $row->compliance_certificate_required;
-   echo '<p>';
-   echo "Compliance Certificate Number:";
-   echo '<br/>';
-   echo $row->compliance_certificate_number;
-   echo '<p>';
-   echo "Known Site Hazards:";
-   echo '<br/>';
-   echo $row->known_site_hazards;
-   echo '<p>';
-   echo "Affiliate Job Number:";
-   echo '<br/>';
-   echo $row->affiliate_job_number;
-   echo '<p>';
-   echo "Description Of Repair:";
-   echo '<br/>';
-   echo $row->description_of_repair;
-   echo '<p>';
-   echo "Last Updated:";
-   echo '<br/>';
-   echo $row->last_updated;
-   echo '<p>';
-   echo "Department:";
-   echo '<br/>';
-   echo $row->department;
-   echo '<p>';
-   echo "Priority:";
-   echo '<br/>';
-   echo $row->priority;
-   echo '<p>';
-   echo "Status:";
-   echo '<br/>';
-   echo $row->status;
-   echo '<p><a href="?page=STsimpleticket">&laquo; back to list</p>';
+   echo '<link rel="stylesheet" href="../wp-content/plugins/ST_ticket/custom.css">
+<div id="display_table">
+
+<table id="left">
+<tr>
+    <td><strong>Entry Date:</strong></br>
+	'.$row->entry_date.'</td>
+</tr>
+<tr>
+	<td><strong>Last Updated:</strong></br>
+	'.$row->last_updated.'</td>
+</tr>
+<tr>
+	<td><strong>Customer Name:</strong></br>
+	'.$row->customer_name.'</td>
+</tr>
+<tr>
+	<td><strong>Planned Start Date:</strong></br>
+	'.$row->planned_start_date.'</td>
+</tr>
+<tr>
+	<td><strong>Planned Finish Date:</strong></br>
+	'.$row->planned_finish_date.'</td>
+</tr>
+<tr>
+	<td><strong>Completion Date:</strong></br>
+	'.$row->completion_date.'</td>
+</tr>
+<tr>
+	<td><strong>Priority:</strong></br>';
+	$priorityOptions = array(' ', 'Low', 'High', 'Urgent', 'Critical');
+	echo $priorityOptions[$row->priority].'</td>
+
+</tr>
+<tr>
+	<td><strong>Status:</strong></br>';
+	$statusOptions = array(' ', 'Pending','Open','Closed');
+	echo $statusOptions[$row->status].'</td>
+</tr>
+</table>
+
+<table id="center">
+<tr>
+    <td><strong>Technician Name:</strong></br>
+	'.$row->technician_name.'</td>
+</tr>
+<tr>
+	<td><strong>Job Manager:</strong></br>
+	'.$row->job_manager.'</td>
+</tr>
+<tr>
+	<td><strong>Job Description:</strong></br>
+	'.$row->job_description.'</td>
+</tr>
+<tr>
+	<td><strong>Special Requests:</strong></br>
+	'.$row->special_requests.'</td>
+</tr>
+<tr>
+	<td><strong>Compliance Certificate Required:</strong></br>';
+	$complianceOptions = array('', 'Yes', 'No');
+	echo $complianceOptions[$row->compliance_certificate_required].'</td>
+</tr>
+<tr>
+	<td><strong>Compliance Certificate Number:</strong></br>
+	'.$row->compliance_certificate_number.'</td>
+</tr>
+<tr>
+	<td><strong>Affiliate Job Number:</strong></br>
+	'.$row->affiliate_job_number.'</td>
+</tr>
+<tr>
+	<td><strong>Description Of Repair:</strong></br>
+	'.$row->description_of_repair.'</td>
+</tr>
+<tr>
+	<td><strong>Department:</strong></br>';
+	$departmentOptions = array('', 'Server Support', 'Network Support', 'Hardware Support', 'Data Support');
+	echo $departmentOptions[$row->department].'</td>
+</tr>
+</table>
+
+<table id="right">
+<tr>
+    <td><strong>Site Name:</strong></br>
+	'.$row->site_name.'</td>
+</tr>
+<tr>
+	<td><strong>Site Address:</strong></br>
+	'.$row->site_address_street.'</td>
+</tr>
+<tr> 
+	<td><strong>Site Address Suburb:</strong></br>
+	'.$row->site_address_suburb.'</td>
+</tr>
+<tr>	
+	<td><strong>Site Address City:</strong></br>
+	'.$row->site_address_city.'</td>
+</tr>
+<tr>	
+	<td><strong>Site Contact Name:</strong></br>
+	'.$row->site_contact_name.'</td>
+</tr>
+<tr>	
+	<td><strong>Site Contact Phone:</strong></br>
+	'.$row->site_contact_phone.'</td>
+</tr>
+<tr>
+	<td><strong>Known Site Hazards:</strong></br>
+	'.$row->known_site_hazards.'</td>
+</tr>
+
+</table>
+
+</div>
+
+<p style="clear: both"><a href="?page=STsimpleticket">&laquo; back to list</p>';
 }
 
 //========================================================================================

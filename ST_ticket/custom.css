@@ -1,0 +1,12 @@
+
+/* Ticket View Table */
+#display_table {
+	width: 100%;
+	}
+
+#left, #center, #right {
+	width: 33.3333%;
+	float: left;
+	}
+	
+/* End Ticket View Table */
