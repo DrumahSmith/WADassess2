@@ -763,7 +763,16 @@ function ST_ticket_form($command, $id = null) {
 		<label><input type="radio" name="visibility" value="0" '.$privateVisibility.'> Private</label> 
 		<label><input type="radio" name="visibility" value="1" '.$pubVisibility.'> Public</label> 
 		</p>
-		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /></p>
+		
+		<div id="toggleNotes" style="display: none">
+			<p>Notes:<br/>
+			<textarea name="notes" type="hidden" rows="5" cols="20" class="large-text">'.$ticket->notes.'</textarea>
+		</div>
+		
+		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /><input name="notes_button" type="button" value="Add Notes" onclick="showNotes()"></p>
+		</form>';
+		
+		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /><input name="notes_button" type="button" value="show_notes" onclick="fnShowNotes()"></p>
 		</form>';
 }
  ?>
