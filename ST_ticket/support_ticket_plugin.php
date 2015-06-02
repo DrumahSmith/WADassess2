@@ -477,6 +477,12 @@ function ST_ticket_update($data) {
 				'status' => stripslashes_deep($data['status'])),
 			  array( 'id' => $data['hid']));
 		$msg = "Ticket ".$data['hid']." has been updated";
+		
+		$wpdb->insert( 'ST_notes',
+		array(
+			'fgn_job_id' => $data['hid'],
+			'customer_notes' => $data['notes']),
+			array('%s', '%s' ));
 		return $msg;
 	}
 	else
@@ -525,6 +531,12 @@ function ST_ticket_insert($data) {
 				'status' => stripslashes_deep($data['status'])),
 			  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
 		$msg = "A ticket entry has been added";
+		
+		$wpdb->insert('ST_notes',
+		array(
+			'fgn_job_id' => $data['hid'],
+			'customer_notes' => $data['notes']),
+			array('%s', '%s' ));
 		return $msg;
 	}
 	else {
@@ -759,20 +771,21 @@ function ST_ticket_form($command, $id = null) {
 		'.dropdown($statusName, $statusOptions, $ticket->status).'
 		<p>Completion Date:<br/>
 		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" placeholder="Pick a Date" size="20" class="large-text" />
+		<p><input name="notes_button" id="notes_button" type="button" value="Add Note" onclick="showNotes()"></p>
 		<p>Visibility:<br/>
 		<label><input type="radio" name="visibility" value="0" '.$privateVisibility.'> Private</label> 
 		<label><input type="radio" name="visibility" value="1" '.$pubVisibility.'> Public</label> 
 		</p>
 		
+		
 		<div id="toggleNotes" style="display: none">
 			<p>Notes:<br/>
-			<textarea name="notes" type="hidden" rows="5" cols="20" class="large-text">'.$ticket->notes.'</textarea>
+			<textarea name="notes" type="hidden" rows="5" cols="20" class="large-text"></textarea>
 		</div>
 		
-		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /><input name="notes_button" type="button" value="Add Notes" onclick="showNotes()"></p>
+		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /></p>
 		</form>';
 		
-		<p class="submit"><input type="submit" name="Submit" value="Save Changes" class="button-primary" /><input name="notes_button" type="button" value="show_notes" onclick="fnShowNotes()"></p>
-		</form>';
+
 }
  ?>

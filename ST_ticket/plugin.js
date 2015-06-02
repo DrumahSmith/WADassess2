@@ -137,10 +137,12 @@
 	if(ele.style.display == "block") {
     		ele.style.display = "none";
 		text.innerHTML = "show";
+		text.value = "Add Note";
   	}
 	else {
 		ele.style.display = "block";
 		text.innerHTML = "hide";
+		text.value = "Cancel Note Entry";
 	}
 
 } 
