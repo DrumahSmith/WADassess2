@@ -124,7 +124,7 @@ function STdisplayticket() {
 	if (is_user_logged_in()) { //is the user authenticated - any user	
 		echo "You are an authenticated user so you may access this information...";	
 		
-		$query = "SELECT * FROM ST_ticket WHERE visibility=1 ORDER BY entry_date DESC";
+		$query = "SELECT * FROM ST_ticket WHERE visibility=0 ORDER BY entry_date DESC";
 		$alltickets = $wpdb->get_results($query);
 
 		$buffer = '<ol>';
@@ -134,8 +134,10 @@ function STdisplayticket() {
 		$buffer .= '</ol>';
 		return $buffer;
 	}
-	else
+	else{
 		echo "You need to be logged in to access this information";
+		//add data view for public users IE not logged in.
+	}
 }
 
 //========================================================================================
@@ -377,11 +379,12 @@ function validate_form_data($data) {
 	});
 	
 	
-	//create new validation object
-	$myValidator = new GUMP();
+	//create new validation object Validates the ticket
+	$ticketValidator = new GUMP();
+	$noteValidator = new GUMP();
 	
-	//Define rules for the data
-	$rules = array (
+	//Define rules for the ticket data
+	$ticketRules = array (
 		'customer_name'						=> 'required|valid_name',
 		'site_name'							=> 'required|alpha_space',
 		'site_address_street'				=> 'required|alpha_space',
@@ -404,12 +407,12 @@ function validate_form_data($data) {
 	);
 	
 	if($data[compliance_certificate_required] == 1) {
-		$rules["compliance_certificate_number"] = "required";
+		$ticketRules["compliance_certificate_number"] = "required";
 	}
 
 	
-	//Define filters to remove bad data
-	$filters = array (
+	//Define filters to remove bad data from ticket
+	$ticketFilters = array (
 		'customer_name'						=> 'sanitize_string',
 		'site_name'							=> 'sanitize_string',
 		'site_address_street'				=> 'sanitize_string',
@@ -428,11 +431,15 @@ function validate_form_data($data) {
 	
 	);
 	
+	$noteRules = array (
+		//
+	)
+	
 	//filter the data first before validating, data changed after filtering could become invalid of malicious
-	$data = $myValidator->filter($data, $filters);
+	$data = $ticketValidator->filter($data, $ticketFilters);
 	
 	//run validation
-	$validated = $myValidator->validate($data, $rules);
+	$validated = $ticketValidator->validate($data, $ticketRules);
 	
 	//Check that the validation was successful
 	if($validated === TRUE)
@@ -443,7 +450,7 @@ function validate_form_data($data) {
 	else
 	{		
 		//print_r($validated); // Shows all the rules that failed along with the data
-		echo $myValidator->get_readable_errors(true);
+		echo $ticketValidator->get_readable_errors(true);
 		return "err";
 	}
 }
