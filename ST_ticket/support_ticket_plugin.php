@@ -137,6 +137,18 @@ function STdisplayticket() {
 	else{
 		echo "You need to be logged in to access this information";
 		//add data view for public users IE not logged in.
+		/* $query = "SELECT * FROM ST_ticket WHERE visibility=1 ORDER BY entry_date DESC";
+		$alltickets = $wpdb->get_results($query);
+
+		$buffer = '<ol>';
+		foreach ($alltickets as $ticket) {
+			$buffer .= '<li>'.format_to_post( $ticket->id ).'<br/>'.format_to_post( $ticket->customer_name ).'</li>';	
+		}
+		$buffer .= '</ol>';
+		return $buffer; */
+		
+		ST_ticket_list();
+		
 	}
 }
 
@@ -433,7 +445,7 @@ function validate_form_data($data) {
 	
 	$noteRules = array (
 		//
-	)
+	);
 	
 	//filter the data first before validating, data changed after filtering could become invalid of malicious
 	$data = $ticketValidator->filter($data, $ticketFilters);
