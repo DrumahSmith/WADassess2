@@ -10,3 +10,9 @@
 	}
 	
 /* End Ticket View Table */
+
+/* Validation Styles */
+
+.error {
+color: red;
+}

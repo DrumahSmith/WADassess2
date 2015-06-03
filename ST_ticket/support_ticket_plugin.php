@@ -718,6 +718,8 @@ function ST_ticket_form($command, $id = null) {
 	<script src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"></script>
 	<script src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.min.js"></script>
 	<script type="text/javascript" src="../wp-content/plugins/ST_ticket/plugin.js"></script>
+	<!-- load the styling for the validation -->
+	<link rel="stylesheet" href="../wp-content/plugins/ST_ticket/custom.css">
 
 	<form name="STform" id="STform" method="post" action="?page=STsimpleticket">
 		<input type="hidden" name="hid" value="'.$id.'"/>
