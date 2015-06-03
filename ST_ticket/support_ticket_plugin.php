@@ -219,6 +219,7 @@ function ST_ticket_view($id) {
    global $wpdb;
    
    $row = $wpdb->get_row("SELECT * FROM ST_ticket WHERE id = '$id'");
+   $notes = $wpdb->get_results("SELECT * FROM ST_notes WHERE fgn_job_id = '$id'");
    echo '<link rel="stylesheet" href="../wp-content/plugins/ST_ticket/custom.css">
 <div id="display_table">
 
@@ -335,6 +336,12 @@ function ST_ticket_view($id) {
 
 </div>
 
+<p style="clear: both"></P>';
+foreach ($notes as $note) {
+echo '<strong>Note:</strong>
+<p>'.$note->customer_notes.'</p>';
+}
+echo '
 <p style="clear: both"><a href="?page=STsimpleticket">&laquo; back to list</p>';
 }
 
