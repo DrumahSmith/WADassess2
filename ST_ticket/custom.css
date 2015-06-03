@@ -11,6 +11,16 @@
 	
 /* End Ticket View Table */
 
+/* Ticket List Table */
+.ticketList h4  {
+padding: 2px;
+}
+
+.ticketList th {
+text-align: left;
+}
+
+
 /* Validation Styles */
 
 .error {

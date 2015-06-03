@@ -25,7 +25,17 @@ add_action('plugins_loaded', 'ST_update_db_check');
 add_action('plugin_action_links_'.plugin_basename(__FILE__), 'STsettingslink' );  
 add_shortcode('displayticket', 'STdisplayticket');
 add_action('admin_menu', 'ST_ticket_menu');
-
+add_action( 'wp_enqueue_scripts', 'WAD_load_scripts' );
+function WAD_load_scripts() {
+//custommmm styles
+    wp_enqueue_style( 'WAD11', plugins_url('custom.css',__FILE__));
+wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+	wp_enqueue_script( 'jquery_v1_1_1','http://code.jquery.com/jquery-1.11.1.js' );	
+	wp_enqueue_script( 'jquery_v1_10_3','http://code.jquery.com/ui/1.10.3/jquery-ui.js' );
+	wp_enqueue_script( 'jquery_validate','http://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js' );
+	wp_enqueue_script( 'jquery_validate_addition','http://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.min.js' );
+	wp_enqueue_script( 'plugin',plugins_url('plugin.js',__FILE__) );
+}
 //========================================================================================
 //check to see if there is any update required for the database, 
 //just in case we updated the plugin without reactivating it
@@ -119,35 +129,19 @@ function STsettingslink($links) {
 //usage: [displayticket]
 //display the ticket questions and answers by using a shortcode
 function STdisplayticket() {
-    global $wpdb;
+    global $wpdb, $current_user;
+	
+	//Retrieve user ID 
+	$user = $current_user->ID;
 
 	if (is_user_logged_in()) { //is the user authenticated - any user	
-		echo "You are an authenticated user so you may access this information...";	
+		//echo "You are an authenticated user so you may access this information...";	
+		ST_ticket_CRUD($user);
 		
-		$query = "SELECT * FROM ST_ticket WHERE visibility=0 ORDER BY entry_date DESC";
-		$alltickets = $wpdb->get_results($query);
-
-		$buffer = '<ol>';
-		foreach ($alltickets as $ticket) {
-			$buffer .= '<li>'.format_to_post( $ticket->id ).'<br/>'.format_to_post( $ticket->customer_name ).'</li>';	
-		}
-		$buffer .= '</ol>';
-		return $buffer;
 	}
 	else{
-		echo "You need to be logged in to access this information";
-		//add data view for public users IE not logged in.
-		/* $query = "SELECT * FROM ST_ticket WHERE visibility=1 ORDER BY entry_date DESC";
-		$alltickets = $wpdb->get_results($query);
+		ST_ticket_CRUD(0, 1);
 
-		$buffer = '<ol>';
-		foreach ($alltickets as $ticket) {
-			$buffer .= '<li>'.format_to_post( $ticket->id ).'<br/>'.format_to_post( $ticket->customer_name ).'</li>';	
-		}
-		$buffer .= '</ol>';
-		return $buffer; */
-		
-		ST_ticket_list();
 		
 	}
 }
@@ -160,19 +154,27 @@ function ST_ticket_menu() {
 }
 
 //basic CRUD selector
-function ST_ticket_CRUD() {
-
+function ST_ticket_CRUD($user = null, $visibility = null) {
+global $current_user;
  //--- some basic debugging for information purposes only
-	echo '<h3>Contents of the POST data</h3>';
-	pr($_POST); //show the contents of the HTTP POST response from a new/edit command from the form
-	echo '<h3>Contents of the REQUEST data</h3>';
-	pr($_REQUEST);	 //show the contents of any variables made with a GET HTTP request
+//	echo '<h3>Contents of the POST data</h3>';
+//	pr($_POST); //show the contents of the HTTP POST response from a new/edit command from the form
+//	echo '<h3>Contents of the REQUEST data</h3>';
+//	pr($_REQUEST);	 //show the contents of any variables made with a GET HTTP request
 //--- end of basic debugging  
+
+
+	if($user == null) {
+		$user = $current_user->ID;
+	}
 
 	echo  '<div id="msg" style="overflow: auto"></div>
 		<div class="wrap">
-		<h2>ST 8. Simple ticket <a href="?page=STsimpleticket&command=new" class="add-new-h2">Add New</a></h2>
-		<div style="clear: both"></div>';
+		<h2>ST 8. Simple ticket ';
+		if($user > 0) {
+			echo '<a href="?page=STsimpleticket&command=new" class="add-new-h2">Add New</a></h2>';
+		}
+		echo '<div style="clear: both"></div>';
 		
 	$ticketdata = $_POST; //our form data from the insert/update
 	
@@ -218,7 +220,7 @@ function ST_ticket_CRUD() {
 		break;
 	}
 
-	if (empty($command)) ST_ticket_list(); //display a list of the tickets if no command issued
+	if (empty($command)) ST_ticket_list($user, $visibility); //display a list of the tickets if no command issued
 
 //show any information messages	
 	if (!empty($msg)) {
@@ -272,6 +274,11 @@ function ST_ticket_view($id) {
 	<td><strong>Status:</strong></br>';
 	$statusOptions = array(' ', 'Pending','Open','Closed');
 	echo $statusOptions[$row->status].'</td>
+</tr>
+<tr>
+	<td><strong>Visibility:</strong></br>';
+	$visiblityOptions = array('Private', 'Public');
+	echo $visiblityOptions[$row->visibility].'</td>
 </tr>
 </table>
 
@@ -577,7 +584,7 @@ function ST_ticket_insert($data) {
 }
 
 //========================================================================================
-function ST_ticket_list() {
+function ST_ticket_list($user = null, $visibility = null) {
    global $wpdb, $current_user;
 
    //prepare the query for retrieving the ticket's from the database
@@ -597,28 +604,34 @@ function ST_ticket_list() {
    department,
    priority,
    status
-   FROM ST_ticket ORDER BY entry_date DESC";
+   FROM ST_ticket ";
+   
+   if($visibility == 1) {
+	   $query .= "WHERE visibility = 1 ";
+   }
+   if($user > 1) {
+	   $query .= "WHERE author_id = $user ";
+   }
+   
+   
+   $query .= "ORDER BY entry_date DESC";
    $alltickets = $wpdb->get_results($query);
 
    //prepare the table and use a default WP style - wp-list-table widefat
-   echo '<table class="wp-list-table widefat">
+   echo '<link rel="stylesheet" href="../wp-content/plugins/ST_ticket/custom.css"><div class="ticketList"><table class="wp-list-table widefat">
 		<thead>
 		<tr>
-			<th scope="col" class="manage-column">Job Number</th>
-			<th scope="col" class="manage-column">Created</th>
-			<th scope="col" class="manage-column">Author</th>
-			<th scope="col" class="manage-column">Visibility</th>
-			<th scope="col" class="manage-column">customer_name</th>
-			<th scope="col" class="manage-column">technician_name</th>
-			<th scope="col" class="manage-column">job_description</th>
-			<th scope="col" class="manage-column">planned_start_date</th>
-			<th scope="col" class="manage-column">planned_finish_date</th>
-			<th scope="col" class="manage-column">completion_date</th>
-			<th scope="col" class="manage-column">affiliate_job_number</th>
-			<th scope="col" class="manage-column">last_updated</th>
-			<th scope="col" class="manage-column">Department</th>
-			<th scope="col" class="manage-column">priority</th>
-			<th scope="col" class="manage-column">Status</th>
+			<th scope="col" class="manage-column"><h4>Job<br/>Number</h4></th>
+			<th scope="col" class="manage-column"><h4>Author</h4></th>
+			<th scope="col" class="manage-column"><h4>Customer</h4></th>
+			<th scope="col" class="manage-column"><h4>Technician</h4></th>
+			<th scope="col" class="manage-column"><h4>Job<br/>Description</h4></th>
+			<th scope="col" class="manage-column"><h4>Job<br/>Dates</h4></th>
+			<th scope="col" class="manage-column"><h4>Affiliate<br/>Number</h4></th>
+			<th scope="col" class="manage-column"><h4>Updated</h4></th>
+			<th scope="col" class="manage-column"><h4>Department</h4></th>
+			<th scope="col" class="manage-column"><h4>Priority</h4></th>
+			<th scope="col" class="manage-column"><h4>Status</h4></th>
 		</tr>
 		</thead>
 		<tbody>';
@@ -637,25 +650,24 @@ function ST_ticket_list() {
 
 //use some inbuilt WP CSS to perform the rollover effect for the edit/view/delete links	   
 	   echo '<tr>';
-	   echo '<td><strong><a href="'.$edit_link.'" title="Edit Job#">' . $ticket->id . '</a></strong>';
+	   echo '<td><strong><a href="'.$view_link.'" title="View Job#">' . $ticket->id . '</a></strong>';
 	   echo '<div class="row-actions">';
-	   echo '<span class="edit"><a href="'.$edit_link.'" title="Edit this item">Edit</a></span> | ';
-	   echo '<span class="view"><a href="'.$view_link.'" title="View this item">View</a></span> | ';
-	   echo '<span class="trash"><a href="'.$delete_link.'" title="Move this item to Trash" onclick="return doDelete();">Trash</a></span>';
+	   echo '<span class="view"><a href="'.$view_link.'" title="View this item">View</a></span> ';
+	   if($user > 0) {
+			echo '| <span class="edit"><a href="'.$edit_link.'" title="Edit this item">Edit</a></span> ';
+	   }
+	   if($user == 1) {
+			echo '| <span class="trash"><a href="'.$delete_link.'" title="Move this item to Trash" onclick="return doDelete();">Trash</a></span>';
+	   }
 	   echo '</div>';
-	   echo '</td>';
-	   echo '<td>' . $ticket->entry_date . '</td>';
+	   echo  $ticket->entry_date . '</td>';
 	   echo '<td>' . $user_info->user_login . '</td>';
-	   
-//display the visibility in words depending on the current visibility value in the database - 0 or 1	   
-	   $visibility = array('Private', 'Public');
- 	   echo '<td>' . $visibility[$ticket->visibility] . '</td>';
+	    
 	   echo '<td>' . $ticket->customer_name . '</td>';
 	   echo '<td>' . $ticket->technician_name . '</td>';
 	   echo '<td>' . $ticket->job_description . '</td>';
-	   echo '<td>' . $ticket->planned_start_date . '</td>';
-	   echo '<td>' . $ticket->planned_finish_date . '</td>';
-	   echo '<td>' . $ticket->completion_date . '</td>';
+	   echo '<td><strong>Planned Start: </strong>' . $ticket->planned_start_date . '
+	   <br/><strong>Planned Finnish: </strong>' . $ticket->planned_finish_date . '</td>';
 	   echo '<td>' . $ticket->affiliate_job_number . '</td>';
 	   echo '<td>' . $ticket->last_updated . '</td>';
 	   $department = array(' ', 'Server Support', 'Network Support', 'Hardware Support', 'Data Support');
@@ -665,7 +677,7 @@ function ST_ticket_list() {
 	   $status = array(' ', 'Pending','Open','Closed');
 	   echo '<td>' . $status[$ticket->status] . '</td></tr>';
     }
-   echo '</tbody></table>';
+   echo '</tbody></table></div>';
 	
 //small piece of javascript for the delete confirmation	
 	echo "<script type='text/javascript'>
