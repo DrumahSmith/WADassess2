@@ -9,7 +9,7 @@
  * License: GPL2
  */
 require "gump.class.php";
-$ST_dbversion = "0.8"; //current version of the database
+$ST_dbversion = "0.9"; //current version of the database
 
 //simple variable debug function
 //usage: pr($avariable);
@@ -83,7 +83,7 @@ function ST_install () {
 			$sql .= 'CREATE TABLE ST_notes (
 			id int(11) NOT NULL auto_increment,
 			customer_notes text,
-			technician_notes text,
+			note_date date,
 			fgn_job_id int(11),
 			PRIMARY KEY (id)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
@@ -335,11 +335,14 @@ function ST_ticket_view($id) {
 </table>
 
 </div>
-
-<p style="clear: both"></P>';
+<p style="clear: both"><strong>Notes:</strong>
+</P>';
 foreach ($notes as $note) {
-echo '<strong>Note:</strong>
-<p>'.$note->customer_notes.'</p>';
+	if($note->customer_notes !== "") {
+		echo '<p class="note">';
+		echo '<p class="customer_note"">'.$note->customer_notes.'</p>';
+		echo '<p class="note_date">'.$note->note_date.'</p>';
+	}
 }
 echo '
 <p style="clear: both"><a href="?page=STsimpleticket">&laquo; back to list</p>';
@@ -488,8 +491,9 @@ function ST_ticket_update($data) {
 		$wpdb->insert( 'ST_notes',
 		array(
 			'fgn_job_id' => $data['hid'],
-			'customer_notes' => $data['notes']),
-			array('%s', '%s' ));
+			'customer_notes' => $data['notes'],
+			'note_date' => date("Y-m-d")),
+			array('%s', '%s', '%s' ));
 		return $msg;
 	}
 	else
@@ -542,7 +546,8 @@ function ST_ticket_insert($data) {
 		$wpdb->insert('ST_notes',
 		array(
 			'fgn_job_id' => $data['hid'],
-			'customer_notes' => $data['notes']),
+			'customer_notes' => $data['notes'],
+			'note_date' => date("Y-m-d")),
 			array('%s', '%s' ));
 		return $msg;
 	}

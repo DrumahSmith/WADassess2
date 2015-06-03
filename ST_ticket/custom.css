@@ -16,3 +16,16 @@
 .error {
 color: red;
 }
+
+.note {
+clear: both;
+}
+
+.customer_note {
+float: left;
+}
+
+.note_date {
+float: left;
+margin-left: 10px;
+}
