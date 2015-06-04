@@ -170,7 +170,7 @@ global $current_user;
 
 	echo  '<div id="msg" style="overflow: auto"></div>
 		<div class="wrap">
-		<h2>ST 8. Simple ticket ';
+		<h2>Support Ticket ';
 		if($user > 0) {
 			echo '<a href="?page=STsimpleticket&command=new" class="add-new-h2">Add New</a></h2>';
 		}
@@ -261,8 +261,13 @@ function ST_ticket_view($id) {
 	'.$row->planned_finish_date.'</td>
 </tr>
 <tr>
-	<td><strong>Completion Date:</strong></br>
-	'.$row->completion_date.'</td>
+	<td><strong>Completion Date:</strong></br>';
+	if($row->completion_date == "1970-01-01") {
+		echo '';
+	} else {
+		echo $row->completion_date;
+		}
+		echo '</td>
 </tr>
 <tr>
 	<td><strong>Priority:</strong></br>';
@@ -417,7 +422,7 @@ function validate_form_data($data) {
 		'planned_finish_date'				=> 'required|date',
 		'completion_date'					=> 'date',
 		'department'						=> 'equal_to_zero|max_numeric,4',
-		'priority'							=> 'equal_to_zero|max_numeric,3',
+		'priority'							=> 'equal_to_zero|max_numeric,4',
 		'status'							=> 'equal_to_zero|max_numeric,3',
 		'compliance_certificate_required'	=> 'equal_to_zero|max_numeric,2',
 		'compliance_certificate_number'		=> 'numeric',
@@ -463,7 +468,6 @@ function validate_form_data($data) {
 	//Check that the validation was successful
 	if($validated === TRUE)
 	{
-		echo "Successful Validation\n\n";
 		return "success";
 	}
 	else
@@ -513,6 +517,7 @@ function ST_ticket_update($data) {
 				'status' => stripslashes_deep($data['status'])),
 			  array( 'id' => $data['hid']));
 		$msg = "Ticket ".$data['hid']." has been updated";
+			
 		
 		$wpdb->insert( 'ST_notes',
 		array(
@@ -567,14 +572,19 @@ function ST_ticket_insert($data) {
 				'priority' => stripslashes_deep($data['priority']),
 				'status' => stripslashes_deep($data['status'])),
 			  array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
-		$msg = "A ticket entry has been added";
+		
+		
+		$lastid = $wpdb->insert_id;
 		
 		$wpdb->insert('ST_notes',
 		array(
-			'fgn_job_id' => $data['hid'],
+			'fgn_job_id' => $lastid,
 			'customer_notes' => $data['notes'],
 			'note_date' => date("Y-m-d")),
 			array('%s', '%s' ));
+			newTicketEmail();
+			$msg = "A ticket entry has been added";
+			
 		return $msg;
 	}
 	else {
@@ -815,7 +825,13 @@ function ST_ticket_form($command, $id = null) {
 		
 		'.dropdown($statusName, $statusOptions, $ticket->status).'
 		<p>Completion Date:<br/>
-		<input type="text" name="completion_date" class="datepicker" value="'.$ticket->completion_date.'" placeholder="Pick a Date" size="20" class="large-text" />
+		<input type="text" name="completion_date" class="datepicker" value="';
+	if($row->completion_date == "1970-01-01") {
+		echo '';
+	} else {
+		echo $row->completion_date;
+		}
+		echo '" placeholder="Pick a Date" size="20" class="large-text" />
 		<p><input name="notes_button" id="notes_button" type="button" value="Add Note" onclick="showNotes()"></p>
 		<p>Visibility:<br/>
 		<label><input type="radio" name="visibility" value="0" '.$privateVisibility.'> Private</label> 
@@ -833,4 +849,24 @@ function ST_ticket_form($command, $id = null) {
 		
 
 }
+
+function newTicketEmail() {
+	
+	$message = "New Ticket has been submitted.";
+
+    $subject ="New Ticket Submission";
+
+    $to = "admin@glenncook.co.nz";
+	
+	$send = mail($to, $subject, $message);
+
+if(!$send){
+    echo 'there were some errors sending enquiry, please try again';
+} else { 
+echo 'We Received Your enquiry, We will get back to you soon';
+     }
+
+	
+}
+
  ?>
