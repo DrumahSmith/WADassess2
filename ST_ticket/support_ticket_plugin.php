@@ -526,13 +526,15 @@ function ST_ticket_update($data) {
 			  array( 'id' => $data['hid']));
 		$msg = "Ticket ".$data['hid']." has been updated";
 			
-		
-		$wpdb->insert( 'ST_notes',
-		array(
-			'fgn_job_id' => $data['hid'],
-			'customer_notes' => $data['notes'],
-			'note_date' => date("Y-m-d")),
-			array('%s', '%s', '%s' ));
+		if($data['notes'] != '') {
+			echo 'true';
+			$wpdb->insert( 'ST_notes',
+			array(
+				'fgn_job_id' => $data['hid'],
+				'customer_notes' => $data['notes'],
+				'note_date' => date("Y-m-d")),
+				array('%s', '%s', '%s' ));
+		}
 		return $msg;
 	}
 	else
@@ -583,7 +585,7 @@ function ST_ticket_insert($data) {
 		
 		
 		$lastid = $wpdb->insert_id;
-		
+		if($data['notes'] != '') {
 		$wpdb->insert('ST_notes',
 		array(
 			'fgn_job_id' => $lastid,
@@ -592,7 +594,7 @@ function ST_ticket_insert($data) {
 			array('%s', '%s' ));
 			newTicketEmail();
 			$msg = "A ticket entry has been added";
-			
+		}
 		return $msg;
 	}
 	else {
@@ -630,6 +632,7 @@ function ST_ticket_list($user = null, $visibility = null) {
    if($user > 1) {
 	   $query .= "WHERE author_id = $user ";
    }
+   
    
    
    $query .= "ORDER BY entry_date DESC";
@@ -735,6 +738,9 @@ function ST_ticket_form($command, $id = null) {
 
 //if the current command is insert then clear the form variables to ensure we have a blank
 //form before starting	
+	if($command == 'insert') {
+		$privateVisibility = "checked";
+	}
 
 //if the current command is 'edit' then retrieve the ticket record based on the id passed to this function
 	if ($command == 'update') {

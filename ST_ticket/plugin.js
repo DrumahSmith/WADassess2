@@ -144,5 +144,7 @@
 		text.innerHTML = "hide";
 		text.value = "Cancel Note Entry";
 	}
-
+	
+  
+  
 } 
