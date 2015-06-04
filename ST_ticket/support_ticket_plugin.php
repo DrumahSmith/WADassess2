@@ -25,17 +25,25 @@ add_action('plugins_loaded', 'ST_update_db_check');
 add_action('plugin_action_links_'.plugin_basename(__FILE__), 'STsettingslink' );  
 add_shortcode('displayticket', 'STdisplayticket');
 add_action('admin_menu', 'ST_ticket_menu');
-add_action( 'wp_enqueue_scripts', 'WAD_load_scripts' );
-function WAD_load_scripts() {
-//custommmm styles
-    wp_enqueue_style( 'WAD11', plugins_url('custom.css',__FILE__));
-wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+//load scripts for front end and admin backend
+add_action( 'wp_enqueue_scripts', 'ST_load_scripts' );
+add_action( 'admin_enqueue_scripts', 'ST_load_scripts' );
+
+//Function for providing font end scripts and styles
+function ST_load_scripts() {
+//custom styles
+    wp_enqueue_style( 'ST_ticket', plugins_url('custom.css',__FILE__));
+	wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+	//jQuery
 	wp_enqueue_script( 'jquery_v1_1_1','http://code.jquery.com/jquery-1.11.1.js' );	
 	wp_enqueue_script( 'jquery_v1_10_3','http://code.jquery.com/ui/1.10.3/jquery-ui.js' );
 	wp_enqueue_script( 'jquery_validate','http://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js' );
 	wp_enqueue_script( 'jquery_validate_addition','http://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.min.js' );
+	//custom js
 	wp_enqueue_script( 'plugin',plugins_url('plugin.js',__FILE__) );
 }
+
+
 //========================================================================================
 //check to see if there is any update required for the database, 
 //just in case we updated the plugin without reactivating it
@@ -236,7 +244,7 @@ function ST_ticket_view($id) {
    
    $row = $wpdb->get_row("SELECT * FROM ST_ticket WHERE id = '$id'");
    $notes = $wpdb->get_results("SELECT * FROM ST_notes WHERE fgn_job_id = '$id'");
-   echo '<link rel="stylesheet" href="../wp-content/plugins/ST_ticket/custom.css">
+   echo '
 <div id="display_table">
 
 <table id="left">
@@ -761,18 +769,7 @@ function ST_ticket_form($command, $id = null) {
 	
 //prepare the HTML form	
     echo '
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <!-- Load jQuery JS -->
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <!-- Load jQuery UI Main JS  -->
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	
-	<!-- load the data validation script -->
-	<script src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"></script>
-	<script src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.min.js"></script>
-	<script type="text/javascript" src="../wp-content/plugins/ST_ticket/plugin.js"></script>
-	<!-- load the styling for the validation -->
-	<link rel="stylesheet" href="../wp-content/plugins/ST_ticket/custom.css">
+
 
 	<form name="STform" id="STform" method="post" action="?page=STsimpleticket">
 		<input type="hidden" name="hid" value="'.$id.'"/>
@@ -826,7 +823,7 @@ function ST_ticket_form($command, $id = null) {
 		'.dropdown($statusName, $statusOptions, $ticket->status).'
 		<p>Completion Date:<br/>
 		<input type="text" name="completion_date" class="datepicker" value="';
-	if($row->completion_date == "1970-01-01") {
+	if($row->completion_date == "1970-01-01") { //adjust what the user sees for completed date
 		echo '';
 	} else {
 		echo $row->completion_date;
@@ -849,6 +846,8 @@ function ST_ticket_form($command, $id = null) {
 		
 
 }
+
+//Email Notification to admin when a valid new ticket is submitted.	
 
 function newTicketEmail() {
 	
